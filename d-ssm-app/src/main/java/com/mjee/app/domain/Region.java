@@ -8,9 +8,6 @@ import java.util.List;
 
 /**
  * 地区。
- * 
- * @author michael
- * @version $Id: Region.java, v 0.1 2013-2-22 下午2:49:44 michael Exp $
  */
 public class Region extends PrimaryKey {
 
@@ -21,6 +18,12 @@ public class Region extends PrimaryKey {
     private Region       parent;
     private List<Region> childList;
 
+    /* ---- public methods ---- */
+    public boolean isTopLevel() {
+        return Integer.valueOf(0).equals(this.level);
+    }
+    
+    /* ---- setter/getter methods ---- */
     public String getName() {
         return name;
     }

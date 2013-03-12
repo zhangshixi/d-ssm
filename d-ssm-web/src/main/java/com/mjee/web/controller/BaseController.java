@@ -1,19 +1,19 @@
 package com.mjee.web.controller;
 
-public abstract class AbstractController {
+public abstract class BaseController {
 	
 	/* Method examples:
 	 * 
 	 * showArticleList();      GET         /article
 	 * 
-	 * toNewArticle();         GET         /article/new
-	 * newArticle();           POST        /article
+	 * toCreateArticle();      GET         /article/create
+	 * createArticle();        POST        /article
 	 * 
 	 * showArticle();          GET         /article/{id}
 	 * editArticle();          PUT         /article/{id}
 	 * 
 	 * removeArticle();        DELETE      /article/{id}
-	 * batchRemoveArticle();   DELETE      /article
+	 * batchRemoveArticles();  DELETE      /article
 	 */
     
     protected String errorPage(String message) {

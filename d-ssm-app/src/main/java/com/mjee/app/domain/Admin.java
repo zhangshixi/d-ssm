@@ -9,14 +9,13 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class Admin extends PrimaryKey {
 
-	/** serial version UID */
 	private static final long serialVersionUID = 5023810582244923444L;
 	
-	@NotEmpty
+	@NotEmpty(message="管理员登录名不能为空！")
 	private String name;
-	@NotEmpty
+	@NotEmpty(message="管理员登录密码不能为空！")
 	private String password;
-	@Email
+	@Email(message="EMAIL格式不正确！")
 	private String email;
 	private String phone;
 
@@ -37,7 +36,7 @@ public class Admin extends PrimaryKey {
 		super(id);
 	}
 	
-	// ---- getter/setter methods ------------------------------------
+	/* ---- getter/setter methods ---- */
 	public String getName() {
 		return name;
 	}

@@ -1,14 +1,7 @@
-/**
- * f-club.cn
- * Copyright (c) 2009-2013 All Rights Reserved.
- */
 package com.mjee.app.domain;
 
 /**
  * 产品。
- * 
- * @author michael
- * @version $Id: Product.java, v 0.1 2013-2-22 下午2:41:34 michael Exp $
  */
 public class Product extends PrimaryKey {
 

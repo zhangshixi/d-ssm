@@ -7,9 +7,10 @@ import com.mtoolkit.page.Page;
 
 public interface ArticleService extends BaseService {
 	
-    public int addArticle(Article article);
+    /* ---- article operations ---- */
+    public int createArticle(Article article);
 
-    public int removeArticle(int articleId);
+    public int removeArticleById(int articleId);
     
     public int editArticle(Article article);
 
@@ -26,9 +27,10 @@ public interface ArticleService extends BaseService {
     public Page<Article> queryArticlesByCategory(int categoryId, Page<Article> page);
     
     
-    public int addArticleCategory(ArticleCategory articleCategory);
+    /* ---- article category operations ---- */
+    public int createArticleCategory(ArticleCategory articleCategory);
     
-    public int removeArticleCategory(int categoryId);
+    public int removeArticleCategoryById(int categoryId);
     
     public int editArticleCategory(ArticleCategory articleCategory);
     
@@ -37,9 +39,10 @@ public interface ArticleService extends BaseService {
     public Page<ArticleCategory> queryArticleCategoriesByPage(Page<ArticleCategory> page);
     
     
-    public int addArticleComment(ArticleComment articleComment);
+    /* ---- article comment operations ---- */
+    public int createArticleComment(ArticleComment articleComment);
     
-    public int removeArticleComment(int commentId);
+    public int removeArticleCommentById(int commentId);
     
     public Page<ArticleComment> queryArticleCommentsByPage(int articleId, Page<ArticleComment> page);
     

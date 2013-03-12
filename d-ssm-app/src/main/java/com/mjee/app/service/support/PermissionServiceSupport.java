@@ -23,7 +23,7 @@ public class PermissionServiceSupport extends AbstractService implements Permiss
 
     @Override
     public int removeRole(int roleId) {
-        return roleMapper.delete(roleId);
+        return roleMapper.deleteById(roleId);
     }
 
     @Override
@@ -43,7 +43,7 @@ public class PermissionServiceSupport extends AbstractService implements Permiss
 
     @Override
     public int removePermission(int permissionId) {
-        return permissionMapper.delete(permissionId);
+        return permissionMapper.deleteById(permissionId);
     }
 
     @Override

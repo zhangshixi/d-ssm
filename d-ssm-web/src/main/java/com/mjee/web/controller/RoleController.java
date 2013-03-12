@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.mjee.app.domain.Role;
 
 @Controller
-public class RoleController extends AbstractController {
+public class RoleController extends BaseController {
     
     @RequestMapping(value="/role", method=RequestMethod.GET)
     public String showRoleList() {

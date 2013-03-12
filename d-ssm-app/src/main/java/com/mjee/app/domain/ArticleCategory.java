@@ -1,7 +1,3 @@
-/**
- * f-club.cn
- * Copyright (c) 2009-2012 All Rights Reserved.
- */
 package com.mjee.app.domain;
 
 import java.util.List;
@@ -12,9 +8,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * 文章分类。
- * 
- * @author michael
- * @version $Id: Category.java, v 0.1 2012-9-26 下午6:19:16 michael Exp $
  */
 public class ArticleCategory extends PrimaryKey {
 

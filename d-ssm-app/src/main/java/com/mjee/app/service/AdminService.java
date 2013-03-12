@@ -4,7 +4,7 @@ import com.mjee.app.domain.Admin;
 
 public interface AdminService extends BaseService {
 
-    public int addAdmin(Admin admin);
+    public int newAdmin(Admin admin);
     
     public int removeAdmin(int adminId);
     

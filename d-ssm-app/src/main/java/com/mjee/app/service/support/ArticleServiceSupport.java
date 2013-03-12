@@ -24,20 +24,20 @@ public class ArticleServiceSupport extends AbstractService implements ArticleSer
     private ArticleCategoryMapper articleCategoryMapper;
     
     @Override
-    public int addArticle(Article article) {
+    public int createArticle(Article article) {
         article.setCreateTime(DateUtil.getCurrentTime());
         return articleMapper.insert(article);
     }
 
     @Override
-    public int removeArticle(int articleId) {
+    public int removeArticleById(int articleId) {
         Article targetArticle = doFindArticleById(articleId);
         if (targetArticle == null) {
             throw new NotExistedException();
         }
         
         articleCommentMapper.deleteByArticle(articleId);
-        return articleMapper.delete(articleId);
+        return articleMapper.deleteById(articleId);
     }
 
     @Override
@@ -77,14 +77,14 @@ public class ArticleServiceSupport extends AbstractService implements ArticleSer
     }
 
     @Override
-    public int addArticleCategory(ArticleCategory articleCategory) {
+    public int createArticleCategory(ArticleCategory articleCategory) {
         return articleCategoryMapper.insert(articleCategory);
     }
 
     @Override
-    public int removeArticleCategory(int categoryId) {
+    public int removeArticleCategoryById(int categoryId) {
         // TODO:
-        articleCategoryMapper.delete(categoryId);
+        articleCategoryMapper.deleteById(categoryId);
         return 0;
     }
 
@@ -104,14 +104,14 @@ public class ArticleServiceSupport extends AbstractService implements ArticleSer
     }
 
     @Override
-    public int addArticleComment(ArticleComment articleComment) {
+    public int createArticleComment(ArticleComment articleComment) {
         articleComment.setIp(null);
         return articleCommentMapper.insert(articleComment);
     }
 
     @Override
-    public int removeArticleComment(int commentId) {
-        return articleCategoryMapper.delete(commentId);
+    public int removeArticleCommentById(int commentId) {
+        return articleCategoryMapper.deleteById(commentId);
     }
 
     @Override

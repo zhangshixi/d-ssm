@@ -1,7 +1,3 @@
-/**
- * f-club.cn
- * Copyright (c) 2009-2012 All Rights Reserved.
- */
 package com.mjee.app.loader;
 
 import java.util.Properties;
@@ -10,8 +6,6 @@ import com.mtoolkit.spring.config.PropertyLoader;
 
 /**
  * 
- * @author michael
- * @version $Id: SystemPropertyLoader.java, v 0.1 2012-8-16 下午1:47:44 michael Exp $
  */
 public class SystemPropertyLoader implements PropertyLoader {
 

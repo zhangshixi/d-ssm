@@ -1,7 +1,3 @@
-/**
- * f-club.cn
- * Copyright (c) 2009-2013 All Rights Reserved.
- */
 package com.mjee.app.domain;
 
 import java.util.Date;
@@ -14,9 +10,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * 产品经纪人。
- * 
- * @author michael
- * @version $Id: ProductBroker.java, v 0.1 2013-2-22 下午2:45:08 michael Exp $
  */
 public class Broker extends PrimaryKey {
 

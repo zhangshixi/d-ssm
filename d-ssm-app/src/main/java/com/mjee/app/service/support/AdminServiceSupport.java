@@ -15,13 +15,13 @@ public class AdminServiceSupport extends AbstractService implements AdminService
     private AdminMapper adminMapper;
 
     @Override
-    public int addAdmin(Admin admin) {
+    public int newAdmin(Admin admin) {
         return adminMapper.insert(admin);
     }
 
     @Override
     public int removeAdmin(int adminId) {
-        return adminMapper.delete(adminId);
+        return adminMapper.deleteById(adminId);
     }
 
     @Override

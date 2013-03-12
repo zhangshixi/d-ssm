@@ -9,13 +9,9 @@ import java.util.List;
 
 /**
  * 角色。
- * 
- * @author michael
- * @version $Id: Role.java, v 0.1 2012-9-26 下午6:17:42 michael Exp $
  */
 public class Role implements Serializable {
 
-    /** serial version UID */
     private static final long serialVersionUID = -4177282920252439830L;
 
     private String name;

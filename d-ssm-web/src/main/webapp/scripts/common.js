@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 ajaxDelete = function(deleteUrl, succeedUrl) {
 	if (confirm("确定删除？")) {
 		$.ajax({

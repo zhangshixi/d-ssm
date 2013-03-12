@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.mjee.app.domain.Permission;
 
 @Controller
-public class PermissionController extends AbstractController {
+public class PermissionController extends BaseController {
 
 	@RequestMapping(value="/permission", method=RequestMethod.POST)
 	public String createPermission(Permission permission) {

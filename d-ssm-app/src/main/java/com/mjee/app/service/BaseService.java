@@ -6,4 +6,16 @@ public interface BaseService {
 
     public void destroy();
     
+    /* Method examples:
+     * 
+     * createArticle(Article article);
+     * 
+     * removeArticleById(int id);
+     * 
+     * editArticle(Article article);
+     * 
+     * findArticleById(int id);
+     * 
+     * queryArticlesByPage(Page<Article> page);
+     */
 }

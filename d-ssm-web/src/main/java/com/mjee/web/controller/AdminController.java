@@ -11,46 +11,16 @@ import com.mjee.app.domain.Admin;
 import com.mjee.app.service.AdminService;
 
 @Controller
-public class AdminController extends AbstractController {
+public class AdminController extends BaseController {
 
     @Autowired
     private AdminService adminService;
-    
-    /**
-     * 管理员登录页面。
-     */
-    @RequestMapping(value="/login", method=RequestMethod.GET)
-    public String toLogin() {
-        return "login";
-    }
-    
-    /**
-     * 管理员登录。
-     */
-    @RequestMapping(value="/login", method=RequestMethod.POST)
-    public String login(Admin admin, ModelMap model) {
-        Admin targetAdmin = adminService.findAdminByName(admin.getName());
-        if (targetAdmin != null && admin.getPassword().equals(targetAdmin.getPassword())) {
-            model.put("admin", targetAdmin);
-            return "index";
-        } else {
-            return "error";
-        }
-    }
-    
-    /**
-     * 管理员登出。
-     */
-    @RequestMapping(value="/logout", method=RequestMethod.GET)
-    public String logout() {
-        return null;
-    }
-    
+
     /**
      * 添加管理员页面。
      */
-    @RequestMapping(value="/admin/new", method=RequestMethod.GET)
-    public String toNewAdmin() {
+    @RequestMapping(value="/admin/create", method=RequestMethod.GET)
+    public String toCreateAdmin() {
         return null;
     }
     
@@ -58,8 +28,8 @@ public class AdminController extends AbstractController {
      * 添加管理员。
      */
 	@RequestMapping(value="/admin", method=RequestMethod.POST)
-	public String newAdmin(Admin admin) {
-	    adminService.addAdmin(admin);
+	public String createAdmin(Admin admin) {
+	    adminService.newAdmin(admin);
 		return null;
 	}
 	

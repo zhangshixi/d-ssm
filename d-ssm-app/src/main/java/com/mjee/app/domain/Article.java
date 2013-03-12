@@ -1,7 +1,3 @@
-/**
- * f-club.cn
- * Copyright (c) 2009-2012 All Rights Reserved.
- */
 package com.mjee.app.domain;
 
 import java.util.Date;
@@ -13,9 +9,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * 文章。
- * 
- * @author michael
- * @version $Id: Article.java, v 0.1 2012-9-26 下午6:19:10 michael Exp $
  */
 public class Article extends PrimaryKey {
 
