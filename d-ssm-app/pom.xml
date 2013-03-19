@@ -28,11 +28,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.michael</groupId>
-			<artifactId>m-toolkit-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.michael</groupId>
-			<artifactId>m-toolkit-frame</artifactId>
+			<artifactId>m-toolkit</artifactId>
 		</dependency>
 		
 		<!-- logger implementation -->

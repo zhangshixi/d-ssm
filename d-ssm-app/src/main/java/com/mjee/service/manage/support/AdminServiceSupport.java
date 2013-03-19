@@ -1,0 +1,42 @@
+package com.mjee.service.manage.support;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.mjee.domain.manage.Admin;
+import com.mjee.mapper.manage.AdminMapper;
+import com.mjee.service.AbstractService;
+import com.mjee.service.manage.AdminService;
+
+@Service
+public class AdminServiceSupport extends AbstractService implements AdminService {
+    
+    @Autowired
+    private AdminMapper adminMapper;
+
+    @Override
+    public int newAdmin(Admin admin) {
+        return adminMapper.insert(admin);
+    }
+
+    @Override
+    public int removeAdmin(int adminId) {
+        return adminMapper.deleteById(adminId);
+    }
+
+    @Override
+    public int editAdmin(Admin admin) {
+        return adminMapper.update(admin);
+    }
+
+    @Override
+    public Admin findAdminById(int adminId) {
+        return adminMapper.selectById(adminId);
+    }
+
+    @Override
+    public Admin findAdminByName(String name) {
+        return adminMapper.selectByName(name);
+    }
+    
+}

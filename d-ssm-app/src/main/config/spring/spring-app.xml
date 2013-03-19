@@ -17,7 +17,7 @@
         http://cxf.apache.org/jaxws  http://cxf.apache.org/schemas/jaxws.xsd"
 	default-autowire="byName">
 	
-	<bean id="systemPropertyLoader" class="com.mjee.app.loader.SystemPropertyLoader" />
+	<bean id="systemPropertyLoader" class="com.mjee.loader.SystemPropertyLoader" />
 	<bean id="systemPropertyConfigurer" class="com.mtoolkit.spring.config.PropertyConfigurerAdapter">
 		<property name="propertyLoader" ref="systemPropertyLoader" />
 		<property name="order" value="2" />
@@ -27,7 +27,7 @@
 	</bean>
 
 	
-	<bean id="deployPropertyLoader" class="com.mjee.app.loader.ConfigPropertyLoader" />
+	<bean id="deployPropertyLoader" class="com.mjee.loader.ConfigPropertyLoader" />
 	<bean id="deployPropertyConfigurer" class="com.mtoolkit.spring.config.PropertyConfigurerAdapter">
 		<property name="propertyLoader" ref="deployPropertyLoader" />
 		<property name="order" value="3" />
