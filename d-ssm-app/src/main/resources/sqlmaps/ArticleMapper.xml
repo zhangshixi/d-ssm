@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC 
 	"-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mjee.mapper.website.ArticleMapper">
+<mapper namespace="com.dssm.mapper.website.ArticleMapper">
 	
-	<resultMap id="BaseResultMap" type="com.mjee.domain.website.Article">
+	<resultMap id="BaseResultMap" type="com.dssm.domain.website.Article">
 		<id column="id" property="id" jdbcType="INTEGER" />
 		<result column="category_id" property="categoryId" jdbcType="INTEGER" />
 		<result column="admin_id" property="adminId" jdbcType="INTEGER" />
@@ -16,7 +16,7 @@
 		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
 	</resultMap>
 	
-	<resultMap id="ResultMapWithBLOBs" type="com.mjee.domain.website.Article" extends="BaseResultMap">
+	<resultMap id="ResultMapWithBLOBs" type="com.dssm.domain.website.Article" extends="BaseResultMap">
 		<result column="content" property="content" jdbcType="LONGVARCHAR" />
 	</resultMap>
 	
@@ -43,7 +43,7 @@
 		where id = #{id,jdbcType=INTEGER}
 	</delete>
 	
-	<insert id="insert" parameterType="com.mjee.domain.website.Article">
+	<insert id="insert" parameterType="com.dssm.domain.website.Article">
 		insert into mj_article 
 		(
 			id, category_id, admin_id, headline, summary, visit_number,
@@ -64,7 +64,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="com.mjee.domain.website.Article">
+	<update id="update" parameterType="com.dssm.domain.website.Article">
 		update mj_article set 
 		category_id = #{categoryId,jdbcType=INTEGER},
 		admin_id = #{adminId,jdbcType=INTEGER},
@@ -77,7 +77,7 @@
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 	
-	<update id="updateWithBlobs" parameterType="com.mjee.domain.website.Article">
+	<update id="updateWithBlobs" parameterType="com.dssm.domain.website.Article">
 		update mj_article set 
 		category_id = #{categoryId,jdbcType=INTEGER},
 		admin_id = #{adminId,jdbcType=INTEGER},
@@ -91,7 +91,7 @@
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 	
-	<update id="updateSelective" parameterType="com.mjee.domain.website.Article">
+	<update id="updateSelective" parameterType="com.dssm.domain.website.Article">
 		update mj_article
 		<set>
 			<if test="categoryId != null">

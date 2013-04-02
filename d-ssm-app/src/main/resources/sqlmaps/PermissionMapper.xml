@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC 
 	"-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mjee.mapper.manage.PermissionMapper">
+<mapper namespace="com.dssm.mapper.manage.PermissionMapper">
 	
-	<resultMap id="BaseResultMap" type="com.mjee.domain.manage.Permission">
+	<resultMap id="BaseResultMap" type="com.dssm.domain.manage.Permission">
 		<id column="id" property="id" jdbcType="INTEGER" />
 		<result column="name" property="name" jdbcType="VARCHAR" />
 		<result column="url" property="url" jdbcType="VARCHAR" />
@@ -27,7 +27,7 @@
 		where id = #{id,jdbcType=INTEGER}
 	</delete>
 	
-	<insert id="insert" parameterType="com.mjee.domain.manage.Permission">
+	<insert id="insert" parameterType="com.dssm.domain.manage.Permission">
 		insert into mj_permission 
 		(id, name, url, description)
 		values 
@@ -39,7 +39,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="com.mjee.domain.manage.Permission">
+	<update id="update" parameterType="com.dssm.domain.manage.Permission">
 		update mj_permission set 
 		name = #{name,jdbcType=VARCHAR},
 		url = #{url,jdbcType=VARCHAR},
@@ -47,7 +47,7 @@
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 	
-	<update id="updateSelective" parameterType="com.mjee.domain.manage.Permission">
+	<update id="updateSelective" parameterType="com.dssm.domain.manage.Permission">
 		update mj_permission
 		<set>
 			<if test="name != null">

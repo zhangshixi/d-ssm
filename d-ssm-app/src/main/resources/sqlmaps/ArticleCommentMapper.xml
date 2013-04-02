@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC 
 	"-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mjee.mapper.website.ArticleCommentMapper">
+<mapper namespace="com.dssm.mapper.website.ArticleCommentMapper">
 	
-	<resultMap id="BaseResultMap" type="com.mjee.domain.website.ArticleComment">
+	<resultMap id="BaseResultMap" type="com.dssm.domain.website.ArticleComment">
 		<id column="id" property="id" jdbcType="INTEGER" />
 		<result column="article_id" property="articleId" jdbcType="INTEGER" />
 		<result column="user_id" property="userId" jdbcType="INTEGER" />
@@ -13,7 +13,7 @@
 		<result column="deleted" property="deleted" jdbcType="BIT" />
 	</resultMap>
 	
-	<resultMap id="ResultMapWithBLOBs" type="com.mjee.domain.website.ArticleComment" extends="BaseResultMap">
+	<resultMap id="ResultMapWithBLOBs" type="com.dssm.domain.website.ArticleComment" extends="BaseResultMap">
 		<result column="content" property="content" jdbcType="LONGVARCHAR" />
 	</resultMap>
 	
@@ -39,7 +39,7 @@
 		where id = #{id,jdbcType=INTEGER}
 	</delete>
 	
-	<insert id="insert" parameterType="com.mjee.domain.website.ArticleComment">
+	<insert id="insert" parameterType="com.dssm.domain.website.ArticleComment">
 		insert into mj_article_comment 
 		(id, article_id, user_id, headline, comment_time, deleted, content)
 		values 
@@ -54,7 +54,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="com.mjee.domain.website.ArticleComment">
+	<update id="update" parameterType="com.dssm.domain.website.ArticleComment">
 		update mj_article_comment set 
 		article_id = #{articleId,jdbcType=INTEGER},
 		user_id = #{userId,jdbcType=INTEGER},
@@ -64,7 +64,7 @@
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 	
-	<update id="updateWithBlobs" parameterType="com.mjee.domain.website.ArticleComment">
+	<update id="updateWithBlobs" parameterType="com.dssm.domain.website.ArticleComment">
 		update mj_article_comment
 		set article_id = #{articleId,jdbcType=INTEGER},
 		user_id = #{userId,jdbcType=INTEGER},
@@ -75,7 +75,7 @@
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 	
-	<update id="updateSelective" parameterType="com.mjee.domain.website.ArticleComment">
+	<update id="updateSelective" parameterType="com.dssm.domain.website.ArticleComment">
 		update mj_article_comment
 		<set>
 			<if test="articleId != null">

@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <decorators defaultdir="/WEB-INF/views">
-	
+
+	<excludes>
+		<pattern>/singin</pattern>
+		<pattern>/version</pattern>
+		<pattern>/error/*</pattern>
+    </excludes>
+
 	<decorator name="layout" page="layout/layout.jsp">
-		<pattern>/</pattern>
+		<pattern>/*</pattern>
 	</decorator>
 	
 </decorators>

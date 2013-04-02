@@ -31,6 +31,10 @@
 	    <servlet-name>default</servlet-name>
 	    <url-pattern>/images/*</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+	    <servlet-name>default</servlet-name>
+	    <url-pattern>/plugins/*</url-pattern>
+	</servlet-mapping>
 	
 	<!-- SpringMVC dispatcher servlet -->
 	<servlet>
@@ -66,6 +70,16 @@
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
+	
+	<!-- Visit holder filter -->
+	<filter>
+		<filter-name>visitHolderFilter</filter-name>
+		<filter-class>com.dssm.filter.VisitHolderFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>visitHolderFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
     
 	<!-- SiteMesh filter -->
 	<filter>
@@ -78,16 +92,21 @@
     </filter-mapping>
 	
 	<!-- Shiro Security filter -->
-<!-- 	<filter> -->
-<!-- 		<filter-name>shiroFilter</filter-name> -->
-<!-- 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class> -->
-<!-- 	</filter> -->
-<!-- 	<filter-mapping> -->
-<!-- 		<filter-name>shiroFilter</filter-name> -->
-<!-- 		<url-pattern>/*</url-pattern> -->
-<!-- 		<dispatcher>REQUEST</dispatcher> -->
-<!-- 		<dispatcher>FORWARD</dispatcher> -->
-<!-- 	</filter-mapping> -->
+	<!-- The filter-name matches name of a 'shiroFilter' bean inside spring applicationContext.xml -->
+	<filter>
+		<filter-name>shiroFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+		<init-param>
+	        <param-name>targetFilterLifecycle</param-name>
+	        <param-value>true</param-value>
+    	</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>shiroFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
 	
 	<!-- Internet explorer restful http method support filter -->
 	<filter>
@@ -108,7 +127,7 @@
  	
  	<!-- Welcome file configuration -->
  	<welcome-file-list>
-		<welcome-file>/index</welcome-file>
+		<welcome-file>/index.jsp</welcome-file>
 	</welcome-file-list>
 	
 	<!-- Error page configuration -->

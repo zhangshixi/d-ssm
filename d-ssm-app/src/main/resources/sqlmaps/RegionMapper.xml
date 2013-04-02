@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC 
 	"-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mjee.mapper.website.RegionMapper">
+<mapper namespace="com.dssm.mapper.website.RegionMapper">
 
-	<resultMap id="BaseResultMap" type="com.mjee.domain.website.Region">
+	<resultMap id="BaseResultMap" type="com.dssm.domain.website.Region">
 		<id column="id" property="id" jdbcType="INTEGER" />
 		<result column="name" property="name" jdbcType="VARCHAR" />
 		<result column="level" property="level" jdbcType="TINYINT" />
@@ -27,7 +27,7 @@
 		where id = #{id,jdbcType=INTEGER}
 	</delete>
 	
-	<insert id="insert" parameterType="com.mjee.domain.website.Region">
+	<insert id="insert" parameterType="com.dssm.domain.website.Region">
 		insert into mj_role 
 		(id, name, description)
 		values 
@@ -38,14 +38,14 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="com.mjee.domain.website.Region">
+	<update id="update" parameterType="com.dssm.domain.website.Region">
 		update mj_role set 
 		name = #{name,jdbcType=VARCHAR},
 		description = #{description,jdbcType=VARCHAR}
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 	
-	<update id="updateSelective" parameterType="com.mjee.domain.website.Region">
+	<update id="updateSelective" parameterType="com.dssm.domain.website.Region">
 		update mj_role
 		<set>
 			<if test="name != null">

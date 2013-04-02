@@ -30,6 +30,10 @@
 			<groupId>com.michael</groupId>
 			<artifactId>m-toolkit</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.michael</groupId>
+			<artifactId>m-cache</artifactId>
+		</dependency>
 		
 		<!-- logger implementation -->
 		<dependency>

@@ -52,6 +52,13 @@
 				<type>jar</type>
 				<scope>compile</scope>
 			</dependency>
+			<dependency>
+				<groupId>com.michael</groupId>
+				<artifactId>m-cache</artifactId>
+				<version>1.0-SNAPSHOT</version>
+				<type>jar</type>
+				<scope>compile</scope>
+			</dependency>
 			
 			
 			<!-- ** dependencies of compile scope ** -->
@@ -306,7 +313,7 @@
 			        <artifactId>tomcat-maven-plugin</artifactId>
 			        <version>1.1</version>
 			        <configuration>
-			        	<path>/mjee-ssm-web</path>
+			        	<path>/d-ssm</path>
 						<port>8080</port>
 						<uriEncoding>UTF-8</uriEncoding>
         				<contextReloadable>true</contextReloadable>

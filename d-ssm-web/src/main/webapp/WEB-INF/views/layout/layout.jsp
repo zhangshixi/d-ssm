@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-		<title>SiteMesh-Velocity: <decorator:title /></title>
+		<title><decorator:title /></title>
 
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta http-equiv="Cache-Control" content="no-store" />
@@ -16,14 +16,13 @@
     	
 		<script src="/scripts/jquery/jquery.js" type="text/javascript"></script>
     	<script src="/scripts/common.js" type="text/javascript"></script>
-    	<script src="/scripts/mjee.js" type="text/javascript"></script>
+    	<script src="/scripts/dssm.js" type="text/javascript"></script>
 		
 		<decorator:head />
     </head>
 	
     <body>
         <jsp:include page="/WEB-INF/views/layout/header.jsp" />
-        <jsp:include page="/WEB-INF/views/layout/left.jsp" />
 		<div id="body">
 			<decorator:body />
 		</div>

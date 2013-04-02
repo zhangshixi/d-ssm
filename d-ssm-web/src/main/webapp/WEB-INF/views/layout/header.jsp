@@ -3,7 +3,7 @@
 
 <div id="header" class="row">
 	
-	<div><h1>MJEE-SSM-WEB HEADER</h1></div>
+	<div>header</div>
 	
 	<div class="pull-right">
 		<shiro:guest><a href="${ctx}/login">个人中心</a></shiro:guest>
