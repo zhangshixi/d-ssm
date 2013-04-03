@@ -2,13 +2,15 @@
 <decorators defaultdir="/WEB-INF/views">
 
 	<excludes>
-		<pattern>/singin</pattern>
 		<pattern>/version</pattern>
-		<pattern>/error/*</pattern>
     </excludes>
 
-	<decorator name="layout" page="layout/layout.jsp">
+	<decorator name="single" page="layout/single_layout.jsp">
 		<pattern>/*</pattern>
 	</decorator>
+	
+<!-- 	<decorator name="compose" page="layout/compose_layout.jsp"> -->
+<!-- 		<pattern>/*</pattern> -->
+<!-- 	</decorator> -->
 	
 </decorators>
