@@ -93,7 +93,7 @@
 	
 	<!-- Shiro Security filter -->
 	<!-- The filter-name matches name of a 'shiroFilter' bean inside spring applicationContext.xml -->
-	<filter>
+	<!-- <filter>
 		<filter-name>shiroFilter</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
 		<init-param>
@@ -106,7 +106,7 @@
 		<url-pattern>/*</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
-	</filter-mapping>
+	</filter-mapping> -->
 	
 	<!-- Internet explorer restful http method support filter -->
 	<filter>
@@ -127,7 +127,7 @@
  	
  	<!-- Welcome file configuration -->
  	<welcome-file-list>
-		<welcome-file>/index.jsp</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
 	
 	<!-- Error page configuration -->
