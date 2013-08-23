@@ -32,7 +32,7 @@ public class Admin extends PrimaryKey {
 	
 	private Role   role;
 	
-
+	/* ---- constructors ---- */
 	public Admin() {
 	}
 	

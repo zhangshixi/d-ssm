@@ -33,7 +33,7 @@ public class Article extends PrimaryKey {
 	private List<ArticleComment> commentList;
 	
 	
-	// ---- getter/setter methods ------------------------------------
+	/* ---- getter/setter methods ---- */
 	public String getHeadline() {
 		return headline;
 	}

@@ -20,12 +20,12 @@ public class Region extends PrimaryKey {
     private Region       parent;
     private List<Region> childList;
 
-    /* ---- public methods ---- */
+    /* ---- extend methods ---- */
     public boolean isTopLevel() {
         return Integer.valueOf(0).equals(this.level);
     }
     
-    /* ---- setter/getter methods ---- */
+    /* ---- getter/setter methods ---- */
     public String getName() {
         return name;
     }

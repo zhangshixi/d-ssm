@@ -27,5 +27,5 @@ public class ProductComment extends PrimaryKey {
     private Product product;
 
     
-    
+    /* ---- getter/setter methods ---- */
 }

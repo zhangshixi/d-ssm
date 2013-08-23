@@ -18,15 +18,13 @@
 	default-autowire="byName">
 	
 	<!-- load jdbc configuration properties -->
-	<!-- 	
-	<context:property-placeholder location="classpath:${profile.active}/jdbc.properties" />
 	<bean id="jdbcPropertyConfigurer" class="com.mtoolkit.spring.config.PropertyConfigurerAdapter">
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
 		<property name="order" value="1" />
 		<property name="location">
-			<value>classpath:${profile.active}/jdbc.properties</value>
+			<value>classpath:jdbc.properties</value>
 		</property>
 	</bean>
-	-->
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />

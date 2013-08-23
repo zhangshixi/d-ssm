@@ -44,6 +44,7 @@ public class ArticleController extends BaseController {
 	
 	@RequestMapping(value="/article/{id}", method=RequestMethod.DELETE)
 	public String removeArticle(@PathVariable int id) {
+		articleService.removeArticleById(id);
 		return null;
 	}
 	

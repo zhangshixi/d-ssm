@@ -6,7 +6,7 @@
     </head>
 	
     <body>
-        <form name="userAddForm" action="${WEBAPP_DOMAIN}/signup" method="post">
+        <form name="userAddForm" action="/signup" method="post">
     		name: <input type="text" name="name" />
     		<br>
     		password: <input type="password" name="password" />

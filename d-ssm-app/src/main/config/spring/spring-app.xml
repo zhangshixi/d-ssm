@@ -19,6 +19,7 @@
 	
 	<bean id="systemPropertyLoader" class="com.dssm.loader.SystemPropertyLoader" />
 	<bean id="systemPropertyConfigurer" class="com.mtoolkit.spring.config.PropertyConfigurerAdapter">
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
 		<property name="propertyLoader" ref="systemPropertyLoader" />
 		<property name="order" value="2" />
 		<property name="location">
@@ -28,10 +29,15 @@
 
 	<bean id="deployPropertyLoader" class="com.dssm.loader.ConfigPropertyLoader" />
 	<bean id="deployPropertyConfigurer" class="com.mtoolkit.spring.config.PropertyConfigurerAdapter">
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<property name="ignoreResourceNotFound" value="true" />
 		<property name="propertyLoader" ref="deployPropertyLoader" />
 		<property name="order" value="3" />
-		<property name="location">
-			<value>classpath:${profile.active}/config.properties</value>
+		<property name="locations">
+			<list>
+				<value>classpath:config.properties</value>
+				<value>file:${config}/config.properties</value>
+			</list>
 		</property>
 	</bean>
 

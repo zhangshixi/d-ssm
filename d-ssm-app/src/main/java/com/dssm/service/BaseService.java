@@ -10,11 +10,11 @@ public interface BaseService {
      * 
      * addArticle(Article article);
      * 
-     * removeArticleById(int id);
+     * removeArticleById(long id);
      * 
      * editArticle(Article article);
      * 
-     * findArticleById(int id);
+     * findArticleById(long id);
      * 
      * queryArticlesByPage(Page<Article> page);
      */

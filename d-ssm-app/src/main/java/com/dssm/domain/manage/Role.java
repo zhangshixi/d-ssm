@@ -22,7 +22,7 @@ public class Role extends PrimaryKey {
     private List<Permission> permissionList;
     
     
-    // ---- getter/setter methods -------------------------------------
+    /* ---- getter/setter methods ---- */
     public String getName() {
 		return name;
 	}

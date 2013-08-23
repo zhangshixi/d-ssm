@@ -25,7 +25,7 @@ public class ArticleCategory extends PrimaryKey {
 	private List<Article> articleList;
 	
 	
-	// ---- getter/setter methods ------------------------------------
+	/* ---- getter/setter methods ---- */
 	public String getName() {
 		return name;
 	}

@@ -18,7 +18,7 @@ public class Permission implements Serializable {
     private Role role;
     
     
-    // ---- getter/setter methods -------------------------------------
+    /* ---- getter/setter methods ---- */
     public String getName() {
 		return name;
 	}

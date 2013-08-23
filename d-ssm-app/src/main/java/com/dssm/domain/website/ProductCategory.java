@@ -12,6 +12,7 @@ public class ProductCategory extends PrimaryKey {
     private String name;
     private String description;
     
+    /* ---- getter/setter methods ---- */
     public String getName() {
         return name;
     }

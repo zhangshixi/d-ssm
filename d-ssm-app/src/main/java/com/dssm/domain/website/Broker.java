@@ -36,5 +36,5 @@ public class Broker extends PrimaryKey {
     private Date    addTime;
     private Admin   addAdmin;
     
-    
+    /* ---- getter/setter methods ---- */
 }

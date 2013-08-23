@@ -27,7 +27,7 @@ public class ArticleComment extends PrimaryKey {
 	private Article article;
 	
 	
-	// ---- getter/setter methods ------------------------------------
+	/* ---- getter/setter methods ---- */
 	public String getContent() {
 		return content;
 	}
