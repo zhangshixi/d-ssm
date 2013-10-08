@@ -1,6 +1,18 @@
-*.class
-
 # Package Files #
 *.jar
 *.war
 *.ear
+
+# Compiler Files #
+d-ssm-app/target/*
+d-ssm-web/target/*
+
+*.class
+
+# Eclipse Files #
+.classpath
+.project
+*.prefs
+
+d-ssm-app/.settings/*
+d-ssm-web/.settings/*
