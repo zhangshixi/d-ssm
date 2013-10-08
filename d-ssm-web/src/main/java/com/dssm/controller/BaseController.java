@@ -5,10 +5,15 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.SecurityUtils;
+
 import com.dssm.domain.manage.Admin;
-import com.dssm.helper.SessionHelper;
 import com.dssm.helper.VisitorHolder;
+import com.dssm.loader.ConfigPropertyLoader;
+import com.dssm.loader.SystemPropertyLoader;
+import com.mtoolkit.spring.SpringContextHolder;
 import com.mtoolkit.util.DateUtil;
+import com.mtoolkit.util.StringUtil;
 
 public abstract class BaseController {
 	
@@ -36,12 +41,13 @@ public abstract class BaseController {
         return DateUtil.getCurrentTime();
     }
     
-    protected int getCurrentAdminId() {
-        return getCurrentAdmin().getId();
+    protected Long getLoginAdminId() {
+    	Admin loginAdmin = getLoginAdmin();
+        return loginAdmin == null ? null : loginAdmin.getId();
     }
     
-    protected Admin getCurrentAdmin() {
-        return SessionHelper.getAdmin(getCurrentRequest());
+    protected Admin getLoginAdmin() {
+    	return (Admin) SecurityUtils.getSubject().getPrincipal();
     }
     
     protected HttpServletRequest getCurrentRequest() {
@@ -70,4 +76,31 @@ public abstract class BaseController {
         return request.getParameter(name);
     }
     
+    
+    public <T> T getBean(String name) {
+        return SpringContextHolder.getBean(name);
+    }
+    
+	protected SystemPropertyLoader getSystemPropertyLoader() {
+        return SpringContextHolder.getBean("systemPropertyLoader");
+    }
+    
+	protected ConfigPropertyLoader getConfigPropertyLoader() {
+        return SpringContextHolder.getBean("configPropertyLoader");
+    }
+	
+	
+	protected String redirectTo(String url) {
+		return redirectTo(url, (Object[]) null);
+	}
+	
+	protected String redirectTo(String url, Object... params) {
+		return "redirect:" + StringUtil.replaceHolderArgs(url, params);
+	}
+	
+	
+	protected String errorTo(String message) {
+		return redirectTo("/error?message=" + message);
+	}
+	
 }

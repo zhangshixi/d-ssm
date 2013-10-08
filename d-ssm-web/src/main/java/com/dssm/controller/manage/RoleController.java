@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.dssm.controller.BaseController;
 import com.dssm.domain.manage.Role;
+import com.dssm.exception.BusinessException;
+import com.dssm.exception.NotFoundException;
+import com.dssm.exception.SystemException;
 
 @Controller
 public class RoleController extends BaseController {
@@ -27,17 +30,28 @@ public class RoleController extends BaseController {
 	}
 	
 	@RequestMapping(value="/role/{id}", method=RequestMethod.GET)
-	public String showRole(@PathVariable int id) {
-	    return null;
+	public String showRole(@PathVariable Long id) {
+		if (id == 1) {
+			throw new SystemException("system exception test...");
+		}
+		else if (id == 2) {
+			throw new BusinessException("business exception test...");
+		}
+		else if (id == 3) {
+			throw new NotFoundException("not found exception test...");
+		}
+		else {
+			return null;
+		}
 	}
 
 	@RequestMapping(value="/role/{id}", method=RequestMethod.PUT)
-	public String editRole(@PathVariable int id, Role role) {
+	public String editRole(@PathVariable Long id, Role role) {
 		return null;
 	}
 	
 	@RequestMapping(value="/role/{id}", method=RequestMethod.DELETE)
-	public String removeRole(@PathVariable int id) {
+	public String removeRole(@PathVariable Long id) {
 		return null;
 	}
 	

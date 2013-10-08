@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="GBK"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jaxws="http://cxf.apache.org/jaxws" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:webflow="http://www.springframework.org/schema/webflow-config"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/util	        http://www.springframework.org/schema/util/spring-util-3.0.xsd
+         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+         http://www.springframework.org/schema/webflow-config http://www.springframework.org/schema/webflow-config/spring-webflow-config-2.0.xsd
+         http://cxf.apache.org/jaxws  http://cxf.apache.org/schemas/jaxws.xsd">
+
+	<description>Shiro权限控制配置</description>
+    
+    
+	<!-- 項目自定义的Realm -->
+    <bean id="shiroJdbcRealm" class="com.dssm.shiro.ShiroJdbcRealm" />
+    
+    <!-- 用户授权信息Cache, 采用EhCache -->
+	<bean id="shiroCacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+		<property name="cacheManagerConfigFile" value="classpath:shiro/ehcache.xml"/>
+	</bean>
+    
+	<!-- apache shiro configuration -->	
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="shiroJdbcRealm" />
+        <property name="cacheManager" ref="shiroCacheManager" />
+    </bean>
+	
+    
+    <!-- Post processor that automatically invokes init() and destroy() methods
+         for Spring-configured Shiro objects so you don't have to
+         1) specify an init-method and destroy-method attributes for every bean
+            definition and
+         2) even know which Shiro objects require these methods to be called. -->
+    <!-- 在注解支持前运行，否则会报getOutputStream() has already been called for this response -->
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+    
+    
+    
+    <!-- 开启Shiro注解支持，借助Spring的AOP扫描使用Shiro注解的类，并在必要时进行安全逻辑验证。 -->
+    <!-- Enable Shiro Annotations for Spring-configured beans.  Only run after the lifecycleBeanProcessor has run: -->
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor" />
+        
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager" />
+    </bean>
+
+
+	<!-- 自定义的Filter，实现验证码功能 -->
+	<bean id="authc" class="com.dssm.shiro.CaptchaFormAuthenticationFilter" />
+	
+	<!-- Shiro Filter -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager" />
+        <property name="loginUrl" value="/login" />
+        <property name="successUrl" value="/admin" />
+        <property name="unauthorizedUrl" value="/error/403" />
+<!--         <property name="filters"> -->
+<!--         	<util:map> -->
+<!--         		<entry key="authc" value-ref="formAuthenticationFilter" /> -->
+<!--         	</util:map> -->
+<!--         </property> -->
+        <property name="filterChainDefinitions">
+            <value>
+            /login = authc
+            /logout = logout
+            /captcha = anon
+            /images/** = anon
+            /styles/** = anon
+            /scripts/** = anon
+            /** = user
+            </value>
+        </property>
+    </bean>
+
+</beans>

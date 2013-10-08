@@ -3,13 +3,15 @@
 
 	<excludes>
 		<pattern>/version</pattern>
+		<pattern>/error/*</pattern>
+		<pattern>/*/list</pattern>
     </excludes>
 
-	<decorator name="single" page="layout/single_layout.jsp">
-		<pattern>/*</pattern>
+	<decorator name="single" page="layout/single_layout.vm">
+		<pattern>*</pattern>
 	</decorator>
 	
-<!-- 	<decorator name="compose" page="layout/compose_layout.jsp"> -->
+<!-- 	<decorator name="compose" page="layout/compose_layout.vm"> -->
 <!-- 		<pattern>/*</pattern> -->
 <!-- 	</decorator> -->
 	

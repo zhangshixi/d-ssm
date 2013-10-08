@@ -25,7 +25,8 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		
-		<springframework.version>3.0.6.RELEASE</springframework.version>
+		<springframework.version>3.2.4.RELEASE</springframework.version>
+		<springframework.asm.version>3.1.4.RELEASE</springframework.asm.version>
 		<mybatis.version>3.0.6</mybatis.version>
 		<mybatis.spring.version>1.0.2</mybatis.spring.version>
 		<shiro.version>1.2.1</shiro.version>
@@ -48,13 +49,6 @@
 			<dependency>
 				<groupId>com.michael</groupId>
 				<artifactId>m-toolkit</artifactId>
-				<version>1.0-SNAPSHOT</version>
-				<type>jar</type>
-				<scope>compile</scope>
-			</dependency>
-			<dependency>
-				<groupId>com.michael</groupId>
-				<artifactId>m-cache</artifactId>
 				<version>1.0-SNAPSHOT</version>
 				<type>jar</type>
 				<scope>compile</scope>
@@ -186,7 +180,7 @@
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-asm</artifactId>
-				<version>${springframework.version}</version>
+				<version>${springframework.asm.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.springframework</groupId>

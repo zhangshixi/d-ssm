@@ -1,6 +1,9 @@
 package com.dssm.domain.manage;
 
 import java.io.Serializable;
+import java.util.List;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * 权限。
@@ -10,12 +13,13 @@ public class Permission implements Serializable {
     /** serial version UID */
     private static final long serialVersionUID = -8804072265160388100L;
 
+    @NotEmpty
     private String name;
+    @NotEmpty
     private String code;
-    private String url;
     private String description;
     
-    private Role role;
+    private List<Role> roleList;
     
     
     /* ---- getter/setter methods ---- */
@@ -35,14 +39,6 @@ public class Permission implements Serializable {
         this.code = code;
     }
     
-    public String getUrl() {
-		return url;
-	}
-    
-    public void setUrl(String url) {
-		this.url = url;
-	}
-    
     public String getDescription() {
 		return description;
 	}
@@ -51,12 +47,12 @@ public class Permission implements Serializable {
 		this.description = description;
 	}
     
-    public Role getRole() {
-		return role;
+    public List<Role> getRoleList() {
+		return roleList;
 	}
     
-    public void setRole(Role role) {
-		this.role = role;
+    public void setRoleList(List<Role> roleList) {
+		this.roleList = roleList;
 	}
     
 }

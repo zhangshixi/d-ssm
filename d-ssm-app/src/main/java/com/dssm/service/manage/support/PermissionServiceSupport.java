@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dssm.domain.manage.Permission;
-import com.dssm.domain.manage.Role;
 import com.dssm.mapper.manage.PermissionMapper;
-import com.dssm.mapper.manage.RoleMapper;
 import com.dssm.service.AbstractService;
 import com.dssm.service.manage.PermissionService;
 
@@ -16,29 +14,7 @@ import com.dssm.service.manage.PermissionService;
 public class PermissionServiceSupport extends AbstractService implements PermissionService {
 
     @Autowired
-    private RoleMapper roleMapper;
-    @Autowired
     private PermissionMapper permissionMapper;
-
-    @Override
-    public int addRole(Role role) {
-        return roleMapper.insert(role);
-    }
-
-    @Override
-    public int removeRole(int roleId) {
-        return roleMapper.deleteById(roleId);
-    }
-
-    @Override
-    public int editRole(Role role) {
-        return roleMapper.updateSelective(role);
-    }
-
-    @Override
-    public Role findRoleById(int roleId) {
-        return roleMapper.selectById(roleId);
-    }
 
     @Override
     public int addPermission(Permission permission) {
@@ -46,7 +22,7 @@ public class PermissionServiceSupport extends AbstractService implements Permiss
     }
 
     @Override
-    public int removePermission(int permissionId) {
+    public int removePermission(Long permissionId) {
         return permissionMapper.deleteById(permissionId);
     }
 
@@ -56,13 +32,18 @@ public class PermissionServiceSupport extends AbstractService implements Permiss
     }
 
     @Override
-    public Permission findPermissionById(int permissionId) {
+    public Permission findPermissionById(Long permissionId) {
         return permissionMapper.selectById(permissionId);
     }
 
     @Override
-    public List<Permission> queryPermissionsByRole(int roleId) {
-        return permissionMapper.selectByRole(roleId);
+    public List<Permission> queryAllPermissions() {
+        return queryAllPermissions(null);
+    }
+    
+    @Override
+    public List<Permission> queryAllPermissions(Long roleId) {
+    	return permissionMapper.selectByRole(roleId);
     }
 
 }

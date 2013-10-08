@@ -1,8 +1,7 @@
 package com.dssm.domain.manage;
 
 import java.util.Date;
-
-import javax.validation.constraints.NotNull;
+import java.util.List;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -13,40 +12,43 @@ public class Admin extends PrimaryKey {
 
     private static final long serialVersionUID = 5023810582244923444L;
 	
-	@NotEmpty(message="管理员登录名不能为空！")
-	private String name;
-	@NotEmpty(message="管理员登录密码不能为空！")
-	private String password;
-	@Email(message="EMAIL格式不正确！")
-	private String email;
-	private String phone;
-
-	private boolean locked;
-	
-	@NotNull
-	private Date   createTime;
-	@NotNull
-	private Date   lastLoginTime;
 	@NotEmpty
-	private String lastLoginIp;
+	private String 	   loginName;
+	@NotEmpty
+	private String 	   password;
 	
-	private Role   role;
+	@NotEmpty
+	private String 	   realName;
+	@Email
+	private String 	   email;
+	private String 	   mobile;
+
+	private Boolean    locked;
+	private Long       createAid;
+	private Date   	   createTime;
+	private String 	   lastLoginIp;
+	private Date   	   lastLoginTime;
+	private String	   remark;
+	
+	private List<Role> roleList;
+	
 	
 	/* ---- constructors ---- */
 	public Admin() {
 	}
 	
-	public Admin(int id) {
+	public Admin(Long id) {
 		super(id);
 	}
 	
+	
 	/* ---- getter/setter methods ---- */
-	public String getName() {
-		return name;
+	public String getLoginName() {
+		return loginName;
 	}
 	
-	public void setName(String name) {
-		this.name = name;
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
 	}
 	
 	public String getPassword() {
@@ -57,6 +59,14 @@ public class Admin extends PrimaryKey {
 		this.password = password;
 	}
 	
+	public String getRealName() {
+		return realName;
+	}
+	
+	public void setRealName(String realName) {
+		this.realName = realName;
+	}
+	
 	public String getEmail() {
 		return email;
 	}
@@ -65,15 +75,15 @@ public class Admin extends PrimaryKey {
 		this.email = email;
 	}
 	
-    public String getPhone() {
-        return phone;
-    }
+    public String getMobile() {
+		return mobile;
+	}
     
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
+    public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
     
-    public Boolean getLocked() {
+    public Boolean isLocked() {
         return locked;
     }
 
@@ -81,20 +91,20 @@ public class Admin extends PrimaryKey {
         this.locked = locked;
     }
 	
+    public Long getCreateAid() {
+		return createAid;
+	}
+    
+    public void setCreateAid(Long createAid) {
+		this.createAid = createAid;
+	}
+    
 	public Date getCreateTime() {
 		return createTime;
 	}
 	
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
-	}
-	
-	public Date getLastLoginTime() {
-		return lastLoginTime;
-	}
-	
-	public void setLastLoginTime(Date lastLoginTime) {
-		this.lastLoginTime = lastLoginTime;
 	}
 	
 	public String getLastLoginIp() {
@@ -105,12 +115,28 @@ public class Admin extends PrimaryKey {
 		this.lastLoginIp = lastLoginIp;
 	}
 	
-	public Role getRole() {
-		return role;
+	public Date getLastLoginTime() {
+		return lastLoginTime;
 	}
 	
-	public void setRole(Role role) {
-		this.role = role;
+	public void setLastLoginTime(Date lastLoginTime) {
+		this.lastLoginTime = lastLoginTime;
+	}
+	
+	public String getRemark() {
+		return remark;
+	}
+	
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	
+	public List<Role> getRoleList() {
+		return roleList;
+	}
+	
+	public void setRoleList(List<Role> roleList) {
+		this.roleList = roleList;
 	}
 	
 }

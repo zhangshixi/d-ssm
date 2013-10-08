@@ -1,0 +1,10 @@
+#macro(page $formId $resultId)
+	#if(!$formId)
+		#set($formId = "searchForm")
+	#end
+	#if(!$resultId)
+		#set($resultId = "searchResult")
+	#end
+	
+	$page
+#end

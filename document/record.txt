@@ -1,0 +1,82 @@
+1：PropertyPlaceholderConfigurer配置多个location，会将所有属性合并在一起，相同的后者覆盖前者。
+
+2：Mybatis若配置了sqlSessionFactory，会提前初始化，导致jdbcPropertyConfigurer外部配置不可用。解决方案：
+	1，注释掉sqlSessionFactory，去除default-autowire="byName"；
+	2，升级到3.11，使用sqlSessionFactoryBeanName替代sqlSessionFactory，后初始化。
+	
+3：Tomcat容器默认的Servlet名字为default，可用其来处理静态资源。
+	Servlet的url-pattern匹配规则为：
+	1，精确路径匹配；
+	2，最长路径匹配；
+	3，扩展名匹配；
+	4，默认Servlet处理。
+	
+4，Maven Nexus搭建好后，如何发布项目：
+	1，在setting.xml中设置repository的访问配置，如：
+	<server>
+      <id>nexus-snapshots</id>
+      <username>admin</username>
+      <password>admin123</password>
+    </server>
+	<server>
+      <id>nexus-releases</id>
+      <username>admin</username>
+      <password>admin123</password>
+    </server>
+	
+	2，在pom.xml中配置发布路径，使用mvn deploy发布，如：
+	<distributionManagement>
+		<snapshotRepository>
+			<id>nexus-snapshots</id>
+			<url>http://127.0.0.1:8081/nexus/content/repositories/snapshots/</url>
+		</snapshotRepository>
+		<repository>
+			<id>nexus-releases</id>
+			<url>http://127.0.0.1:8081/nexus/content/repositories/releases/</url>
+		</repository>
+	</distributionManagement>
+	
+5，如果使用maven配置config目录，并输出到classpath下，则需要配置resource，如下：
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/config</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+	</build>
+	
+6，maven profile的配置：
+	<profiles>
+		<profile>
+			<id>develop</id>	
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<profile.active>develop</profile.active>
+			</properties>
+		</profile>
+		<profile>
+			<id>product</id>	
+			<properties>
+				<profile.active>product</profile.active>
+			</properties>
+		</profile>
+	</profiles>
+	
+7，jQuery.validate.js的使用
+	使用jQuery.validate做前端校验，使用JSR303做服务端校验，业务校验失败仅抛出异常即可。
+
+8，JRebel的使用，下载jrebel.jar放在本地目录，配置运行的JVM参数即可，如：
+	-noverify
+	-javaagent:D:\Program\jrebel\jrebel.jar
+	-Drebel.spring_plugin=true
+	-Drebel.mybatis_plugin=true
+	
+9，使用ehcache-core > 2.5 时，不能创建同名的多个实例，会报错，改用了 ehcache-core.2.4.8，具体解决办法还未知。
+

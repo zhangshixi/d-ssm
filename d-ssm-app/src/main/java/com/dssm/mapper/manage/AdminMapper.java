@@ -7,7 +7,7 @@ import com.dssm.mapper.BaseMapper;
 
 public interface AdminMapper extends BaseMapper<Admin> {
 	
-    public Admin selectByName(String name);
+    public Admin selectByLoginName(String name);
     
     public List<Admin> selectAll();
     

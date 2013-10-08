@@ -21,19 +21,39 @@
 	<!-- default servlet process static resource -->
 	<servlet-mapping>
 	    <servlet-name>default</servlet-name>
-	    <url-pattern>/scripts/*</url-pattern>
+	    <url-pattern>*.js</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 	    <servlet-name>default</servlet-name>
-	    <url-pattern>/styles/*</url-pattern>
+	    <url-pattern>*.css</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 	    <servlet-name>default</servlet-name>
-	    <url-pattern>/images/*</url-pattern>
+	    <url-pattern>*.jpg</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 	    <servlet-name>default</servlet-name>
 	    <url-pattern>/plugins/*</url-pattern>
+	</servlet-mapping>
+	
+	<!-- captcha servlet-->
+	<servlet>
+		<servlet-name>captcha</servlet-name>
+		<servlet-class>com.google.code.kaptcha.servlet.KaptchaServlet</servlet-class> 
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>captcha</servlet-name>
+		<url-pattern>/images/captcha.jpg</url-pattern>
+	</servlet-mapping>
+	
+	<!-- sitemesh-velocity servlet -->
+	<servlet>
+	    <servlet-name>sitemesh-velocity</servlet-name>
+	    <servlet-class>com.opensymphony.module.sitemesh.velocity.VelocityDecoratorServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	    <servlet-name>sitemesh-velocity</servlet-name>
+	    <url-pattern>*.vm</url-pattern>
 	</servlet-mapping>
 	
 	<!-- SpringMVC dispatcher servlet -->
@@ -44,12 +64,13 @@
 			<param-name>contextConfigLocation</param-name>
 			<param-value>classpath*:spring/**/*.xml</param-value>
 		</init-param>
-		<load-on-startup>-1</load-on-startup>
+		<load-on-startup>2</load-on-startup>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>springMvc</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	
 	
 	<!-- Character encoding filter -->
 	<filter>
@@ -70,7 +91,8 @@
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
-	
+
+
 	<!-- Visit holder filter -->
 	<filter>
 		<filter-name>visitHolderFilter</filter-name>
@@ -80,20 +102,11 @@
 		<filter-name>visitHolderFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-    
-	<!-- SiteMesh filter -->
-	<filter>
-        <filter-name>sitemeshFilter</filter-name>
-        <filter-class>com.opensymphony.module.sitemesh.filter.PageFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>sitemeshFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
+	
 	
 	<!-- Shiro Security filter -->
 	<!-- The filter-name matches name of a 'shiroFilter' bean inside spring applicationContext.xml -->
-	<!-- <filter>
+	<filter>
 		<filter-name>shiroFilter</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
 		<init-param>
@@ -106,7 +119,19 @@
 		<url-pattern>/*</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
-	</filter-mapping> -->
+	</filter-mapping>
+	
+    
+	<!-- SiteMesh filter -->
+	<filter>
+        <filter-name>sitemeshFilter</filter-name>
+        <filter-class>com.opensymphony.sitemesh.webapp.SiteMeshFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>sitemeshFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+	
 	
 	<!-- Internet explorer restful http method support filter -->
 	<filter>
@@ -125,27 +150,22 @@
  	</session-config>
  	
  	
- 	<!-- Welcome file configuration -->
- 	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
-	</welcome-file-list>
-	
 	<!-- Error page configuration -->
-	<error-page>
-		<error-code>403</error-code>
-		<location>/403</location>
-	</error-page>
-	<error-page>
-		<error-code>404</error-code>
-		<location>/404</location>
-	</error-page>
-	<error-page>
-		<error-code>500</error-code>
-		<location>/500</location>
-	</error-page>
-	<error-page>
-		<exception-type>java.lang.Throwable</exception-type>
-		<location>/500</location>
-	</error-page>
+<!-- 	<error-page> -->
+<!-- 		<error-code>403</error-code> -->
+<!-- 		<location>/error/403</location> -->
+<!-- 	</error-page> -->
+<!-- 	<error-page> -->
+<!-- 		<error-code>404</error-code> -->
+<!-- 		<location>/error/404</location> -->
+<!-- 	</error-page> -->
+<!-- 	<error-page> -->
+<!-- 		<error-code>500</error-code> -->
+<!-- 		<location>/error/500</location> -->
+<!-- 	</error-page> -->
+<!-- 	<error-page> -->
+<!-- 		<exception-type>java.lang.Throwable</exception-type> -->
+<!-- 		<location>/error/500</location> -->
+<!-- 	</error-page> -->
 	
 </web-app>

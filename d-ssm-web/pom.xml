@@ -106,6 +106,21 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.axet</groupId>
+			<artifactId>kaptcha</artifactId>
+			<version>0.0.8</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache-core</artifactId>
+			<version>2.4.8</version>
+		</dependency>
 	</dependencies>
 	
 	
@@ -113,8 +128,8 @@
 	<build>
 		<finalName>${final.name}</finalName>
 		
+		<!-- include confi folder 
 		<resources>
-			<!-- include config folder -->
 			<resource>
 				<directory>src/main/resources</directory>
 			</resource>
@@ -122,6 +137,7 @@
 				<directory>src/main/config</directory>
 			</resource>
 		</resources>
+		-->
 	</build>
 	
 </project>

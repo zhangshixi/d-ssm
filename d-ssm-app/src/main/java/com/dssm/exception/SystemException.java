@@ -29,4 +29,8 @@ public class SystemException extends RuntimeException {
         super(StringUtil.replaceHolderArgs(message, params));
     }
     
+    public SystemException(Throwable cause, String message, Object... params) {
+		super(StringUtil.replaceHolderArgs(message, params), cause);
+	}
+    
 }

@@ -6,6 +6,8 @@ package com.dssm.domain.manage;
 
 import java.util.List;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import com.dssm.domain.PrimaryKey;
 
 /**
@@ -15,7 +17,10 @@ public class Role extends PrimaryKey {
 
     private static final long serialVersionUID = -4177282920252439830L;
 
+    @NotEmpty
     private String name;
+    @NotEmpty
+    private String code;
     private String description;
     
     private List<Admin> adminList;
@@ -29,6 +34,14 @@ public class Role extends PrimaryKey {
     
     public void setName(String name) {
 		this.name = name;
+	}
+    
+    public String getCode() {
+		return code;
+	}
+    
+    public void setCode(String code) {
+		this.code = code;
 	}
     
     public String getDescription() {

@@ -29,4 +29,8 @@ public class BusinessException extends RuntimeException {
 	    super(StringUtil.replaceHolderArgs(message, params));
 	}
 	
+	public BusinessException(Throwable cause, String message, Object... params) {
+		super(StringUtil.replaceHolderArgs(message, params), cause);
+	}
+	
 }

@@ -33,17 +33,17 @@ public class ArticleController extends BaseController {
 	}
 	
 	@RequestMapping(value="/article/{id}", method=RequestMethod.GET)
-	public String showArticle(@PathVariable int id) {
+	public String showArticle(@PathVariable Long id) {
 	    return null;
 	}
 
 	@RequestMapping(value="/article/{id}", method=RequestMethod.PUT)
-	public String editArticle(@PathVariable int id, Article article) {
+	public String editArticle(@PathVariable Long id, Article article) {
 		return null;
 	}
 	
 	@RequestMapping(value="/article/{id}", method=RequestMethod.DELETE)
-	public String removeArticle(@PathVariable int id) {
+	public String removeArticle(@PathVariable Long id) {
 		articleService.removeArticleById(id);
 		return null;
 	}

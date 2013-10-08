@@ -15,7 +15,6 @@ public class RegionServiceSupport extends AbstractService implements RegionServi
     @Override
     public void init() {
         super.init();
-        
     }
     
     @Override
@@ -24,7 +23,7 @@ public class RegionServiceSupport extends AbstractService implements RegionServi
     }
 
     @Override
-    public int removeRegion(int regionId) {
+    public int removeRegion(Long regionId) {
         return regionMapper.deleteById(regionId);
     }
 
@@ -34,7 +33,7 @@ public class RegionServiceSupport extends AbstractService implements RegionServi
     }
 
     @Override
-    public Region findRegionById(int regionId) {
+    public Region findRegionById(Long regionId) {
         return regionMapper.selectById(regionId);
     }
 

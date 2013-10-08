@@ -4,81 +4,76 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.dssm.mapper.manage.AdminMapper">
 
-	<resultMap id="BaseResultMap" type="com.dssm.domain.manage.Admin">
-		<id column="id" property="id" jdbcType="INTEGER" />
+	<resultMap id="BaseResultMap" type="Admin">
+		<id column="id" property="id" jdbcType="SMALLINT" />
 		
-		<result column="role_id" property="roleId" jdbcType="INTEGER" />
-		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="login_name" property="loginName" jdbcType="VARCHAR" />
 		<result column="password" property="password" jdbcType="VARCHAR" />
-		<result column="email" property="email" jdbcType="VARCHAR" />
-		<result column="phone" property="phone" jdbcType="VARCHAR" />
 		
+		<result column="real_name" property="realName" jdbcType="VARCHAR" />
+		<result column="email" property="email" jdbcType="VARCHAR" />
+		<result column="mobile" property="mobile" jdbcType="VARCHAR" />
+		<result column="locked" property="locked" jdbcType="BOOLEAN" />
+		
+		<result column="create_aid" property="createAid" jdbcType="SMALLINT" />
 		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
 		<result column="last_login_ip" property="lastLoginIp" jdbcType="VARCHAR" />
 		<result column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP" />
+		
+<!-- 		<association property="role" typeHandler="com.dssm.mapper.manage.RoleMapper.BaseResultMap" /> -->
 	</resultMap>
 	
 	<sql id="Base_Column_List">
-		id, role_id, name, password, email, phone, create_time, last_login_ip, last_login_time
+		id, login_name, password, real_name, email, mobile, locked, create_aid, create_time, last_login_ip, last_login_time
 	</sql>
 	
-	<select id="select" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-		select
-		<include refid="Base_Column_List" />
-		from mj_admin
-		where id = #{id,jdbcType=INTEGER}
-	</select>
-	
-	<delete id="delete" parameterType="java.lang.Integer">
-		delete from mj_admin
-		where id = #{id,jdbcType=INTEGER}
-	</delete>
-	
-	<insert id="insert" parameterType="com.dssm.domain.manage.Admin">
-		insert into mj_admin 
-		(id, role_id, name, password, email, phone, create_time)
-		values 
-		(
-			#{id,jdbcType=INTEGER}, 
-			#{roleId,jdbcType=INTEGER},
-			#{name,jdbcType=VARCHAR},
+	<insert id="insert" parameterType="Admin">
+		INSERT INTO ssm_admin(
+			login_name, password, real_name, email, mobile, create_aid, create_time)
+		VALUES(
+			#{loginName,jdbcType=VARCHAR},
 			#{password,jdbcType=VARCHAR}, 
+			#{realName,jdbcType=VARCHAR},
 			#{email,jdbcType=VARCHAR}, 
-			#{phone,jdbcType=VARCHAR}, 
-			#{createTime,jdbcType=TIMESTAMP}
+			#{mobile,jdbcType=VARCHAR}, 
+			#{createAid,jdbcType=SMALLINT}, 
+			NOW()
 		)
 	</insert>
 	
-	<update id="update" parameterType="com.dssm.domain.manage.Admin">
-		update mj_admin set 
-		role_id = #{roleId,jdbcType=INTEGER},
-		name = #{name,jdbcType=VARCHAR},
-		password = #{password,jdbcType=VARCHAR},
-		email = #{email,jdbcType=VARCHAR},
-		phone = #{phone,jdbcType=VARCHAR},
-		create_time = #{createTime,jdbcType=DATETIME},
-		last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
-		last_login_time = #{lastLoginTime,jdbcType=DATETIME}
-		where id = #{id,jdbcType=INTEGER}
+	<delete id="deleteById" parameterType="java.lang.Integer">
+		DELETE FROM ssm_admin WHERE id = #{id,jdbcType=INTEGER}
+	</delete>
+	
+	<update id="update" parameterType="Admin">
+		UPDATE ssm_admin SET 
+			password = #{password,jdbcType=VARCHAR},
+			realName = #{realName,jdbcType=VARCHAR},
+			email = #{email,jdbcType=VARCHAR},
+			mobile = #{mobile,jdbcType=VARCHAR},
+			locked = #{locked,jdbcType=BOOLEAN}, 
+			last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+			last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP}
+		WHERE id = #{id,jdbcType=INTEGER}
 	</update>
 	
-	<update id="updateSelective" parameterType="com.dssm.domain.manage.Admin">
-		update mj_admin
+	<update id="updateSelective" parameterType="Admin">
+		UPDATE ssm_admin
 		<set>
-			<if test="roleId != null">
-				role_id = #{roleId,jdbcType=INTEGER},
-			</if>
-			<if test="name != null">
-				name = #{name,jdbcType=VARCHAR},
-			</if>
 			<if test="password != null">
 				password = #{password,jdbcType=VARCHAR},
+			</if>
+			<if test="realName != null">
+				real_name = #{realName,jdbcType=VARCHAR},
 			</if>
 			<if test="email != null">
 				email = #{email,jdbcType=VARCHAR},
 			</if>
-			<if test="phone != null">
-				phone = #{phone,jdbcType=VARCHAR},
+			<if test="mobile != null">
+				mobile = #{mobile,jdbcType=VARCHAR},
+			</if>
+			<if test="locked != null">
+				locked = #{locked,jdbcType=BOOLEAN}, 
 			</if>
 			<if test="lastLoginIp != null">
 				last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
@@ -87,7 +82,45 @@
 				last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
 			</if>
 		</set>
-		where id = #{id,jdbcType=INTEGER}
+		WHERE id = #{id,jdbcType=INTEGER}
 	</update>
+	
+	<select id="selectById" resultMap="BaseResultMap" parameterType="Integer">
+		SELECT
+			<include refid="Base_Column_List" />
+		FROM ssm_admin
+		WHERE id = #{id,jdbcType=INTEGER}
+	</select>
+	
+	<select id="selectByLoginName" resultMap="BaseResultMap" parameterType="String">
+		SELECT 
+			<include refid="Base_Column_List" />
+		FROM ssm_admin
+		WHERE login_name = #{loginName,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="selectByPage" parameterType="Admin" resultMap="BaseResultMap">
+		SELECT 
+			<include refid="Base_Column_List" />
+		FROM ssm_admin
+		<where>
+			<if test="search.realName != null and search.realName != ''">
+				real_name LIKE '%${search.realName}%'
+			</if>
+			<if test="search.email != null and search.email != ''">
+				AND email = #{search.email,jdbcType=VARCHAR}
+			</if>
+			<if test="search.email != null and search.email != ''">
+				AND mobile = #{search.mobile,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectAll">
+		SELECT 
+			<include refid="Base_Column_List" />
+		FROM ssm_admin
+		ORDER BY id DESC
+	</select>
 	
 </mapper>

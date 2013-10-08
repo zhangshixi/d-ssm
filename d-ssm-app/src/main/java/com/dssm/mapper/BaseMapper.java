@@ -15,12 +15,12 @@ public interface BaseMapper<TYPE> {
     
     public int insertSelective(TYPE instance);
     
-    public int batcheInsert(TYPE[] instances);
+    public int batchInsert(TYPE[] instances);
     
     
-    public int deleteById(int primaryId);
+    public int deleteById(Long primaryId);
     
-    public int batchDeleteByIds(int[] primaryIds);
+    public int batchDeleteByIds(Long[] primaryIds);
     
     
     public int update(TYPE instance);
@@ -30,9 +30,9 @@ public interface BaseMapper<TYPE> {
     public int batchUpdate(TYPE[] instances);
     
     
-    public TYPE selectById(int primaryId);
+    public TYPE selectById(Long primaryId);
     
-    public TYPE[] batchSelectByIds(int[] primaryIds);
+    public TYPE[] batchSelectByIds(Long[] primaryIds);
     
     public List<TYPE> selectByPage(
     		@Param(MybatisPageInterceptor.PARAMETER_PAGE) Page<TYPE> page, 

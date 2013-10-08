@@ -1,7 +1,7 @@
 package com.dssm.service;
 
-import com.mcache.callback.CallbackCache;
-import com.mcache.support.HashMapCache;
+import com.mtoolkit.cache.callback.CallbackCache;
+import com.mtoolkit.cache.support.HashMapCache;
 
 public abstract class AbstractService extends CallbackCache implements BaseService {
 

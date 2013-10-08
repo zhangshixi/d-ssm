@@ -11,11 +11,11 @@ public interface ArticleService extends BaseService {
     /* ---- article operations ---- */
     public int addArticle(Article article);
 
-    public int removeArticleById(int articleId);
+    public int removeArticleById(Long articleId);
     
     public int editArticle(Article article);
 
-    public Article findArticleById(int articleId);
+    public Article findArticleById(Long articleId);
     
     public Page<Article> queryArticlesByPage(Page<Article> page); 
     
@@ -25,17 +25,17 @@ public interface ArticleService extends BaseService {
     
     public Page<Article> queryArticlesByComment(Page<Article> page);
     
-    public Page<Article> queryArticlesByCategory(int categoryId, Page<Article> page);
+    public Page<Article> queryArticlesByCategory(Long categoryId, Page<Article> page);
     
     
     /* ---- article category operations ---- */
     public int addArticleCategory(ArticleCategory articleCategory);
     
-    public int removeArticleCategoryById(int categoryId);
+    public int removeArticleCategoryById(Long categoryId);
     
     public int editArticleCategory(ArticleCategory articleCategory);
     
-    public ArticleCategory findArticleCategoryById(int categoryId);
+    public ArticleCategory findArticleCategoryById(Long categoryId);
     
     public Page<ArticleCategory> queryArticleCategoriesByPage(Page<ArticleCategory> page);
     
@@ -43,8 +43,8 @@ public interface ArticleService extends BaseService {
     /* ---- article comment operations ---- */
     public int addArticleComment(ArticleComment articleComment);
     
-    public int removeArticleCommentById(int commentId);
+    public int removeArticleCommentById(Long commentId);
     
-    public Page<ArticleComment> queryArticleCommentsByPage(int articleId, Page<ArticleComment> page);
+    public Page<ArticleComment> queryArticleCommentsByPage(Long articleId, Page<ArticleComment> page);
     
 }

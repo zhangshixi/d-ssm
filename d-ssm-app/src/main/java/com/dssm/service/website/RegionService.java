@@ -7,10 +7,10 @@ public interface RegionService extends BaseService {
     
     public int addRegion(Region region);
 
-    public int removeRegion(int regionId);
+    public int removeRegion(Long regionId);
 
     public int editRegion(Region region);
 
-    public Region findRegionById(int regionId);
+    public Region findRegionById(Long regionId);
     
 }

@@ -1,25 +1,25 @@
 /* mysql-5.5 databse schema */
 
 -- database
-DROP DATABASE IF EXISTS	mjee;
-CREATE DATABASE mjee DEFAULT CHARACTER SET utf8;
-USE mjee;
+DROP DATABASE IF EXISTS	dssm;
+CREATE DATABASE dssm DEFAULT CHARACTER SET utf8;
+USE dssm;
 
 
 /* ------------------------------------------------------------------ */
 -- user
-CREATE TABLE mj_user(
+CREATE TABLE ssm_user(
 	id INT AUTO_INCREMENT COMMENT 'user id',
 	name VARCHAR(128) UNIQUE NOT NULL COMMENT 'user login name',
 	password VARCHAR(128) NOT NULL COMMENT 'user login password',
 	email VARCHAR(128) NOT NULL COMMENT 'user email address',
 	PRIMARY KEY(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
-ALTER TABLE mj_user COMMENT 'user table';
-ALTER TABLE mj_user ADD INDEX IDX_NAME(name);
+ALTER TABLE ssm_user COMMENT 'user table';
+ALTER TABLE ssm_user ADD INDEX IDX_NAME(name);
 
 -- user detail
-CREATE TABLE mj_user_detail(
+CREATE TABLE ssm_user_detail(
 	id INT AUTO_INCREMENT COMMENT 'user detail id',
 	user_id INT UNIQUE NOT NULL COMMENT 'related user id',
 	real_name VARCHAR(128) COMMENT 'user real name',
@@ -29,20 +29,20 @@ CREATE TABLE mj_user_detail(
 	last_login_ip VARCHAR(128) NOT NULL COMMENT 'user last login ip address',
 	PRIMARY KEY(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
-ALTER TABLE mj_user_detail COMMENT 'user detail information table';
+ALTER TABLE ssm_user_detail COMMENT 'user detail information table';
 
 
 -- article category
-CREATE TABLE mj_article_category(
+CREATE TABLE ssm_article_category(
 	id INT AUTO_INCREMENT COMMENT 'article category id',
 	name VARCHAR(128) UNIQUE NOT NULL COMMENT 'article catrgory name',
 	description VARCHAR(255) COMMENT 'article category description',
 	PRIMARY KEY(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
-ALTER TABLE mj_article_category COMMENT 'article category table';
+ALTER TABLE ssm_article_category COMMENT 'article category table';
 
 -- article
-CREATE TABLE mj_article(
+CREATE TABLE ssm_article(
 	id INT AUTO_INCREMENT COMMENT 'article id',
 	category_id INT NOT NULL COMMENT 'article category id',
 	admin_id INT NOT NULL COMMENT 'article published admin id',
@@ -55,10 +55,10 @@ CREATE TABLE mj_article(
 	update_time DATETIME COMMENT 'article update time',
 	PRIMARY KEY(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
-ALTER TABLE mj_article COMMENT 'article table';
+ALTER TABLE ssm_article COMMENT 'article table';
 
 -- article comment
-CREATE TABLE mj_article_comment(
+CREATE TABLE ssm_article_comment(
 	id INT AUTO_INCREMENT COMMENT 'article comment id',
 	article_id INT NOT NULL COMMENT 'related article id',
 	user_id INT NOT NULL COMMENT 'comment user id',
@@ -68,59 +68,66 @@ CREATE TABLE mj_article_comment(
 	deleted BOOLEAN NOT NULL DEFAULT FALSE COMMENT 'has deleted',
 	PRIMARY KEY(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
-ALTER TABLE mj_article COMMENT 'article table';
+ALTER TABLE ssm_article COMMENT 'article table';
 
 
 /* ------------------------------------------------------------------ */
 -- role
-CREATE TABLE mj_role(
-	id INT AUTO_INCREMENT COMMENT 'role id',
-	name VARCHAR(128) UNIQUE NOT NULL COMMENT 'admin role name',
+DROP TABLE IF EXISTS ssm_role;
+CREATE TABLE ssm_role(
+	id SMALLINT UNSIGNED AUTO_INCREMENT COMMENT 'role id',
+	name VARCHAR(128) NOT NULL COMMENT 'role name',
+	code VARCHAR(128) UNIQUE NOT NULL COMMENT 'role code',
 	description VARCHAR(255) COMMENT 'role description',
 	PRIMARY KEY(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
-ALTER TABLE mj_role COMMENT 'role table';
+ALTER TABLE ssm_role COMMENT 'role table';
 
 -- admin
-CREATE TABLE mj_admin(
-	id INT AUTO_INCREMENT COMMENT 'admin id',
-	role_id INT COMMENT 'role id',
-	name VARCHAR(128) UNIQUE NOT NULL COMMENT 'admin login name',
+DROP TABLE IF EXISTS ssm_admin;
+CREATE TABLE ssm_admin(
+	id SMALLINT UNSIGNED AUTO_INCREMENT COMMENT 'admin id',
+	login_name VARCHAR(128) UNIQUE NOT NULL COMMENT 'admin login name',
 	password VARCHAR(128) NOT NULL COMMENT 'admin login password',
+	real_name VARCHAR(128) NOT NULL COMMENT 'admin real name',
 	email VARCHAR(128) NOT NULL COMMENT 'admin email address',
-	create_time DATETIME NOT NULL COMMENT 'admin create time',
-	last_login_ip VARCHAR(128) NOT NULL COMMENT 'admin last login ip address',
-	last_login_time DATETIME NOT NULL COMMENT 'admin last login time',
+	mobile VARCHAR(16) NOT NULL COMMENT 'admin mobile',
+	locked BOOLEAN NOT NULL DEFAULT FALSE COMMENT 'locked or not',
+	create_aid SMALLINT UNSIGNED NOT NULL COMMENT 'create admin id',
+	create_time DATETIME DEFAULT NULL COMMENT 'admin create time',
+	last_login_ip VARCHAR(128) DEFAULT NULL COMMENT 'admin last login ip address',
+	last_login_time DATETIME DEFAULT NULL COMMENT 'admin last login time',
+	remark VARCHAR(255) DEFAULT NULL COMMENT 'admin remark info',
 	PRIMARY KEY(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
-ALTER TABLE mj_admin COMMENT 'admin table';
-ALTER TABLE mj_admin ADD INDEX IDX_NAME(name);
+ALTER TABLE ssm_admin COMMENT 'admin table';
 
 -- admin role relation
-CREATE TABLE mj_relation_admin_role(
-	id INT AUTO_INCREMENT COMMENT 'admin role relation id',
-	admin_id INT NOT NULL COMMENT 'admin id',
-	role_id INT NOT NULL COMMENT 'role id',
-	PRIMARY KEY(id)
+DROP TABLE IF EXISTS ssm_relate_admin_role;
+CREATE TABLE ssm_relate_admin_role(
+	role_id SMALLINT UNSIGNED NOT NULL COMMENT 'related role id',
+	admin_id SMALLINT UNSIGNED NOT NULL COMMENT 'related admin id',
+	PRIMARY KEY(role_id, admin_id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
-ALTER TABLE mj_relation_admin_role COMMENT 'admin role relation table';
+ALTER TABLE ssm_relation_admin_role COMMENT 'admin role relation table';
 
 -- permission
-CREATE TABLE mj_permission(
-	id INT AUTO_INCREMENT COMMENT 'permission id',
-	name VARCHAR(128) UNIQUE NOT NULL COMMENT 'permission name',
-	url VARCHAR(128) UNIQUE NOT NULL COMMENT 'permission url',
+DROP TABLE IF EXISTS ssm_permission;
+CREATE TABLE ssm_permission(
+	id SMALLINT UNSIGNED AUTO_INCREMENT COMMENT 'permission id',
+	name VARCHAR(128) NOT NULL COMMENT 'permission name',
+	code VARCHAR(128) UNIQUE NOT NULL COMMENT 'permission code',
 	description VARCHAR(255) COMMENT 'permission description',
 	PRIMARY KEY(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
-ALTER TABLE mj_permission COMMENT 'permission table';
+ALTER TABLE ssm_permission COMMENT 'permission table';
 
 -- role permission relation
-CREATE TABLE mj_relation_role_permission(
-	id INT AUTO_INCREMENT COMMENT 'role permission relation id',
-	role_id INT NOT NULL COMMENT 'role id',
-	permission_id INT NOT NULL COMMENT 'permission id',
-	PRIMARY KEY(id)
+DROP TABLE IF EXISTS ssm_relate_role_permission;
+CREATE TABLE ssm_relate_role_permission(
+	role_id SMALLINT UNSIGNED NOT NULL COMMENT 'related role id',
+	permission_id SMALLINT UNSIGNED NOT NULL COMMENT 'related permission id',
+	PRIMARY KEY(role_id, permission_id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
-ALTER TABLE mj_relation_role_permission COMMENT 'role permission relation table';
+ALTER TABLE ssm_relation_role_permission COMMENT 'role permission relation table';
 

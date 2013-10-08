@@ -22,12 +22,12 @@ public class PermissionController extends BaseController {
 	}
 	
 	@RequestMapping(value="/permission/{id}", method=RequestMethod.DELETE)
-	public String removePermission(@PathVariable int id) {
+	public String removePermission(@PathVariable Long id) {
 		return null;
 	}
 	
 	@RequestMapping(value="/permission/{id}", method=RequestMethod.GET)
-	public String showPermission(@PathVariable int id) {
+	public String showPermission(@PathVariable Long id) {
 		return null;
 	}
 	

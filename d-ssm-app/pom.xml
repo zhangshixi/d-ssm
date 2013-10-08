@@ -30,10 +30,6 @@
 			<groupId>com.michael</groupId>
 			<artifactId>m-toolkit</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>com.michael</groupId>
-			<artifactId>m-cache</artifactId>
-		</dependency>
 		
 		<!-- logger implementation -->
 		<dependency>
@@ -198,7 +194,7 @@
 	</dependencies>
 	
 	
-	<!-- build settings -->
+	<!-- build settings 
 	<build>
 		<resources>
 			<resource>
@@ -211,11 +207,10 @@
 			</resource>
 		</resources>
 	</build>
+	-->
 	
-	
-	<!-- profiles settings -->
+	<!-- profiles settings 
 	<profiles>
-		<!-- develop profile -->
 		<profile>
 			<id>develop</id>	
 			<activation>
@@ -225,7 +220,6 @@
 				<profile.active>develop</profile.active>
 			</properties>
 		</profile>
-		<!-- product profile -->
 		<profile>
 			<id>product</id>	
 			<properties>
@@ -233,5 +227,6 @@
 			</properties>
 		</profile>
 	</profiles>
+	-->
 	
 </project>

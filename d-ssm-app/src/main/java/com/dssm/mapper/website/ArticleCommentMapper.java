@@ -5,6 +5,6 @@ import com.dssm.mapper.BaseMapper;
 
 public interface ArticleCommentMapper extends BaseMapper<ArticleComment> {
 	
-    public int deleteByArticle(int articleId);
+    public int deleteByArticle(Long articleId);
     
 }

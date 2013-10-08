@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import com.dssm.domain.website.Article;
 import com.dssm.domain.website.ArticleCategory;
 import com.dssm.domain.website.ArticleComment;
-import com.dssm.exception.NotExistedException;
+import com.dssm.exception.NotFoundException;
 import com.dssm.mapper.website.ArticleCategoryMapper;
 import com.dssm.mapper.website.ArticleCommentMapper;
 import com.dssm.mapper.website.ArticleMapper;
@@ -32,10 +32,10 @@ public class ArticleServiceSupport extends AbstractService implements ArticleSer
     }
 
     @Override
-    public int removeArticleById(int articleId) {
+    public int removeArticleById(Long articleId) {
         Article targetArticle = doFindArticleById(articleId);
         if (targetArticle == null) {
-            throw new NotExistedException();
+            throw new NotFoundException();
         }
         
         articleCommentMapper.deleteByArticle(articleId);
@@ -49,7 +49,7 @@ public class ArticleServiceSupport extends AbstractService implements ArticleSer
     }
 
     @Override
-    public Article findArticleById(int articleId) {
+    public Article findArticleById(Long articleId) {
         return doFindArticleById(articleId);
     }
 
@@ -74,7 +74,7 @@ public class ArticleServiceSupport extends AbstractService implements ArticleSer
     }
 
     @Override
-    public Page<Article> queryArticlesByCategory(int categoryId, Page<Article> page) {
+    public Page<Article> queryArticlesByCategory(Long categoryId, Page<Article> page) {
         return null;
     }
 
@@ -84,7 +84,7 @@ public class ArticleServiceSupport extends AbstractService implements ArticleSer
     }
 
     @Override
-    public int removeArticleCategoryById(int categoryId) {
+    public int removeArticleCategoryById(Long categoryId) {
         // TODO:
         articleCategoryMapper.deleteById(categoryId);
         return 0;
@@ -96,7 +96,7 @@ public class ArticleServiceSupport extends AbstractService implements ArticleSer
     }
 
     @Override
-    public ArticleCategory findArticleCategoryById(int categoryId) {
+    public ArticleCategory findArticleCategoryById(Long categoryId) {
         return articleCategoryMapper.selectById(categoryId);
     }
 
@@ -112,18 +112,18 @@ public class ArticleServiceSupport extends AbstractService implements ArticleSer
     }
 
     @Override
-    public int removeArticleCommentById(int commentId) {
+    public int removeArticleCommentById(Long commentId) {
         return articleCategoryMapper.deleteById(commentId);
     }
 
     @Override
-    public Page<ArticleComment> queryArticleCommentsByPage(int articleId, Page<ArticleComment> page) {
+    public Page<ArticleComment> queryArticleCommentsByPage(Long articleId, Page<ArticleComment> page) {
         return null;
     }
 
     
     // ---- private methods
-    private Article doFindArticleById(int articleId) {
+    private Article doFindArticleById(Long articleId) {
         if (articleId <= 0) {
             return null;
         } else {
