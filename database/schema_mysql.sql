@@ -109,7 +109,7 @@ CREATE TABLE ssm_relate_admin_role(
 	admin_id SMALLINT UNSIGNED NOT NULL COMMENT 'related admin id',
 	PRIMARY KEY(role_id, admin_id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
-ALTER TABLE ssm_relation_admin_role COMMENT 'admin role relation table';
+ALTER TABLE ssm_relate_admin_role COMMENT 'admin role relation table';
 
 -- permission
 DROP TABLE IF EXISTS ssm_permission;
@@ -129,5 +129,5 @@ CREATE TABLE ssm_relate_role_permission(
 	permission_id SMALLINT UNSIGNED NOT NULL COMMENT 'related permission id',
 	PRIMARY KEY(role_id, permission_id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
-ALTER TABLE ssm_relation_role_permission COMMENT 'role permission relation table';
+ALTER TABLE ssm_relate_role_permission COMMENT 'role permission relation table';
 

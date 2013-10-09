@@ -96,16 +96,16 @@
 	</bean>
 	
 	<!-- exception resolver -->	
-	<bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-		<property name="defaultErrorView" value="/error/500" />
-		<property name="exceptionMappings">
-			<props>
-				<prop key="com.mjee.app.exception.SystemException">/error/500</prop>
-				<prop key="com.mjee.app.exception.BusinessException">/error</prop>
-				<!-- spring集成shiro异常处理 -->
-				<prop key="org.apache.shiro.authz.UnauthorizedException">/error/403</prop>
-			</props>
-		</property>
-	</bean>
+<!-- 	<bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver"> -->
+<!-- 		<property name="defaultErrorView" value="/error/500" /> -->
+<!-- 		<property name="exceptionMappings"> -->
+<!-- 			<props> -->
+<!-- 				<prop key="com.mjee.app.exception.SystemException">/error/500</prop> -->
+<!-- 				<prop key="com.mjee.app.exception.BusinessException">/error</prop> -->
+<!-- 				spring集成shiro异常处理 -->
+<!-- 				<prop key="org.apache.shiro.authz.UnauthorizedException">/error/403</prop> -->
+<!-- 			</props> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
 	
 </beans>

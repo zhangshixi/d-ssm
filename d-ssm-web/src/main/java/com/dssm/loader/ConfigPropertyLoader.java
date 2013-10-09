@@ -6,11 +6,11 @@ import com.mtoolkit.spring.config.PropertyLoader;
 
 public class ConfigPropertyLoader implements PropertyLoader {
 
-    private Properties deployProps;
+    private Properties configProps;
     
     @Override
     public void load(Properties props) {
-        deployProps = props;
+        configProps = props;
     }
     
     
@@ -30,7 +30,7 @@ public class ConfigPropertyLoader implements PropertyLoader {
     
     /* ---- private methods ---- */
     private String getProperty(String key) {
-    	return deployProps.getProperty(key).trim();
+    	return configProps.getProperty(key).trim();
     }
     
 }

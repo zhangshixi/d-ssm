@@ -77,7 +77,7 @@ public class SystemPropertyLoader implements PropertyLoader {
      * @return property value of callback.url.name
      */
     public String getCallbackUrlName() {
-        return systemProps.getProperty("callback.url.name");
+        return getProperty("callback.url.name");
     }
     
     
