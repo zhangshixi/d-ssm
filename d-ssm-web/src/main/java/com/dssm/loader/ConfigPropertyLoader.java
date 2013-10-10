@@ -14,23 +14,14 @@ public class ConfigPropertyLoader implements PropertyLoader {
     }
     
     
-    /* ---- cookie ---- */
-    /**
-     * Getter method for property <tt>cookie.domain</tt>.
-     * 
-     * @return property value of cookie.domain
-     */
-    public String getCookieDomain() {
-        return getProperty("cookie.domain");
-    }
-    
-    
-    /* ---- others ---- */
-    
     
     /* ---- private methods ---- */
     private String getProperty(String key) {
-    	return configProps.getProperty(key).trim();
+    	return trim(configProps.getProperty(key));
+    }
+    
+    private String trim(String source) {
+    	return source == null ? null :source.trim();
     }
     
 }
