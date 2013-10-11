@@ -32,7 +32,7 @@ public class LoginController extends BaseController {
     	if (isRemembered || isAuthenticated) {
     		return redirectTo("/admin/new");
     	}
-        return "login";
+        return "back/login";
     }
     
     /**

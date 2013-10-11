@@ -57,37 +57,35 @@
 		</property>
 	</bean>
 	 
-	<!-- jsp view resolver 
+	<!-- jsp view resolver -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-    	<property name="prefix" value="/WEB-INF/views/" />
+    	<property name="prefix" value="/WEB-INF/" />
 		<property name="suffix" value=".jsp" />
 	</bean>	
-	-->
-	
 	
 	
 	<!-- velocity view resolver -->
-	<bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
-		<property name="resourceLoaderPath" value="/WEB-INF/views" />
-	    <property name="configLocation" value="/WEB-INF/velocity/velocity.properties" />
-    </bean>
-	<bean id="viewResolver" class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">  
-	    <property name="suffix" value=".vm" />  
-	    <property name="contentType" value="text/html;charset=UTF-8" />
+<!-- 	<bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer"> -->
+<!-- 		<property name="resourceLoaderPath" value="/WEB-INF/views" /> -->
+<!-- 	    <property name="configLocation" value="/WEB-INF/velocity/velocity.properties" /> -->
+<!--     </bean> -->
+<!-- 	<bean id="viewResolver" class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">   -->
+<!-- 	    <property name="suffix" value=".vm" />   -->
+<!-- 	    <property name="contentType" value="text/html;charset=UTF-8" /> -->
 	    
-	    <!-- 使用springMacro， 使用servlet的对象 -->  
-	    <property name="exposeSpringMacroHelpers" value="true" />
-	    <property name="exposeRequestAttributes" value="true" />
-	    <property name="exposeSessionAttributes" value="true" />
+<!-- 	    使用springMacro， 使用servlet的对象   -->
+<!-- 	    <property name="exposeSpringMacroHelpers" value="true" /> -->
+<!-- 	    <property name="exposeRequestAttributes" value="true" /> -->
+<!-- 	    <property name="exposeSessionAttributes" value="true" /> -->
 	    
-	    <property name="requestContextAttribute" value="request" />
+<!-- 	    <property name="requestContextAttribute" value="request" /> -->
 	    
-	    <!-- spring的日期格式化 -->
-	    <property name="dateToolAttribute" value="dateTool" />
+<!-- 	    spring的日期格式化 -->
+<!-- 	    <property name="dateToolAttribute" value="dateTool" /> -->
 	    
-	    <!-- velocity toolbox -->
-	    <property name="toolboxConfigLocation" value="/WEB-INF/velocity/toolbox.xml" />  
-	</bean>
+<!-- 	    velocity toolbox -->
+<!-- 	    <property name="toolboxConfigLocation" value="/WEB-INF/velocity/toolbox.xml" />   -->
+<!-- 	</bean> -->
 	
 	
 	<!-- multipart file resolver -->

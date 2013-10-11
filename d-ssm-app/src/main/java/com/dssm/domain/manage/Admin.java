@@ -83,7 +83,7 @@ public class Admin extends PrimaryKey {
 		this.mobile = mobile;
 	}
     
-    public Boolean isLocked() {
+    public Boolean getLocked() {
         return locked;
     }
 

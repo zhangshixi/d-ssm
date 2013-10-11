@@ -31,18 +31,19 @@ public class ShiroJdbcRealm extends AuthorizingRealm {
 	 */
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principal) {
-		String loginName = (String) principal.fromRealm(getName()).iterator().next();
-		Admin loginAdmin = adminService.findAdminByLoginName(loginName);
+		Admin loginAdmin = (Admin) principal.fromRealm(getName()).iterator().next();
+//		Admin loginAdmin = adminService.findAdminByLoginName(loginName);
 		
 		SimpleAuthorizationInfo authInfo = null;
 		if (loginAdmin != null) {
 			authInfo = new SimpleAuthorizationInfo();
-			for (Role role : loginAdmin.getRoleList()) {
-				authInfo.addRole(role.getCode());
-				for (Permission permission : role.getPermissionList()) {
-					authInfo.addStringPermission(permission.getCode());
-				}
-			}
+//			for (Role role : loginAdmin.getRoleList()) {
+//				authInfo.addRole(role.getCode());
+//				for (Permission permission : role.getPermissionList()) {
+					authInfo.addStringPermission("admin:edit");
+					authInfo.addStringPermission("admin:delete");
+//				}
+//			}
 		}
 		
 		return authInfo;
@@ -63,7 +64,7 @@ public class ShiroJdbcRealm extends AuthorizingRealm {
 			throw new UnknownAccountException("Login admin [" + loginName + "] not exist" );
 		} else if (!loginAdmin.getPassword().equals(password)) {
 			throw new IncorrectCredentialsException("Login admin [" + loginName + "] password error");
-		} else if (loginAdmin.isLocked()) {
+		} else if (loginAdmin.getLocked()) {
 			throw new LockedAccountException("Login admin [" + loginName + "] is locked");
 		} else {
 			callbackOnLoginSuccess(loginAdmin.getId());

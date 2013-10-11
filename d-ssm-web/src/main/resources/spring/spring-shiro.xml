@@ -49,7 +49,7 @@
 
 
 	<!-- 自定义的Filter，实现验证码功能 -->
-	<bean id="authc" class="com.dssm.shiro.CaptchaFormAuthenticationFilter" />
+<!-- 	<bean id="authc" class="com.dssm.shiro.CaptchaFormAuthenticationFilter" /> -->
 	
 	<!-- Shiro Filter -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">

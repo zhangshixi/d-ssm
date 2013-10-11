@@ -28,7 +28,7 @@ public class AdminController extends BaseController {
      */
     @RequestMapping(value="/admin/new", method=RequestMethod.GET)
     public String toNewAdmin() {
-        return "admin/add";
+        return "back/admin/add";
     }
     
     /**
@@ -52,7 +52,7 @@ public class AdminController extends BaseController {
 	        return redirectTo("/error/404");
 	    } else {
 	        modelMap.put("target", admin);
-	        return "admin/edit";
+	        return "back/admin/edit";
 	    }
 	}
 	
@@ -64,7 +64,7 @@ public class AdminController extends BaseController {
 	    admin.setId(id);
 	    adminService.editAdmin(admin);
 	    
-		return redirectTo("/admin/{0}/edit", id);
+		return redirectTo("/admin/{0}", id);
 	}
 	
 	/**
@@ -85,7 +85,7 @@ public class AdminController extends BaseController {
 	    Admin targetAdmin = adminService.findAdminById(id);
 	    modelMap.put("target", targetAdmin);
 	    
-		return "admin/show";
+		return "back/admin/show";
 	}
 	
 	/**
@@ -93,7 +93,7 @@ public class AdminController extends BaseController {
 	 */
 	@RequestMapping(value="/admin", method=RequestMethod.GET)
 	public String index(ModelMap modelMap) {
-		return "admin/index";
+		return "back/admin/index";
 	}
 	
 	/**
@@ -105,7 +105,7 @@ public class AdminController extends BaseController {
 		modelMap.put("page", page);
 		modelMap.put("adminList", adminList);
 		
-		return "admin/list";
+		return "back/admin/list";
 	}
 	
 	
