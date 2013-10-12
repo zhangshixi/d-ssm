@@ -1,0 +1,116 @@
+
+
+#TB_HideSelect{
+	z-index:99;
+	position:absolute;
+	top: 0;
+	left: 0;
+	width:100%;
+	height:100%;
+	background-color:#fff;
+	border:none;
+	filter:alpha(opacity=0);
+	-moz-opacity: 0;
+	opacity: 0;
+}
+#TB_overlay {
+	position: absolute;
+	z-index:100;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	min-height:100%;
+	background-color:#000;
+	filter:alpha(opacity=5);
+	-moz-opacity: 0.05;
+	opacity: 0.05;
+}
+
+#TB_load{
+	position: absolute;
+	display:none;
+	height:34px;
+	width:200px;
+	border: 2px solid #21577a;
+	background-color: #FFFFFF;
+	font-family:"宋体";
+	font-size: 11.5px;
+	text-align: center;
+	margin: 0 auto;
+	z-index:101;
+}
+
+ #TB_loadImg{   
+   float : left;
+   height:15px;   
+   font-size:1px;   
+   width:15px;   
+   position:relative;   
+   background-image: url(/images/loading.gif);
+   top : 8px;
+   left : 8px
+   }  
+ 
+ #TB_tip{
+ 	line-height:28px
+ } 
+
+#TB_window {
+	position: absolute;
+	background: #ffffff;
+	z-index: 102;
+	color:#000000;
+	display:none;
+	border: 4px solid #ccc;
+	text-align:left;
+	-webkit-box-shadow:	0 6px 20px rgba(0,0,0,.5);
+	-moz-box-shadow:	0 6px 20px rgba(0,0,0,.5);
+	-ms-box-shadow:		0 6px 20px rgba(0,0,0,.5);
+	-o-box-shadow:		0 6px 20px rgba(0,0,0,.5);
+	box-shadow:			0 6px 20px rgba(0,0,0,.5);
+}
+#TB_closeWindowButton{color:#fff;}
+#TB_window img {
+	display:block;
+	margin: 15px 0 0 15px;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	border-top: 1px solid #666;
+	border-left: 1px solid #666;
+}
+
+
+#TB_title{
+	background-color:#e8e8e8;
+	height:27px;
+}
+
+#TB_caption{
+	height:25px;
+	padding:10px 30px 10px 25px;
+}
+#TB_closeWindow{
+	height:25px;
+	padding:10px 25px 10px 0;
+	float:right;
+}
+#TB_closeAjaxWindow{
+	padding:5px 10px 7px 0;
+	margin-bottom:1px;
+	text-align:right;
+	/*background-color:#96D5FF;*/
+	color:#fff;
+	background:-webkit-linear-gradient(top,#666,#333);
+	background:   -moz-linear-gradient(top,#666,#333);
+	background:    -ms-linear-gradient(top,#666,#333);
+	background:     -o-linear-gradient(top,#666,#333);
+	background:        linear-gradient(top,#666,#333);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#666666',endColorstr='#333333',GradientType=0);
+}
+#TB_ajaxContent{
+	padding:2px 15px 15px 15px;
+	overflow:auto;
+}
+
+.TB_titleWindow{display:block;float:left;padding-left:10px;}

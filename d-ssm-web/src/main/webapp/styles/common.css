@@ -1,0 +1,58 @@
+/*全局样式*/
+html,body,div,ul,li,a,dl,dt,dd,input{margin:0;padding:0;}
+html,body{min-height:100%;height:auto !important;height:100%;font-family:Tahoma, SimSun, Arial,'宋体';font-size:12px;font-weight:400;}
+ul,li{list-style:none;}
+a{text-decoration:none;cursor:pointer;}
+tr{background-color:#fff;}
+img{border:0;vertical-align:middle;}
+select{padding:2px;border:1px solid #aaa;margin:0;}
+
+/*通用样式*/
+.left{float:left;}
+.right{float:right;}
+.clear{clear:both;}
+.orange{/*color:#ff7f00;*/color:#f00;}
+.bold{font-weight:bold;}
+.font_size13{font-size:13px;}
+.font_size14{font-size:14px;}
+.red{color:red;}
+.purple{color:#FF33FF;}
+.black{color:black;}
+.gray{color:#888;}
+.dark_gray{color:#444;}
+.dark_blue{color:#333;}
+.cursor{cursor:pointer;}
+.position_re{position:relative;}
+.bgcolor_dark_blue{background-color:#bac6d4;}
+.height15{height:15px;}
+.underline{text-decoration:underline;}
+.layout{table-layout:fixed;}
+#dataTable .BGnone{background-image:none;cursor:default;}
+.center{text-align:center;}
+.main .title_row .width50{width:50px;}
+.main .title_row .width100{width:100px;}
+.main .title_row .width200{width:200px;}
+.main .title_row .widthA{width:auto;}
+.marginL20{margin-left:20px}
+.BGDarkRed{background-color:#FD8080;}
+
+/*按钮样式*/
+.button,.button57,.button810,.list_b .button,.button_3{
+	background:#f21818;color:#fff;cursor:pointer;border:none;padding:0 15px;*padding:0 10px;
+	height:24px;line-height:24px;text-align:center;display:inline-block;
+	-webkit-text-shadow:0 1px 0px rgba(0,0,0,.2);
+	-moz-text-shadow:	0 1px 0px rgba(0,0,0,.2);
+	text-shadow:		0 1px 0px rgba(0,0,0,.2);
+	-webkit-box-shadow:	1px 1px 3px rgba(229,23,23,.5);
+	-moz-box-shadow:	1px 1px 3px rgba(229,23,23,.5);
+	box-shadow:			1px 1px 3px rgba(229,23,23,.5);
+}
+.list_b .red{color:#f21818;}
+/*.button_2{background:url(../img/BG_common.png) 0 -220px repeat-x;color:#fff;cursor:pointer;border:none;height:22px;line-height:22px;text-align:center;display:inline-block;padding:0 5px;}*/
+/*a.button:hover{background-color:#0066cc;background-image:none;}*/
+/*.button,.list_b .button,.button_3{width:59px;}
+.list_b .button{display:inline-block;padding:0;}*/
+/*.button57{width:95px;background-position:0 -30px;}
+.buttonRed{background-position:-100px -30px;}
+.button810{width:131px;background-position:0 -60px;}
+.button_3{background-position:0 -90px;color:#000;}*/
