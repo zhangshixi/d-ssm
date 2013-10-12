@@ -1,13 +1,13 @@
-/*鍏ㄥ眬鏍峰紡*/
+/*全局样式*/
 html,body,div,ul,li,a,dl,dt,dd,input{margin:0;padding:0;}
-html,body{min-height:100%;height:auto !important;height:100%;font-family:Tahoma, SimSun, Arial,'瀹嬩綋';font-size:12px;font-weight:400;}
+html,body{min-height:100%;height:auto !important;height:100%;font-family:Tahoma, SimSun, Arial,'宋体';font-size:12px;font-weight:400;}
 ul,li{list-style:none;}
 a{text-decoration:none;cursor:pointer;}
 tr{background-color:#fff;}
 img{border:0;vertical-align:middle;}
 select{padding:2px;border:1px solid #aaa;margin:0;}
 
-/*閫氱敤鏍峰紡*/
+/*通用样式*/
 .left{float:left;}
 .right{float:right;}
 .clear{clear:both;}
@@ -36,7 +36,7 @@ select{padding:2px;border:1px solid #aaa;margin:0;}
 .marginL20{margin-left:20px}
 .BGDarkRed{background-color:#FD8080;}
 
-/*鎸夐挳鏍峰紡*/
+/*按钮样式*/
 .button,.button57,.button810,.list_b .button,.button_3{
 	background:#f21818;color:#fff;cursor:pointer;border:none;padding:0 15px;*padding:0 10px;
 	height:24px;line-height:24px;text-align:center;display:inline-block;
@@ -48,7 +48,7 @@ select{padding:2px;border:1px solid #aaa;margin:0;}
 	box-shadow:			1px 1px 3px rgba(229,23,23,.5);
 }
 .list_b .red{color:#f21818;}
-/*.button_2{background:url(../img/BG_common.png) 0 -220px repeat-x;color:#fff;cursor:pointer;border:none;height:22px;line-height:22px;text-align:center;display:inline-block;padding:0 5px;}*/
+/*.button_2{background:url(../images/BG_common.png) 0 -220px repeat-x;color:#fff;cursor:pointer;border:none;height:22px;line-height:22px;text-align:center;display:inline-block;padding:0 5px;}*/
 /*a.button:hover{background-color:#0066cc;background-image:none;}*/
 /*.button,.list_b .button,.button_3{width:59px;}
 .list_b .button{display:inline-block;padding:0;}*/

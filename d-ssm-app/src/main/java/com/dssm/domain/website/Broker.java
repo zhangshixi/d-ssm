@@ -9,7 +9,7 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.dssm.domain.PrimaryKey;
-import com.dssm.domain.manage.Admin;
+import com.dssm.domain.security.Admin;
 
 /**
  * 产品经纪人。

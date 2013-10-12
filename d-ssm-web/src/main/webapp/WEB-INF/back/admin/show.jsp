@@ -11,15 +11,70 @@
 
 <body>
 
-	<form id="editForm" name="editForm" method="post" action="${ctx}/admin/${target.id}">
-		<input type="hidden" name="_method" value="PUT" />
-		
-		Login name: ${target.loginName}<br />
-		Real name: ${target.realName}<br />
-		Email: ${target.email}<br />
-		Mobile: ${target.mobile}<br />
-		Locked: ${target.locked}
-	</form>
+	<div class="main">
+			<div class="main_title">
+				<span class="left bold main_title_top dark_blue">
+					<a href="${ctx}/admin">管理员管理</a> >> 查看
+				</span>
+				<span class="right add_t"><a href="${ctx}/admin" title="添加">返回列表</a></span>
+			</div>
+			
+			<div class="clear"></div>
+			
+			<div class=" title_row dark_blue">
+				<form id="editForm" name="editForm" method="post" action="${ctx}/admin/${target.id}">
+					<input type="hidden" name="_method" value="PUT" />
+					
+					<table width="100%" cellspacing="1" cellpadding="3">
+						<tbody>
+							<tr>
+								<td width="40%" class="label dark_blue">Login name</td>
+								<td width="60%">
+									<input type="text" class="inputBorder" name="loginName" value="${target.loginName}" />
+									<span class="red_dian">*</span>
+								</td>
+							</tr>
+							<tr>
+								<td class="label dark_blue">Real name</td>
+								<td>
+									<input type="text" class="inputBorder" name="realName" value="${target.realName}" />
+									<span class="red_dian">*</span>
+								</td>
+							</tr>
+							<tr>
+								<td class="label dark_blue">Email</td>
+								<td>
+									<input type="text" class="inputBorder" name="email" value="${target.email}" />
+									<span class="red_dian">*</span>
+								</td>
+							</tr>
+							<tr>
+								<td class="label dark_blue">Mobile</td>
+								<td>
+									<input type="text" class="inputBorder" name="mobile" value="${target.mobile}" />
+									<span class="red_dian">*</span>
+								</td>
+							</tr>
+							<tr>
+								<td class="label dark_blue">Locked</td>
+								<td>
+									<input type="text" class="inputBorder" name="mobile" value="${target.locked}" />
+									<span class="red_dian">*</span>
+								</td>
+							</tr>
+							<tr>
+								<td class="label dark_blue">Remark</td>
+								<td>
+									<input type="text" class="inputBorder" name="remark" value="${target.remark}" />
+								</td>
+							</tr>
+						</tbody>
+					</table>
 
-</body>
+				</form>
+			
+			</div>
+		</div>
+	
+	</body>
 </html>

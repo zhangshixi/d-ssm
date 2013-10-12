@@ -12,22 +12,87 @@
 	
 	<body>
 	
-		<form id="addForm" name="addForm" method="POST" action="${ctx}/admin">
-			Login name: <input type="text" id="loginName" name="loginName" /><br />
-			Password: <input type="text" id="password" name="password" /><br />
-			Password confirm: <input type="text" name="passwordConfirm" /><br /><br />
+		<div class="main">
+			<div class="main_title">
+				<span class="left bold main_title_top dark_blue">
+					<a href="${ctx}/admin">管理员管理</a> >> 添加
+				</span>
+				<span class="right add_t"><a href="${ctx}/admin" title="添加">返回列表</a></span>
+			</div>
 			
-			Real name: <input type="text" name="realName" /><br />
-			Email: <input type="text" name="email" /><br />
-			Mobile: <input type="text" name="mobile" /><br />
+			<div class="clear"></div>
 			
-			<input type="submit" value="Submit" />
-			<input type="reset" value="Reset" />
-		</form>
+			<div class=" title_row dark_blue">
+				<form id="addForm" name="addForm" method="post" action="${ctx}/admin">
+				
+					<table width="100%" cellspacing="1" cellpadding="3">
+						<tbody>
+							<tr>
+								<td width="40%" class="label dark_blue">Login name</td>
+								<td width="60%">
+									<input type="text" class="inputBorder" name="loginName" />
+									<span class="red_dian">*</span>
+								</td>
+							</tr>
+							<tr>
+								<td class="label dark_blue">Password</td>
+								<td>
+									<input type="text" class="inputBorder" id="password" name="password" />
+									<span class="red_dian">*</span>
+								</td>
+							</tr>
+							<tr>
+								<td class="label dark_blue">Password confirm</td>
+								<td>
+									<input class="inputBorder" type="text" name="passwordConfirm" />
+									<span class="red_dian">*</span>
+								</td>
+							</tr>
+							<tr>
+								<td class="label dark_blue">Real name</td>
+								<td>
+									<input type="text" class="inputBorder" name="realName" />
+									<span class="red_dian">*</span>
+								</td>
+							</tr>
+							<tr>
+								<td class="label dark_blue">Email</td>
+								<td>
+									<input type="text" class="inputBorder" name="email" />
+									<span class="red_dian">*</span>
+								</td>
+							</tr>
+							<tr>
+								<td class="label dark_blue">Mobile</td>
+								<td>
+									<input type="text" class="inputBorder" name="mobile" />
+									<span class="red_dian">*</span>
+								</td>
+							</tr>
+							<tr>
+								<td class="label dark_blue">Remark</td>
+								<td>
+									<input type="text" class="inputBorder" name="remark" />
+								</td>
+							</tr>
+							<tr>
+								<td align="center" colspan="2">
+									<input type="submit" class="button" value="Submit" />
+									<input type="reset" class="button" value="Reset" />
+								</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</form>
+			
+			</div>
+		</div>
+		
 	
 		<script type="text/javascript">
 	        $().ready(function() {
-	            $("#loginName").focus();
+	            $("input[name=loginName]").focus();
 				
 	            $("#addForm").validate({
 	                rules: {

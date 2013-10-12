@@ -10,12 +10,12 @@
     </head>
 	
     <body>
-        <form name="addForm" action="${ctx}/signup" method="POST">
+        <form name="addForm" action="${ctx}/signup" method="post">
     		name: <input type="text" name="name" />
-    		<br>
+    		<br/>
     		password: <input type="password" name="password" />
-    		<br>
-    		email: <input type="email" name="email" />
+    		<br/>
+    		email: <input type="text" name="email" />
 			<input type="submit" />
 			<input type="reset" />
 		</form>

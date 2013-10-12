@@ -28,7 +28,7 @@ public class CommonController extends BaseController {
     
     @RequestMapping(value="/error/404", method=RequestMethod.GET)
     public String error404() {
-        return "error/404";
+        return "back/error/404";
     }
     
     @RequestMapping(value="/error/500", method=RequestMethod.GET)

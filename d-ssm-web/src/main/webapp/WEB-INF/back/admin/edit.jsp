@@ -11,17 +11,70 @@
     </head>
     
     <body>
-    
-    	<form id="editForm" name="editForm" method="post" action="${ctx}/admin/${target.id}">
-    		<input type="hidden" name="_method" value="PUT" />
-    		LoginName: ${target.loginName}<br />
-    		Real name: <input type="text" name="realName" value="${target.realName}" /><br />
-    		Email: <input type="text" name="email" value="${target.email}" /><br />
-    		mobile: <input type="text" name="mobile" value="${target.mobile}" /><br />
-    		
-    		<input type="submit" value="Submit" />
-    		<input type="reset" value="Reset" />
-    	</form>
+    	
+    	<div class="main">
+			<div class="main_title">
+				<span class="left bold main_title_top dark_blue">
+					<a href="${ctx}/admin">管理员管理</a> >> 編輯
+				</span>
+				<span class="right add_t"><a href="${ctx}/admin" title="添加">返回列表</a></span>
+			</div>
+			
+			<div class="clear"></div>
+			
+			<div class=" title_row dark_blue">
+				<form id="editForm" name="editForm" method="post" action="${ctx}/admin/${target.id}">
+					<input type="hidden" name="_method" value="PUT" />
+					
+					<table width="100%" cellspacing="1" cellpadding="3">
+						<tbody>
+							<tr>
+								<td width="40%" class="label dark_blue">Login name</td>
+								<td width="60%">
+									<input type="text" class="inputBorder" name="loginName" value="${target.loginName}" />
+									<span class="red_dian">*</span>
+								</td>
+							</tr>
+							<tr>
+								<td class="label dark_blue">Real name</td>
+								<td>
+									<input type="text" class="inputBorder" name="realName" value="${target.realName}" />
+									<span class="red_dian">*</span>
+								</td>
+							</tr>
+							<tr>
+								<td class="label dark_blue">Email</td>
+								<td>
+									<input type="text" class="inputBorder" name="email" value="${target.email}" />
+									<span class="red_dian">*</span>
+								</td>
+							</tr>
+							<tr>
+								<td class="label dark_blue">Mobile</td>
+								<td>
+									<input type="text" class="inputBorder" name="mobile" value="${target.mobile}" />
+									<span class="red_dian">*</span>
+								</td>
+							</tr>
+							<tr>
+								<td class="label dark_blue">Remark</td>
+								<td>
+									<input type="text" class="inputBorder" name="remark" value="${target.remark}" />
+								</td>
+							</tr>
+							<tr>
+								<td align="center" colspan="2">
+									<input type="submit" class="button" value="Submit" />
+									<input type="reset" class="button" value="Reset" />
+								</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</form>
+			
+			</div>
+		</div>
     
     </body>
 </html>

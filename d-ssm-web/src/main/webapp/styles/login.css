@@ -10,7 +10,7 @@ input{
 	border-radius:5px;
 
 }
-table{font-family:Tahoma,SimSun,Arial,'瀹嬩綋';font-size:12px;font-weight:400;}
+table{font-family:Tahoma,SimSun,Arial,'宋体';font-size:12px;font-weight:400;}
 label{
 	color:#5a5a5a;padding-right:12px;
 	-webkit-text-shadow:0 1px 0 #fff;
@@ -18,7 +18,7 @@ label{
 	text-shadow:0 1px 0 #fff;
 }
 
-/*涓棿鏍峰紡*/
+/*中间样式*/
 #loginForm{
 	position:relative;
 	top:50px;

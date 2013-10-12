@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8" ?>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
@@ -27,11 +26,11 @@
 		
 		${errorMsg}
 		
-		<form id="loginForm" name="loginForm" method="POST" action="${ctx}/login">
+		<form id="loginForm" name="loginForm" method="post" action="${ctx}/login">
 			Username: <input type="text" name="username" /><br />
 			Password: <input type="password" name="password" /><br />
 			Captcha: <input type="text" name="captcha" /><img src="${ctx}/images/captcha.jpg" /><br />
-			<input type="checkbox" name="rememberMe" value="true" checked />Remember Me?<br />
+			<input type="checkbox" name="rememberMe" value="true" checked="checked" />Remember Me?<br />
 			
 			<input type="submit" value="Submit" />
 			<input type="reset" value="Reset" />
@@ -66,31 +65,3 @@
 	
 	</body>
 </html>
-
-
-<table id="contentTable" class="table table-striped table-bordered table-condensed">
-	<thead>
-		<tr>
-			<th>登录名</th>
-			<th>姓名</th>
-			<th>电邮</th>
-			<th>状态</th>
-			<th>操作</th>
-		</tr>
-	</thead>
-	<tbody>
-		<c:forEach items="${adminList}" var="admin">
-			<tr>
-				<td>${admin.loginName}&nbsp;</td>
-				<td>${admin.realName}&nbsp;</td>
-				<td>${admin.email}&nbsp;</td>
-				<td>${admin.mobile}&nbsp;</td>
-				<td>
-					<shiro:hasPermission name="user:edit">
-						<a href="${ctx}/account/user/update/${user.id}" id="editLink-${user.loginName}">修改</a>
-					</shiro:hasPermission>
-				</td>
-			</tr>
-		</c:forEach>
-	</tbody>		
-</table>

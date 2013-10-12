@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.dssm.domain.PrimaryKey;
-import com.dssm.domain.manage.Admin;
+import com.dssm.domain.security.Admin;
 
 /**
  * 文章。

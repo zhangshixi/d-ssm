@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.SecurityUtils;
 
-import com.dssm.domain.manage.Admin;
+import com.dssm.domain.security.Admin;
 import com.dssm.helper.VisitorHolder;
 import com.dssm.loader.ConfigPropertyLoader;
 import com.dssm.loader.SystemPropertyLoader;

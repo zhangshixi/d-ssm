@@ -4,7 +4,7 @@ window.onload = function(){
 
 searchPage = function() {
 	$("#searchForm").ajaxSubmit(function(result){
-		$("#searchResult").html(result);
+		$("#contentPanel").html(result);
 	});
 };
 

@@ -15,10 +15,8 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.dssm.domain.manage.Admin;
-import com.dssm.domain.manage.Permission;
-import com.dssm.domain.manage.Role;
-import com.dssm.service.manage.AdminService;
+import com.dssm.domain.security.Admin;
+import com.dssm.service.security.AdminService;
 import com.mtoolkit.util.DateUtil;
 
 public class ShiroJdbcRealm extends AuthorizingRealm {
@@ -40,7 +38,9 @@ public class ShiroJdbcRealm extends AuthorizingRealm {
 //			for (Role role : loginAdmin.getRoleList()) {
 //				authInfo.addRole(role.getCode());
 //				for (Permission permission : role.getPermissionList()) {
+					authInfo.addStringPermission("admin:new");
 					authInfo.addStringPermission("admin:edit");
+					authInfo.addStringPermission("admin:show");
 					authInfo.addStringPermission("admin:delete");
 //				}
 //			}
