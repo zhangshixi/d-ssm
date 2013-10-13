@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8" ?>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
@@ -30,7 +29,7 @@
 			
 				<form id="searchForm" name="searchForm" method="post" action="${ctx}/admin/list">
 					<input type="hidden" name="pageIndex" value="1" />
-					<input type="hidden" name="pageSize" value="5" />
+					<input type="hidden" name="pageSize" value="20" />
 					
 					<div class="search_row_element">
 		    			真实姓名: <input type="text" class="enterQuery input black" name="realName" />

@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8" ?>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
@@ -15,7 +14,7 @@
     	<div class="main">
 			<div class="main_title">
 				<span class="left bold main_title_top dark_blue">
-					<a href="${ctx}/admin">管理员管理</a> >> 編輯
+					<a href="${ctx}/admin">管理员管理</a> &gt;&gt; 編輯
 				</span>
 				<span class="right add_t"><a href="${ctx}/admin" title="添加">返回列表</a></span>
 			</div>

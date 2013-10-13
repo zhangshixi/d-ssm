@@ -8,33 +8,31 @@ searchPage = function() {
 	});
 };
 
-
-
-
-function jumpPage(pageNo) {
-	$("#pageNo").val(pageNo);
-	$("#pageSize").val($("#selePageSize").val());
-	TB_showMaskLayer("正在查询...");
-	$("#searchForm").ajaxSubmit(function(result) {
-		$("#contentPanel").html(result);
-		TB_removeMaskLayer();
-	});
-}
-function jumpPageTo() {
-	var index = $("#pageTo").val();
-	index = parseInt(index);
-	if (index > 0) {
-		jumpPage(index);
+function jumpToPage(index) {
+	var pageIndex = index;
+	if (isEmpty(pageIndex)) {
+		pageIndex = $("#jumpToPage").val();
+	}
+	
+	pageIndex = parseInt(pageIndex);
+	if (pageIndex > 0) {
+		$("input[name=pageIndex]").val(pageIndex);
+		$("input[name=pageSize]").val($("#changePageSize").val());
+		
+		searchPage();
 	}
 }
+
 function changePageSize() {
-	$("#pageSize").val($("#selePageSize").val());
-	TB_showMaskLayer("正在查询...");
-	$("#searchForm").ajaxSubmit(function(result) {
-		$("#contentPanel").html(result);
-		TB_removeMaskLayer();
-	});
+	// change to first page
+	$("input[name=pageIndex]").val(1);
+	$("input[name=pageSize]").val($("#changePageSize").val());
+	
+	searchPage();
 }
+
+
+
 function sortBy(column) {
 	if ($("#order") == null || $("#orderBy") == null) {
 		return;

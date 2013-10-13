@@ -5,7 +5,7 @@
 <mapper namespace="com.dssm.mapper.security.RoleMapper">
 
 	<resultMap id="BaseResultMap" type="Role">
-		<id column="id" property="id" jdbcType="INTEGER" />
+		<id column="id" property="id" jdbcType="SMALLINT" />
 		<result column="name" property="name" jdbcType="VARCHAR" />
 		<result column="code" property="code" jdbcType="VARCHAR" />
 		<result column="description" property="description" jdbcType="VARCHAR" />
@@ -15,38 +15,29 @@
 		id, name, code, description
 	</sql>
 	
-	<select id="select" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-		select
-		<include refid="Base_Column_List" />
-		from mj_role
-		where id = #{id,jdbcType=INTEGER}
-	</select>
-	
-	<delete id="delete" parameterType="java.lang.Integer">
-		delete from mj_role
-		where id = #{id,jdbcType=INTEGER}
-	</delete>
-	
 	<insert id="insert" parameterType="Role">
-		insert into mj_role 
-		(id, name, description)
-		values 
-		(
-			#{id,jdbcType=INTEGER}, 
+		INSERT INTO ssm_role (
+			name, code, description
+		) VALUES (
 			#{name,jdbcType=VARCHAR},
+			#{code,jdbcType=VARCHAR},
 			#{description,jdbcType=VARCHAR}
 		)
 	</insert>
 	
+	<delete id="delete" parameterType="java.lang.Integer">
+		DELETE FROM ssm_role WHERE id = #{id,jdbcType=SMALLINT}
+	</delete>
+	
 	<update id="update" parameterType="Role">
-		update mj_role set 
-		name = #{name,jdbcType=VARCHAR},
-		description = #{description,jdbcType=VARCHAR}
-		where id = #{id,jdbcType=INTEGER}
+		UPDATE ssm_role SET 
+			name = #{name,jdbcType=VARCHAR},
+			description = #{description,jdbcType=VARCHAR}
+		WHERE id = #{id,jdbcType=SMALLINT}
 	</update>
 	
 	<update id="updateSelective" parameterType="Role">
-		update mj_role
+		UPDATE ssm_role 
 		<set>
 			<if test="name != null">
 				name = #{name,jdbcType=VARCHAR},
@@ -55,7 +46,46 @@
 				description = #{description,jdbcType=VARCHAR},
 			</if>
 		</set>
-		where id = #{id,jdbcType=INTEGER}
+		WHERE id = #{id,jdbcType=SMALLINT}
 	</update>
+	
+	<select id="selectById" resultMap="BaseResultMap" parameterType="Integer">
+		SELECT
+			<include refid="Base_Column_List" />
+		FROM ssm_role
+		WHERE id = #{id,jdbcType=SMALLINT}
+	</select>
+	
+	<select id="selectByCode" resultMap="BaseResultMap" parameterType="String">
+		SELECT 
+			<include refid="Base_Column_List" />
+		FROM ssm_role
+		WHERE code = #{code,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="selectByPage" parameterType="Role" resultMap="BaseResultMap">
+		SELECT 
+			<include refid="Base_Column_List" />
+		FROM ssm_role
+		<where>
+			<if test="search.code != null and search.code != ''">
+				code LIKE '%${search.code}%'
+			</if>
+			<if test="search.name != null and search.name != ''">
+				AND name = #{search.name,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectAll">
+		SELECT 
+			r.id, r.name, r.code, r.description, 
+		FROM ssm_role r 
+		<if test="roleId != null and roleId > 0">
+			INNER JOIN ssm_relate_admin_role ar ON ar.role_id = r.id
+			AND ar.admin_id = #{adminId,jdbcType=SMALLINT}
+		</if>
+		ORDER BY r.id DESC
+	</select>
 	
 </mapper>

@@ -11,31 +11,20 @@ public interface BaseMapper<TYPE> {
     
     public static final String PARAMETER_SEARCH = "search";
     
-    public int insert(TYPE instance);
-    
-    public int insertSelective(TYPE instance);
-    
+    public Integer insert(TYPE instance);
     public int batchInsert(TYPE[] instances);
     
-    
-    public int deleteById(Long primaryId);
-    
-    public int batchDeleteByIds(Long[] primaryIds);
-    
+    public int deleteById(Integer primaryId);
+    public int batchDeleteByIds(List<Integer> primaryIds);
     
     public int update(TYPE instance);
-    
     public int updateSelective(TYPE instance);
+    public int batchUpdate(List<TYPE> instances);
     
-    public int batchUpdate(TYPE[] instances);
-    
-    
-    public TYPE selectById(Long primaryId);
-    
-    public TYPE[] batchSelectByIds(Long[] primaryIds);
+    public TYPE selectById(Integer primaryId);
+    public List<TYPE> batchSelectByIds(List<Integer> primaryIds);
     
     public List<TYPE> selectByPage(
     		@Param(MybatisPageInterceptor.PARAMETER_PAGE) Page<TYPE> page, 
     		@Param(PARAMETER_SEARCH) TYPE search);
-    
 }

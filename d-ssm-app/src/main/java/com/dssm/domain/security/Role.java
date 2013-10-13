@@ -23,7 +23,6 @@ public class Role extends PrimaryKey {
     private String code;
     private String description;
     
-    private List<Admin> adminList;
     private List<Permission> permissionList;
     
     
@@ -50,14 +49,6 @@ public class Role extends PrimaryKey {
     
     public void setDescription(String description) {
 		this.description = description;
-	}
-    
-    public List<Admin> getAdminList() {
-		return adminList;
-	}
-    
-    public void setAdminList(List<Admin> adminList) {
-		this.adminList = adminList;
 	}
     
     public List<Permission> getPermissionList() {

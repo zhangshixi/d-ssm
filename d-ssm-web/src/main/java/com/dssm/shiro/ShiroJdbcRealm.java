@@ -41,7 +41,22 @@ public class ShiroJdbcRealm extends AuthorizingRealm {
 					authInfo.addStringPermission("admin:new");
 					authInfo.addStringPermission("admin:edit");
 					authInfo.addStringPermission("admin:show");
-					authInfo.addStringPermission("admin:delete");
+					authInfo.addStringPermission("admin:remove");
+					
+					authInfo.addStringPermission("role:new");
+					authInfo.addStringPermission("role:edit");
+					authInfo.addStringPermission("role:show");
+					authInfo.addStringPermission("role:remove");
+					
+					authInfo.addStringPermission("permission:new");
+					authInfo.addStringPermission("permission:edit");
+					authInfo.addStringPermission("permission:show");
+					authInfo.addStringPermission("permission:remove");
+
+					authInfo.addStringPermission("menu:new");
+					authInfo.addStringPermission("menu:edit");
+					authInfo.addStringPermission("menu:show");
+					authInfo.addStringPermission("menu:remove");
 //				}
 //			}
 		}
@@ -58,7 +73,7 @@ public class ShiroJdbcRealm extends AuthorizingRealm {
 		String loginName = token.getUsername();
 		String password = String.valueOf(token.getPassword());
 
-		Admin loginAdmin = adminService.findAdminByLoginName(loginName);
+		Admin loginAdmin = adminService.findByLoginName(loginName);
 		
 		if (loginAdmin == null) {
 			throw new UnknownAccountException("Login admin [" + loginName + "] not exist" );
@@ -75,14 +90,14 @@ public class ShiroJdbcRealm extends AuthorizingRealm {
 	/**
 	 * 登陆成功回调
 	 */
-	protected void callbackOnLoginSuccess(Long adminId) {
+	protected void callbackOnLoginSuccess(Integer adminId) {
 		String loginIp = SecurityUtils.getSubject().getSession().getHost();
 		
 		Admin loginAdmin = new Admin(adminId);
 		loginAdmin.setLastLoginIp(loginIp);
 		loginAdmin.setLastLoginTime(DateUtil.getCurrentTime());
 		
-		adminService.editAdmin(loginAdmin);
+		adminService.editSelective(loginAdmin);
 	}
 	
 }

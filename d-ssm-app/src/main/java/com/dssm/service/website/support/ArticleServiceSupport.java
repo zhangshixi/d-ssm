@@ -16,7 +16,7 @@ import com.mtoolkit.page.Page;
 import com.mtoolkit.util.DateUtil;
 
 @Service
-public class ArticleServiceSupport extends AbstractService implements ArticleService {
+public class ArticleServiceSupport extends AbstractService<Article> implements ArticleService {
 
     @Autowired
     private ArticleMapper articleMapper;
@@ -26,13 +26,13 @@ public class ArticleServiceSupport extends AbstractService implements ArticleSer
     private ArticleCategoryMapper articleCategoryMapper;
     
     @Override
-    public int addArticle(Article article) {
+    public Integer addArticle(Article article) {
         article.setCreateTime(DateUtil.getCurrentTime());
         return articleMapper.insert(article);
     }
 
     @Override
-    public int removeArticleById(Long articleId) {
+    public int removeArticleById(Integer articleId) {
         Article targetArticle = doFindArticleById(articleId);
         if (targetArticle == null) {
             throw new NotFoundException();
@@ -49,7 +49,7 @@ public class ArticleServiceSupport extends AbstractService implements ArticleSer
     }
 
     @Override
-    public Article findArticleById(Long articleId) {
+    public Article findArticleById(Integer articleId) {
         return doFindArticleById(articleId);
     }
 
@@ -74,17 +74,17 @@ public class ArticleServiceSupport extends AbstractService implements ArticleSer
     }
 
     @Override
-    public Page<Article> queryArticlesByCategory(Long categoryId, Page<Article> page) {
+    public Page<Article> queryArticlesByCategory(Integer categoryId, Page<Article> page) {
         return null;
     }
 
     @Override
-    public int addArticleCategory(ArticleCategory articleCategory) {
+    public Integer addArticleCategory(ArticleCategory articleCategory) {
         return articleCategoryMapper.insert(articleCategory);
     }
 
     @Override
-    public int removeArticleCategoryById(Long categoryId) {
+    public int removeArticleCategoryById(Integer categoryId) {
         // TODO:
         articleCategoryMapper.deleteById(categoryId);
         return 0;
@@ -96,7 +96,7 @@ public class ArticleServiceSupport extends AbstractService implements ArticleSer
     }
 
     @Override
-    public ArticleCategory findArticleCategoryById(Long categoryId) {
+    public ArticleCategory findArticleCategoryById(Integer categoryId) {
         return articleCategoryMapper.selectById(categoryId);
     }
 
@@ -106,24 +106,24 @@ public class ArticleServiceSupport extends AbstractService implements ArticleSer
     }
 
     @Override
-    public int addArticleComment(ArticleComment articleComment) {
+    public Integer addArticleComment(ArticleComment articleComment) {
         articleComment.setIp(null);
         return articleCommentMapper.insert(articleComment);
     }
 
     @Override
-    public int removeArticleCommentById(Long commentId) {
+    public int removeArticleCommentById(Integer commentId) {
         return articleCategoryMapper.deleteById(commentId);
     }
 
     @Override
-    public Page<ArticleComment> queryArticleCommentsByPage(Long articleId, Page<ArticleComment> page) {
+    public Page<ArticleComment> queryArticleCommentsByPage(Integer articleId, Page<ArticleComment> page) {
         return null;
     }
 
     
     // ---- private methods
-    private Article doFindArticleById(Long articleId) {
+    private Article doFindArticleById(Integer articleId) {
         if (articleId <= 0) {
             return null;
         } else {

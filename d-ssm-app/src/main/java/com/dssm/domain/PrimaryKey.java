@@ -10,13 +10,13 @@ public abstract class PrimaryKey implements Serializable {
     private static final long serialVersionUID = 3116037967036722554L;
     
     /** primary key */
-    protected Long id;
+    protected Integer id;
 
     
     public PrimaryKey() {
     }
     
-    public PrimaryKey(Long id) {
+    public PrimaryKey(Integer id) {
     	this.id = id;
 	}
     
@@ -26,7 +26,7 @@ public abstract class PrimaryKey implements Serializable {
      * 
      * @return property value of id
      */
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
     
@@ -35,7 +35,7 @@ public abstract class PrimaryKey implements Serializable {
      * 
      * @param id value to be assigned to property id
      */
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

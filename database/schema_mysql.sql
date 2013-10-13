@@ -131,3 +131,18 @@ CREATE TABLE ssm_relate_role_permission(
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ALTER TABLE ssm_relate_role_permission COMMENT 'role permission relation table';
 
+-- menu
+DROP TABLE IF EXISTS ssm_menu;
+CREATE TABLE ssm_menu(
+	id SMALLINT UNSIGNED AUTO_INCREMENT COMMENT 'menu id',
+	parent_id SMALLINT UNSIGNED NOT NULL DEFAULT 0 COMMENT 'parent menu id',
+	name VARCHAR(64) NOT NULL COMMENT 'menu name',
+	link VARCHAR(128) DEFAULT NULL COMMENT 'menu code',
+	level SMALLINT UNSIGNED NOT NULL DEFAULT 1 COMMENT 'menu level',
+	sequence SMALLINT NOT NULL DEFAULT 0 COMMENT 'menu sequence',
+	display BOOLEAN NOT NULL DEFAULT TRUE COMMENT 'display or not',
+	update_aid SMALLINT UNSIGNED NOT NULL COMMENT 'update admin id',
+	update_time DATETIME DEFAULT NULL COMMENT 'update time',
+	PRIMARY KEY(id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+ALTER TABLE ssm_menu COMMENT 'menu table';

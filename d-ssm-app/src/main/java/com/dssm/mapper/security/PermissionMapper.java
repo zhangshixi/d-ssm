@@ -7,6 +7,8 @@ import com.dssm.mapper.BaseMapper;
 
 public interface PermissionMapper extends BaseMapper<Permission> {
     
-    public List<Permission> selectByRole(Long roleId);
+	public Permission selectByCode(String code);
+	
+    public List<Permission> selectAll(Integer roleId);
     
 }

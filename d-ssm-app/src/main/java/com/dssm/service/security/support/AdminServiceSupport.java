@@ -15,9 +15,9 @@ import com.mtoolkit.page.Page;
 //import com.mcache.callback.KeyGenerator;
 
 @Service
-public class AdminServiceSupport extends AbstractService implements AdminService {
+public class AdminServiceSupport extends AbstractService<Admin> implements AdminService {
     
-    @Autowired
+	@Autowired
     private AdminMapper adminMapper;
     
     @Override
@@ -31,7 +31,7 @@ public class AdminServiceSupport extends AbstractService implements AdminService
     }
 
     @Override
-    public int addAdmin(Admin admin) {
+    public Integer add(Admin admin) {
         if (adminMapper.selectByLoginName(admin.getLoginName()) != null) {
             throw new BusinessException("用户名[{0}]已存在！", admin.getLoginName());
         }
@@ -40,14 +40,14 @@ public class AdminServiceSupport extends AbstractService implements AdminService
     }
 
     @Override
-    public int removeAdmin(Long adminId) {
+    public int removeById(Integer adminId) {
         int row = adminMapper.deleteById(adminId);
 //        asyncRemove(new AdminIdCacheKeyGenerator(adminId));
         return row;
     }
 
     @Override
-    public int editAdmin(Admin admin) {
+    public int editSelective(Admin admin) {
     	if (admin.getLoginName() != null) {
     		doValidateAdmin(admin);
     	}
@@ -58,13 +58,13 @@ public class AdminServiceSupport extends AbstractService implements AdminService
     }
 
 	@Override
-    public Admin findAdminById(Long adminId) {
+    public Admin findById(Integer adminId) {
 //        return get(new AdminIdCacheKeyGenerator(adminId), new AdminValueLoader(adminId, EXPIRED_TIME, adminMapper));
     	return adminMapper.selectById(adminId);
     }     
 
     @Override
-    public Admin findAdminByLoginName(String loginName) {
+    public Admin findByLoginName(String loginName) {
 //        Integer adminId = get(new AdminNameCacheKeyGenerator(adminName));
 //        if (adminId != null) {
 //            return findAdminById(adminId.intValue());
@@ -78,12 +78,12 @@ public class AdminServiceSupport extends AbstractService implements AdminService
     }
     
     @Override
-    public List<Admin> queryAdminsByPage(Page<Admin> page, Admin search) {
+    public List<Admin> queryByPage(Page<Admin> page, Admin search) {
     	return adminMapper.selectByPage(page, search);
     }
     
     @Override
-    public List<Admin> queryAllAdmins() {
+    public List<Admin> queryAll() {
     	return adminMapper.selectAll();
     }
     

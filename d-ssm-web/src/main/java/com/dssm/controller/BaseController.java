@@ -41,7 +41,7 @@ public abstract class BaseController {
         return DateUtil.getCurrentTime();
     }
     
-    protected Long getLoginAdminId() {
+    protected Integer getLoginAdminId() {
     	Admin loginAdmin = getLoginAdmin();
         return loginAdmin == null ? null : loginAdmin.getId();
     }

@@ -5,18 +5,10 @@ import java.util.List;
 import com.dssm.domain.security.Role;
 import com.dssm.service.BaseService;
 
-public interface RoleService extends BaseService {
+public interface RoleService extends BaseService<Role> {
 
-	public int addRole(Role role);
+	public Role findByCode(String code);
 
-	public int removeRole(Long roleId);
-
-	public int editRole(Role role);
-
-	public Role findRoleById(Long roleId);
-
-	public List<Role> queryAllRoles();
-	
-	public List<Role> queryAllRoles(Long adminId);
+	public List<Role> queryAll(Integer adminId);
 	
 }

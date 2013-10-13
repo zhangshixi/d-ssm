@@ -7,7 +7,7 @@ import com.dssm.mapper.website.RegionMapper;
 import com.dssm.service.AbstractService;
 import com.dssm.service.website.RegionService;
 
-public class RegionServiceSupport extends AbstractService implements RegionService {
+public class RegionServiceSupport extends AbstractService<Region> implements RegionService {
 
     @Autowired
     private RegionMapper regionMapper;
@@ -18,12 +18,12 @@ public class RegionServiceSupport extends AbstractService implements RegionServi
     }
     
     @Override
-    public int addRegion(Region region) {
+    public Integer addRegion(Region region) {
         return regionMapper.insert(region);
     }
 
     @Override
-    public int removeRegion(Long regionId) {
+    public int removeRegion(Integer regionId) {
         return regionMapper.deleteById(regionId);
     }
 
@@ -33,7 +33,7 @@ public class RegionServiceSupport extends AbstractService implements RegionServi
     }
 
     @Override
-    public Region findRegionById(Long regionId) {
+    public Region findRegionById(Integer regionId) {
         return regionMapper.selectById(regionId);
     }
 

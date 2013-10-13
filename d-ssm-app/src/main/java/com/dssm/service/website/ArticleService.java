@@ -6,16 +6,16 @@ import com.dssm.domain.website.ArticleComment;
 import com.dssm.service.BaseService;
 import com.mtoolkit.page.Page;
 
-public interface ArticleService extends BaseService {
+public interface ArticleService extends BaseService<Article> {
 	
     /* ---- article operations ---- */
-    public int addArticle(Article article);
+    public Integer addArticle(Article article);
 
-    public int removeArticleById(Long articleId);
+    public int removeArticleById(Integer articleId);
     
     public int editArticle(Article article);
 
-    public Article findArticleById(Long articleId);
+    public Article findArticleById(Integer articleId);
     
     public Page<Article> queryArticlesByPage(Page<Article> page); 
     
@@ -25,26 +25,26 @@ public interface ArticleService extends BaseService {
     
     public Page<Article> queryArticlesByComment(Page<Article> page);
     
-    public Page<Article> queryArticlesByCategory(Long categoryId, Page<Article> page);
+    public Page<Article> queryArticlesByCategory(Integer categoryId, Page<Article> page);
     
     
     /* ---- article category operations ---- */
-    public int addArticleCategory(ArticleCategory articleCategory);
+    public Integer addArticleCategory(ArticleCategory articleCategory);
     
-    public int removeArticleCategoryById(Long categoryId);
+    public int removeArticleCategoryById(Integer categoryId);
     
     public int editArticleCategory(ArticleCategory articleCategory);
     
-    public ArticleCategory findArticleCategoryById(Long categoryId);
+    public ArticleCategory findArticleCategoryById(Integer categoryId);
     
     public Page<ArticleCategory> queryArticleCategoriesByPage(Page<ArticleCategory> page);
     
     
     /* ---- article comment operations ---- */
-    public int addArticleComment(ArticleComment articleComment);
+    public Integer addArticleComment(ArticleComment articleComment);
     
-    public int removeArticleCommentById(Long commentId);
+    public int removeArticleCommentById(Integer commentId);
     
-    public Page<ArticleComment> queryArticleCommentsByPage(Long articleId, Page<ArticleComment> page);
+    public Page<ArticleComment> queryArticleCommentsByPage(Integer articleId, Page<ArticleComment> page);
     
 }

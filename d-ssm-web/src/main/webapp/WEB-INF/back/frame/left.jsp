@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8" ?>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
@@ -26,13 +25,16 @@
 				<s class="icon_gysxx"></s>权限管理
 			</dt>
 			<dd style="display:none;">
-				<a href="${ctx}/admin" target="mainFrame">管理列表</a>
+				<a href="${ctx}/admin" target="mainFrame">管理员管理</a>
 			</dd>
 			<dd style="display:none;">
-				<a href="${ctx}/role" target="mainFrame">角色设置</a>
+				<a href="${ctx}/role" target="mainFrame">角色管理</a>
 			</dd>
 			<dd style="display:none;">
-				<a href="${ctx}/permission" target="mainFrame">权限设置</a>
+				<a href="${ctx}/permission" target="mainFrame">权限管理</a>
+			</dd>
+			<dd style="display:none;">
+				<a href="${ctx}/menu" target="mainFrame">菜单设置</a>
 			</dd>
 		</dl>
 		

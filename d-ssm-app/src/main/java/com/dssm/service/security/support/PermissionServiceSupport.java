@@ -9,41 +9,52 @@ import com.dssm.domain.security.Permission;
 import com.dssm.mapper.security.PermissionMapper;
 import com.dssm.service.AbstractService;
 import com.dssm.service.security.PermissionService;
+import com.mtoolkit.page.Page;
 
 @Service
-public class PermissionServiceSupport extends AbstractService implements PermissionService {
+public class PermissionServiceSupport extends AbstractService<Permission> implements PermissionService {
 
-    @Autowired
+	@Autowired
     private PermissionMapper permissionMapper;
 
-    @Override
-    public int addPermission(Permission permission) {
+	@Override
+    public Integer add(Permission permission) {
         return permissionMapper.insert(permission);
     }
 
     @Override
-    public int removePermission(Long permissionId) {
+    public int removeById(Integer permissionId) {
         return permissionMapper.deleteById(permissionId);
     }
 
     @Override
-    public int editPermission(Permission permission) {
+    public int editSelective(Permission permission) {
         return permissionMapper.updateSelective(permission);
     }
 
     @Override
-    public Permission findPermissionById(Long permissionId) {
+    public Permission findById(Integer permissionId) {
         return permissionMapper.selectById(permissionId);
     }
 
     @Override
-    public List<Permission> queryAllPermissions() {
-        return queryAllPermissions(null);
+    public Permission findByCode(String code) {
+        return permissionMapper.selectByCode(code);
     }
     
     @Override
-    public List<Permission> queryAllPermissions(Long roleId) {
-    	return permissionMapper.selectByRole(roleId);
+    public List<Permission> queryByPage(Page<Permission> page, Permission search) {
+    	return permissionMapper.selectByPage(page, search);
     }
+	
+	@Override
+	public List<Permission> queryAll() {
+		return queryAll(null);
+	}
+
+	@Override
+	public List<Permission> queryAll(Integer permissionId) {
+		return permissionMapper.selectAll(permissionId);
+	}
 
 }

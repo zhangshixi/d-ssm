@@ -29,8 +29,8 @@
 	
 	<insert id="insert" parameterType="Admin">
 		INSERT INTO ssm_admin(
-			login_name, password, real_name, email, mobile, create_aid, create_time)
-		VALUES(
+			login_name, password, real_name, email, mobile, create_aid, create_time
+		) VALUES(
 			#{loginName,jdbcType=VARCHAR},
 			#{password,jdbcType=VARCHAR}, 
 			#{realName,jdbcType=VARCHAR},
@@ -42,7 +42,7 @@
 	</insert>
 	
 	<delete id="deleteById" parameterType="java.lang.Integer">
-		DELETE FROM ssm_admin WHERE id = #{id,jdbcType=INTEGER}
+		DELETE FROM ssm_admin WHERE id = #{id,jdbcType=SMALLINT}
 	</delete>
 	
 	<update id="update" parameterType="Admin">
@@ -54,7 +54,7 @@
 			locked = #{locked,jdbcType=BOOLEAN}, 
 			last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
 			last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP}
-		WHERE id = #{id,jdbcType=INTEGER}
+		WHERE id = #{id,jdbcType=SMALLINT}
 	</update>
 	
 	<update id="updateSelective" parameterType="Admin">
@@ -82,14 +82,14 @@
 				last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
 			</if>
 		</set>
-		WHERE id = #{id,jdbcType=INTEGER}
+		WHERE id = #{id,jdbcType=SMALLINT}
 	</update>
 	
 	<select id="selectById" resultMap="BaseResultMap" parameterType="Integer">
 		SELECT
 			<include refid="Base_Column_List" />
 		FROM ssm_admin
-		WHERE id = #{id,jdbcType=INTEGER}
+		WHERE id = #{id,jdbcType=SMALLINT}
 	</select>
 	
 	<select id="selectByLoginName" resultMap="BaseResultMap" parameterType="String">

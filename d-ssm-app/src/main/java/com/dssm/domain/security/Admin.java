@@ -24,7 +24,7 @@ public class Admin extends PrimaryKey {
 	private String 	   mobile;
 
 	private Boolean    locked;
-	private Long       createAid;
+	private Integer    createAid;
 	private Date   	   createTime;
 	private String 	   lastLoginIp;
 	private Date   	   lastLoginTime;
@@ -37,7 +37,7 @@ public class Admin extends PrimaryKey {
 	public Admin() {
 	}
 	
-	public Admin(Long id) {
+	public Admin(Integer id) {
 		super(id);
 	}
 	
@@ -91,11 +91,11 @@ public class Admin extends PrimaryKey {
         this.locked = locked;
     }
 	
-    public Long getCreateAid() {
+    public Integer getCreateAid() {
 		return createAid;
 	}
     
-    public void setCreateAid(Long createAid) {
+    public void setCreateAid(Integer createAid) {
 		this.createAid = createAid;
 	}
     

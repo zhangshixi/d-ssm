@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dssm.mapper.security.MenuMapper">
+
+	<resultMap id="BaseResultMap" type="Menu">
+		<id column="id" property="id" jdbcType="SMALLINT" />
+		<result column="parent_id" property="parent.id" jdbcType="SMALLINT" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="link" property="link" jdbcType="VARCHAR" />
+		<result column="level" property="level" jdbcType="SMALLINT" />
+		<result column="sequence" property="sequence" jdbcType="SMALLINT" />
+		<result column="display" property="display" jdbcType="BOOLEAN" />
+		<result column="update_aid" property="updateAid" jdbcType="SMALLINT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, parent_id, name, link, level, sequence, display, update_aid, update_time
+	</sql>
+	
+	<insert id="insert" parameterType="Menu">
+		INSERT INTO ssm_menu (
+			parent_id, name, link, level, sequence, update_aid, update_time
+		) VALUES (
+			#{parent.id,jdbcType=SMALLINT},
+			#{name,jdbcType=VARCHAR},
+			#{link,jdbcType=VARCHAR},
+			#{level,jdbcType=SMALLINT},
+			#{sequence,jdbcType=SMALLINT},
+			#{updateAid,jdbcType=SMALLINT},
+			NOW()
+		)
+	</insert>
+	
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM ssm_menu WHERE id = #{id,jdbcType=SMALLINT}
+	</delete>
+	
+	<update id="updateSelective" parameterType="Menu">
+		UPDATE ssm_menu 
+		SET 
+			<if test="parent != null and parent.id != null">
+				parent_id = #{parent.id,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="link != null">
+				link = #{link,jdbcType=VARCHAR},
+			</if>
+			<if test="level != null">
+				level = #{level,jdbcType=SMALLINT},
+			</if>
+			<if test="sequence != null">
+				sequence = #{sequence,jdbcType=SMALLINT},
+			</if>
+			<if test="updateAid != null">
+				update_aid = #{updateAid,jdbcType=SMALLINT},
+			</if>
+			update_time = NOW()
+		WHERE id = #{id,jdbcType=SMALLINT}
+	</update>
+	
+	<select id="selectById" parameterType="Integer" resultMap="BaseResultMap">
+		SELECT
+			<include refid="Base_Column_List" />
+		FROM ssm_menu
+		WHERE id = #{id,jdbcType=SMALLINT}
+	</select>
+	
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT 
+			<include refid="Base_Column_List" />
+		FROM ssm_menu 
+		WHERE display = 1
+		ORDER BY sequence DESC
+	</select>
+	
+</mapper>

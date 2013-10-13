@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8" ?>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
@@ -57,48 +56,13 @@
 		</div>
 		
 		<script type="text/javascript">
-		//按钮淡入淡出效果
-		/*$('.topButton').hover(function () {
-		  $(this).prev('.topButtonHover').fadeIn(0);
-		  $(this).css('color','#003048');
-		},function () {
-		  $(this).prev('.topButtonHover').fadeOut(100);
-		  $(this).removeAttr('style');
-		});*/
-		
-		// 刷新页面
-		function pageReload() {
-		  window.top.frames['mainFrame'].document.location.reload();
-		}
-		// 头部信息显示
-		var h=20,time=3000,speed=500;
-		function showMsg() {
-		  $('.msgBox ul').height(h);
-		  setTimeout(function(){msgNum();},0);
-		  var t=setInterval(function(){msgNum();gundong();},time);
-		  $('.msgBox li').hover(
-		    function () {clearInterval(t);},
-		    function () {t=setInterval(function(){msgNum();gundong();},time);}
-		  );
-		}
-		// 判断信息数量
-		function msgNum() {
-		  if ($('.msgBox li').length>0){$('.msgBox').show();}else {$('.msgBox').hide();}
-		}
-		// 轮播滚动函数
-		function gundong(){
-		  if ($('.msgBox li').length>1){
-		    $('.msgBox li:eq(0)').animate({marginTop:-h},speed,function () {
-		      $(this).removeAttr('style');
-		      $('.msgBox ul').append($(this));
-		    });
-		  }
-		}
-		showMsg();
-		
-		function toUpdatePassword() {
-			window.top.frames['mainFrame'].document.location.href = "/passwordTo.htm";
-		}
+			function pageReload() {
+			  window.top.frames['mainFrame'].document.location.reload();
+			}
+			
+			function toUpdatePassword() {
+				window.top.frames['mainFrame'].document.location.href = "/passwordTo.htm";
+			}
 		</script>
     </body>
 </html>

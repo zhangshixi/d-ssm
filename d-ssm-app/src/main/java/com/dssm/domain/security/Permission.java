@@ -1,14 +1,15 @@
 package com.dssm.domain.security;
 
-import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.dssm.domain.PrimaryKey;
+
 /**
  * 权限。
  */
-public class Permission implements Serializable {
+public class Permission extends PrimaryKey {
 
     /** serial version UID */
     private static final long serialVersionUID = -8804072265160388100L;

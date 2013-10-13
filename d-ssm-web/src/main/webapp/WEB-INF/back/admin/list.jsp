@@ -4,7 +4,7 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 
 <div id="listDiv">
-	<table id="dataTable" class="dataTable" width="100%" cellpadding="0" cellspacing="0">
+	<table id="dataTable" class="dataTable" style="width: 100%;">
 		<tbody>
 			<tr>
 				<th>ID</th>
@@ -15,23 +15,23 @@
 				<th>最后登录时间</th>
 				<th>操作</th>
 			</tr>
-			<c:forEach items="${adminList}" var="admin">
+			<c:forEach items="${resultList}" var="item">
 				<tr>
-					<td>${admin.id}</td>
-					<td>${admin.loginName}</td>
-					<td>${admin.realName}</td>
-					<td>${admin.email}</td>
-					<td>${admin.mobile}</td>
-					<td>${admin.lastLoginTime}</td>
+					<td>${item.id}</td>
+					<td>${item.loginName}</td>
+					<td>${item.realName}</td>
+					<td>${item.email}</td>
+					<td>${item.mobile}</td>
+					<td>${item.lastLoginTime}</td>
 					<td>
 						<shiro:hasPermission name="admin:show">
-							<a href="${ctx}/admin/${admin.id}" id="editLink-${admin.loginName}">查看</a>
+							<a href="${ctx}/admin/${item.id}" id="editLink-${item.loginName}">查看</a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="admin:edit">
-							<a href="${ctx}/admin/${admin.id}/edit" id="editLink-${admin.loginName}">编辑</a>
+							<a href="${ctx}/admin/${item.id}/edit" id="editLink-${item.loginName}">编辑</a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="admin:delete">
-							<a href="${ctx}/admin/${admin.id}" title="删除" onclick="return doDelete(this);">删除</a>
+							<a href="${ctx}/admin/${item.id}" title="删除" onclick="return doDelete(this);">删除</a>
 						</shiro:hasPermission>
 					</td>
 				</tr>
@@ -46,18 +46,27 @@
 		共<span class="bold red" id="totalPages">${page.totalPage}</span>页，
 		<span class="bold red">${page.totalData}</span>条，
 		每页显示
-		<select id="selePageSize" onchange="changePageSize();">
-			<option value="10">10</option>
-			<option value="20" selected="selected">20</option>
-			<option value="50">50</option>
+		<select id="changePageSize" onchange="changePageSize();">
+			<option value="2" <c:if test="${page.pageSize == 2}">selected="selected"</c:if>>2</option>
+			<option value="10" <c:if test="${page.pageSize == 10}">selected="selected"</c:if>>10</option>
+			<option value="20" <c:if test="${page.pageSize == 20}">selected="selected"</c:if>>20</option>
+			<option value="50" <c:if test="${page.pageSize == 50}">selected="selected"</c:if>>50</option>
 		</select>
 	</div>
 	<div class="right list_bottom list_b">
-    	<a class="gray">首页</a>
-		<a class="gray">上一页</a>
-        <a class="gray">下一页</a>
-		<a class="gray">尾页</a>
-        <input type="text" class="input" id="pageTo" style="width:30px;">
-    	<a href="javascript:jumpPageTo()" class="button">GO</a>
+    	<a <c:if test="${page.firstPage}">class="gray"</c:if>
+    	   <c:if test="${!page.firstPage}">href="javascript:jumpToPage(1);"</c:if>
+    	>首页</a>
+		<a <c:if test="${page.firstPage}">class="gray"</c:if>
+		   <c:if test="${!page.firstPage}">href="javascript:jumpToPage(${page.pageIndex - 1});"</c:if>
+		>上一页</a>
+        <a <c:if test="${page.lastPage}">class="gray"</c:if>
+    	   <c:if test="${!page.lastPage}">href="javascript:jumpToPage(${page.pageIndex + 1});"</c:if>
+		>下一页</a>
+		<a <c:if test="${page.lastPage}">class="gray"</c:if>
+    	   <c:if test="${!page.lastPage}">href="javascript:jumpToPage(${page.totalPage});"</c:if>
+		>尾页</a>
+        <input type="text" class="input" id="jumpToPage" style="width:30px;">
+    	<a class="button" href="javascript:jumpToPage();">GO</a>
 	</div>
 </div>
