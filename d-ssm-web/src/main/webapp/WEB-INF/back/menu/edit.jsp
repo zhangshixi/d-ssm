@@ -28,6 +28,13 @@
 					<table width="100%" cellspacing="1" cellpadding="3">
 						<tbody>
 							<tr>
+								<td width="40%" class="label dark_blue">parent.id</td>
+								<td width="60%">
+									<input type="text" class="inputBorder" name="parent.id" value="${target.parent.id}" />
+									<span class="red_dian">*</span>
+								</td>
+							</tr>
+							<tr>
 								<td width="40%" class="label dark_blue">Name</td>
 								<td width="60%">
 									<input type="text" class="inputBorder" name="name" value="${target.name}" />
@@ -35,16 +42,16 @@
 								</td>
 							</tr>
 							<tr>
-								<td class="label dark_blue">Code</td>
+								<td class="label dark_blue">Link</td>
 								<td>
-									<input type="text" class="inputBorder" name="code" value="${target.code}" />
+									<input type="text" class="inputBorder" name="link" value="${target.link}" />
 									<span class="red_dian">*</span>
 								</td>
 							</tr>
 							<tr>
-								<td class="label dark_blue">Description</td>
+								<td class="label dark_blue">sequence</td>
 								<td>
-									<input type="text" class="inputBorder" name="description" value="${target.description}" />
+									<input type="text" class="inputBorder" name="sequence" value="${target.sequence}" />
 								</td>
 							</tr>
 							<tr>

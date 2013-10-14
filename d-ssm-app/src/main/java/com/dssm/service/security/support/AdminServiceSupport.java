@@ -24,10 +24,10 @@ public class AdminServiceSupport extends AbstractService<Admin> implements Admin
     public void init() {
         super.init();
         
-        List<Admin> allAdminList = adminMapper.selectAll();
-        for (Admin admin : allAdminList) {
+//        List<Admin> allAdminList = adminMapper.selectAll();
+//        for (Admin admin : allAdminList) {
 //            asyncPut(new AdminIdCacheKeyGenerator(admin.getId()), admin, EXPIRED_TIME);
-        }
+//        }
     }
 
     @Override
@@ -97,8 +97,8 @@ public class AdminServiceSupport extends AbstractService<Admin> implements Admin
 	}
     
     /* ---- inner classes ---- */
-    private static final long EXPIRED_TIME = 7 * 24 * 60 * 60 * 1000;
-    
+//    private static final long EXPIRED_TIME = 7 * 24 * 60 * 60 * 1000;
+//    
 //    private static class AdminIdCacheKeyGenerator implements KeyGenerator {
 //        
 //        private int adminId;

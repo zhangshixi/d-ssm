@@ -48,12 +48,6 @@
 								</td>
 							</tr>
 							<tr>
-								<td class="label dark_blue">level</td>
-								<td>
-									<input type="text" class="inputBorder" name="level" />
-								</td>
-							</tr>
-							<tr>
 								<td class="label dark_blue">sequence</td>
 								<td>
 									<input type="text" class="inputBorder" name="sequence" />

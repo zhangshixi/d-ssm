@@ -1,6 +1,10 @@
 package com.dssm.service.security.support;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,8 +57,30 @@ public class MenuServiceSupport extends AbstractService<Menu> implements MenuSer
 	}
 
 	@Override
-	public List<Menu> queryAll(Integer menuId) {
-		return menuMapper.selectAll(menuId);
+	public List<Menu> queryAll(Boolean display) {
+		return menuMapper.selectAll(display);
+	}
+	
+	@Override
+	public List<Menu> queryAllTree(Boolean display) {
+		List<Menu> menuList = queryAll(display);
+		if (menuList == null || menuList.isEmpty()) {
+			return Collections.emptyList();
+		}
+		
+		// TODO:
+		Menu item = null;
+		Iterator<Menu> iterator = menuList.iterator();
+		Map<Integer, Menu> menuMap = new HashMap<Integer, Menu>();
+		while (iterator.hasNext()) {
+			item = iterator.next();			
+			if (item.isTopLevel()) {
+				menuMap.put(item.getId(), item);
+			} else {
+				item.getParent().getId();
+			}
+		}
+		return menuMapper.selectAll(display);
 	}
 	
 }

@@ -36,5 +36,61 @@ public class Broker extends PrimaryKey {
     private Date    addTime;
     private Admin   addAdmin;
     
+    
     /* ---- getter/setter methods ---- */
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public Boolean getGender() {
+		return gender;
+	}
+	public void setGender(Boolean gender) {
+		this.gender = gender;
+	}
+	public Integer getAge() {
+		return age;
+	}
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public Boolean getDeleted() {
+		return deleted;
+	}
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
+	}
+	public Date getAddTime() {
+		return addTime;
+	}
+	public void setAddTime(Date addTime) {
+		this.addTime = addTime;
+	}
+	public Admin getAddAdmin() {
+		return addAdmin;
+	}
+	public void setAddAdmin(Admin addAdmin) {
+		this.addAdmin = addAdmin;
+	}
+    
 }

@@ -60,6 +60,14 @@ public class ArticleComment extends PrimaryKey {
 		this.deleted = deleted;
 	}
 	
+	public String getReferenceIds() {
+		return referenceIds;
+	}
+	
+	public void setReferenceIds(String referenceIds) {
+		this.referenceIds = referenceIds;
+	}
+	
 	public Article getArticle() {
 		return article;
 	}

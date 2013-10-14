@@ -1,15 +1,23 @@
 package com.dssm.controller.security;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.dssm.controller.BaseController;
+import com.dssm.domain.security.Menu;
+import com.dssm.service.security.MenuService;
 
 @Controller
 public class IndexController extends BaseController {
     
+	@Autowired
+    private MenuService menuService;
+	
     @RequestMapping(value="/index", method=RequestMethod.GET)
     public String index() {
         return "back/index";
@@ -21,11 +29,14 @@ public class IndexController extends BaseController {
     }
 
     @RequestMapping(value="/left", method=RequestMethod.GET)
-    public String left(ModelMap modelMap, String message) {
+    public String left(ModelMap modelMap) {
+    	List<Menu> menuList = menuService.queryAll(Boolean.TRUE);
+    	modelMap.put("menuList", menuList);
     	return "back/frame/left";
     }
     
     @RequestMapping(value="/middle", method=RequestMethod.GET)
+    
     public String middle() {
         return "back/frame/middle";
     }

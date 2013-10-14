@@ -1,5 +1,7 @@
 package com.dssm.shiro;
 
+import java.util.List;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -16,13 +18,21 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.dssm.domain.security.Admin;
+import com.dssm.domain.security.Permission;
+import com.dssm.domain.security.Role;
 import com.dssm.service.security.AdminService;
+import com.dssm.service.security.PermissionService;
+import com.dssm.service.security.RoleService;
 import com.mtoolkit.util.DateUtil;
 
 public class ShiroJdbcRealm extends AuthorizingRealm {
 	
 	@Autowired
-	private AdminService adminService;
+	private AdminService 	   adminService;
+	@Autowired
+	private RoleService  	   roleService;
+	@Autowired
+	private PermissionService  permissionService;
 	
 	/**
 	 * 授权
@@ -30,35 +40,20 @@ public class ShiroJdbcRealm extends AuthorizingRealm {
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principal) {
 		Admin loginAdmin = (Admin) principal.fromRealm(getName()).iterator().next();
-//		Admin loginAdmin = adminService.findAdminByLoginName(loginName);
 		
 		SimpleAuthorizationInfo authInfo = null;
 		if (loginAdmin != null) {
 			authInfo = new SimpleAuthorizationInfo();
-//			for (Role role : loginAdmin.getRoleList()) {
-//				authInfo.addRole(role.getCode());
-//				for (Permission permission : role.getPermissionList()) {
-					authInfo.addStringPermission("admin:new");
-					authInfo.addStringPermission("admin:edit");
-					authInfo.addStringPermission("admin:show");
-					authInfo.addStringPermission("admin:remove");
-					
-					authInfo.addStringPermission("role:new");
-					authInfo.addStringPermission("role:edit");
-					authInfo.addStringPermission("role:show");
-					authInfo.addStringPermission("role:remove");
-					
-					authInfo.addStringPermission("permission:new");
-					authInfo.addStringPermission("permission:edit");
-					authInfo.addStringPermission("permission:show");
-					authInfo.addStringPermission("permission:remove");
-
-					authInfo.addStringPermission("menu:new");
-					authInfo.addStringPermission("menu:edit");
-					authInfo.addStringPermission("menu:show");
-					authInfo.addStringPermission("menu:remove");
-//				}
-//			}
+			for (Role role : loginAdmin.getRoleList()) {
+				if (role.isAdministrator()) {
+					return buildAdminAuthorizationInfo();
+				} else {
+					authInfo.addRole(role.getCode());
+					for (Permission permission : role.getPermissionList()) {
+						authInfo.addStringPermission(permission.getCode());
+					}
+				}
+			}
 		}
 		
 		return authInfo;
@@ -83,7 +78,7 @@ public class ShiroJdbcRealm extends AuthorizingRealm {
 			throw new LockedAccountException("Login admin [" + loginName + "] is locked");
 		} else {
 			callbackOnLoginSuccess(loginAdmin.getId());
-			return new SimpleAuthenticationInfo(loginAdmin, loginAdmin.getPassword(), getName());
+			return buildAdminAuthenticationInfo(loginAdmin);
 		}
 	}
 	
@@ -98,6 +93,38 @@ public class ShiroJdbcRealm extends AuthorizingRealm {
 		loginAdmin.setLastLoginTime(DateUtil.getCurrentTime());
 		
 		adminService.editSelective(loginAdmin);
+	}
+	
+	private AuthorizationInfo buildAdminAuthorizationInfo() {
+		List<Role> roleList = roleService.queryAll();
+		List<Permission> permissionList = permissionService.queryAll();
+		
+		SimpleAuthorizationInfo authInfo = null;
+		if (!roleList.isEmpty() || !permissionList.isEmpty()) {
+			authInfo = new SimpleAuthorizationInfo();
+			for (Role role : roleList) {
+				authInfo.addRole(role.getCode());
+			}
+			for (Permission permission : permissionList) {
+				authInfo.addStringPermission(permission.getCode());
+			}
+		}
+		
+		return authInfo;
+	}
+	
+	private AuthenticationInfo buildAdminAuthenticationInfo(Admin loginAdmin) {
+		List<Role> roleList = roleService.queryAll(loginAdmin.getId());
+		AuthenticationInfo authInfo = null;
+		if (!roleList.isEmpty()) {
+			for (Role role : roleList) {
+				role.setPermissionList(permissionService.queryAll(role.getId()));
+			}
+			loginAdmin.setRoleList(roleList);
+			authInfo = new SimpleAuthenticationInfo(loginAdmin, loginAdmin.getPassword(), getName());
+		}
+		
+		return authInfo;
 	}
 	
 }

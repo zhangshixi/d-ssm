@@ -14,6 +14,7 @@
 		<result column="email" property="email" jdbcType="VARCHAR" />
 		<result column="mobile" property="mobile" jdbcType="VARCHAR" />
 		<result column="locked" property="locked" jdbcType="BOOLEAN" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
 		
 		<result column="create_aid" property="createAid" jdbcType="SMALLINT" />
 		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
@@ -24,18 +25,20 @@
 	</resultMap>
 	
 	<sql id="Base_Column_List">
-		id, login_name, password, real_name, email, mobile, locked, create_aid, create_time, last_login_ip, last_login_time
+		id, login_name, password, real_name, email, mobile, locked, remark, create_aid, create_time, last_login_ip, last_login_time
 	</sql>
 	
 	<insert id="insert" parameterType="Admin">
 		INSERT INTO ssm_admin(
-			login_name, password, real_name, email, mobile, create_aid, create_time
+			login_name, password, real_name, email, mobile, locked, remark, create_aid, create_time
 		) VALUES(
 			#{loginName,jdbcType=VARCHAR},
 			#{password,jdbcType=VARCHAR}, 
 			#{realName,jdbcType=VARCHAR},
 			#{email,jdbcType=VARCHAR}, 
 			#{mobile,jdbcType=VARCHAR}, 
+			FALSE,
+			#{remark,jdbcType=VARCHAR},
 			#{createAid,jdbcType=SMALLINT}, 
 			NOW()
 		)
@@ -52,6 +55,7 @@
 			email = #{email,jdbcType=VARCHAR},
 			mobile = #{mobile,jdbcType=VARCHAR},
 			locked = #{locked,jdbcType=BOOLEAN}, 
+			remark = #{remark,jdbcType=VARCHAR},
 			last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
 			last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP}
 		WHERE id = #{id,jdbcType=SMALLINT}
@@ -74,6 +78,9 @@
 			</if>
 			<if test="locked != null">
 				locked = #{locked,jdbcType=BOOLEAN}, 
+			</if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR}, 
 			</if>
 			<if test="lastLoginIp != null">
 				last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
@@ -110,13 +117,13 @@
 			<if test="search.email != null and search.email != ''">
 				AND email = #{search.email,jdbcType=VARCHAR}
 			</if>
-			<if test="search.email != null and search.email != ''">
+			<if test="search.mobile != null and search.mobile != ''">
 				AND mobile = #{search.mobile,jdbcType=VARCHAR}
 			</if>
 		</where>
 	</select>
 	
-	<select id="selectAll">
+	<select id="selectAll" resultMap="BaseResultMap">
 		SELECT 
 			<include refid="Base_Column_List" />
 		FROM ssm_admin

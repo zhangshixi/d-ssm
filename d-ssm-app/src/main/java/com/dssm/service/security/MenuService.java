@@ -9,6 +9,8 @@ public interface MenuService extends BaseService<Menu> {
 
 	public Menu findByCode(String code);
 
-	public List<Menu> queryAll(Integer adminId);
+	public List<Menu> queryAll(Boolean display);
+	
+	public List<Menu> queryAllTree(Boolean display);
 	
 }

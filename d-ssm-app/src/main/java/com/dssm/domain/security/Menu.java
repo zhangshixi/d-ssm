@@ -18,7 +18,6 @@ public class Menu extends PrimaryKey {
 
     private String     name;
     private String	   link;
-    private Integer    level;
     private Integer	   sequence;
     private Boolean	   display;
     private Integer	   updateAid;
@@ -29,7 +28,7 @@ public class Menu extends PrimaryKey {
 
     /* ---- extend methods ---- */
     public boolean isTopLevel() {
-        return Integer.valueOf(1).equals(this.level);
+        return this.parent != null && Integer.valueOf(0).equals(this.parent.getId());
     }
     
     /* ---- getter/setter methods ---- */
@@ -49,14 +48,6 @@ public class Menu extends PrimaryKey {
 		this.link = link;
 	}
 
-    public Integer getLevel() {
-        return level;
-    }
-    
-    public void setLevel(Integer level) {
-    	this.level = level;
-    }
-    
     public Integer getSequence() {
     	return sequence;
     }

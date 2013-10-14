@@ -16,7 +16,8 @@ import com.dssm.domain.PrimaryKey;
 public class Role extends PrimaryKey {
 
     private static final long serialVersionUID = -4177282920252439830L;
-
+    public static final String ADMINISTRATOR = "administrator";
+    
     @NotEmpty
     private String name;
     @NotEmpty
@@ -25,6 +26,11 @@ public class Role extends PrimaryKey {
     
     private List<Permission> permissionList;
     
+    
+    /* ---- extend methods ---- */
+    public boolean isAdministrator() {
+    	return ADMINISTRATOR.equals(this.code);
+    }
     
     /* ---- getter/setter methods ---- */
     public String getName() {

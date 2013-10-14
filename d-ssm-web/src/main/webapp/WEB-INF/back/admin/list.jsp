@@ -30,7 +30,7 @@
 						<shiro:hasPermission name="admin:edit">
 							<a href="${ctx}/admin/${item.id}/edit" id="editLink-${item.loginName}">编辑</a>
 						</shiro:hasPermission>
-						<shiro:hasPermission name="admin:delete">
+						<shiro:hasPermission name="admin:remove">
 							<a href="${ctx}/admin/${item.id}" title="删除" onclick="return doDelete(this);">删除</a>
 						</shiro:hasPermission>
 					</td>

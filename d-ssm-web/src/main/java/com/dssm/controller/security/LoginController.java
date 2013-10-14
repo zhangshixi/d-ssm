@@ -57,7 +57,7 @@ public class LoginController extends BaseController {
     	
     	modelMap.put("errorMsg", errorMsg);
     	
-    	return "login";
+    	return "back/login";
     }
 	
 }

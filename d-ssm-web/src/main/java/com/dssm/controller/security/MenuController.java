@@ -81,7 +81,7 @@ public class MenuController extends BaseController {
 //		List<Menu> menuList = menuService.queryByPage(page, menu);
 //		modelMap.put("page", page);
 		
-		List<Menu> menuList = menuService.queryAll();
+		List<Menu> menuList = menuService.queryAll(null);
 		modelMap.put("resultList", menuList);
 		
 		return "back/menu/list";

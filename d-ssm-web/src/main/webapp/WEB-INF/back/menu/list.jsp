@@ -11,7 +11,6 @@
 				<th>parent ID</th>
 				<th>名称</th>
 				<th>link</th>
-				<th>level</th>
 				<th>sequence</th>
 				<th>display</th>
 				<th>update admin</th>
@@ -24,7 +23,6 @@
 					<td>${item.parent.id}</td>
 					<td>${item.name}</td>
 					<td>${item.link}</td>
-					<td>${item.level}</td>
 					<td>${item.sequence}</td>
 					<td>${item.display}</td>
 					<td>${item.updateAid}</td>
@@ -36,7 +34,7 @@
 						<shiro:hasPermission name="menu:edit">
 							<a href="${ctx}/menu/${item.id}/edit" id="editLink-${item.name}">编辑</a>
 						</shiro:hasPermission>
-						<shiro:hasPermission name="menu:delete">
+						<shiro:hasPermission name="menu:remove">
 							<a href="${ctx}/menu/${item.id}" title="删除" onclick="return doDelete(this);">删除</a>
 						</shiro:hasPermission>
 					</td>

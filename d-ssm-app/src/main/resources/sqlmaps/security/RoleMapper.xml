@@ -77,13 +77,13 @@
 		</where>
 	</select>
 	
-	<select id="selectAll">
+	<select id="selectAll" parameterType="Integer" resultMap="BaseResultMap">
 		SELECT 
-			r.id, r.name, r.code, r.description, 
+			r.id, r.name, r.code, r.description 
 		FROM ssm_role r 
-		<if test="roleId != null and roleId > 0">
+		<if test="_parameter != null and _parameter > 0">
 			INNER JOIN ssm_relate_admin_role ar ON ar.role_id = r.id
-			AND ar.admin_id = #{adminId,jdbcType=SMALLINT}
+			AND ar.admin_id = #{_parameter,jdbcType=SMALLINT}
 		</if>
 		ORDER BY r.id DESC
 	</select>

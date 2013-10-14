@@ -79,11 +79,11 @@
 	
 	<select id="selectAll" parameterType="Integer" resultMap="BaseResultMap">
 		SELECT 
-			p.id, p.name, p.code, p.description, 
+			p.id, p.name, p.code, p.description 
 		FROM ssm_permission p 
-		<if test="roleId != null and roleId > 0">
+		<if test="_parameter != null and _parameter > 0">
 			INNER JOIN ssm_relate_role_permission rp ON rp.permission_id = p.id
-			AND rp.role_id = #{roleId,jdbcType=SMALLINT}
+			AND rp.role_id = #{_parameter,jdbcType=SMALLINT}
 		</if>
 		ORDER BY p.id DESC
 	</select>

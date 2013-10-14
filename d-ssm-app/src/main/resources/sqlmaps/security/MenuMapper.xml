@@ -9,25 +9,23 @@
 		<result column="parent_id" property="parent.id" jdbcType="SMALLINT" />
 		<result column="name" property="name" jdbcType="VARCHAR" />
 		<result column="link" property="link" jdbcType="VARCHAR" />
-		<result column="level" property="level" jdbcType="SMALLINT" />
 		<result column="sequence" property="sequence" jdbcType="SMALLINT" />
 		<result column="display" property="display" jdbcType="BOOLEAN" />
 		<result column="update_aid" property="updateAid" jdbcType="SMALLINT" />
-		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id, parent_id, name, link, level, sequence, display, update_aid, update_time
+		id, parent_id, name, link, sequence, display, update_aid, update_time
 	</sql>
 	
 	<insert id="insert" parameterType="Menu">
 		INSERT INTO ssm_menu (
-			parent_id, name, link, level, sequence, update_aid, update_time
+			parent_id, name, link, sequence, update_aid, update_time
 		) VALUES (
 			#{parent.id,jdbcType=SMALLINT},
 			#{name,jdbcType=VARCHAR},
 			#{link,jdbcType=VARCHAR},
-			#{level,jdbcType=SMALLINT},
 			#{sequence,jdbcType=SMALLINT},
 			#{updateAid,jdbcType=SMALLINT},
 			NOW()
@@ -39,8 +37,7 @@
 	</delete>
 	
 	<update id="updateSelective" parameterType="Menu">
-		UPDATE ssm_menu 
-		SET 
+		UPDATE ssm_menu SET 
 			<if test="parent != null and parent.id != null">
 				parent_id = #{parent.id,jdbcType=VARCHAR},
 			</if>
@@ -49,9 +46,6 @@
 			</if>
 			<if test="link != null">
 				link = #{link,jdbcType=VARCHAR},
-			</if>
-			<if test="level != null">
-				level = #{level,jdbcType=SMALLINT},
 			</if>
 			<if test="sequence != null">
 				sequence = #{sequence,jdbcType=SMALLINT},
@@ -70,11 +64,13 @@
 		WHERE id = #{id,jdbcType=SMALLINT}
 	</select>
 	
-	<select id="selectAll" resultMap="BaseResultMap">
+	<select id="selectAll" parameterType="Boolean" resultMap="BaseResultMap">
 		SELECT 
 			<include refid="Base_Column_List" />
 		FROM ssm_menu 
-		WHERE display = 1
+		<if test="_parameter != null">
+		WHERE display = #{_parameter,jdbcType=BOOLEAN}
+		</if>
 		ORDER BY sequence DESC
 	</select>
 	

@@ -46,6 +46,20 @@
 				<a href="${ctx}/log" target="mainFrame">系统日志</a>
 			</dd>
 		</dl>
+		
+		
+		<c:forEach items="${enumList}" var="item">
+			<dl>
+			<dt class="bold">
+				<s class="icon_yygl"></s>${item.name}
+			</dt>
+			<c:forEach items="${enum.childList}" var="childItem">	
+				<dd style="display:none;">
+					<a href="${ctx}${childItem.link}" target="mainFrame">${childItem.name}</a>
+				</dd>
+			</c:forEach>
+		</dl>
+		</c:forEach>
     </div>
     <div class="shadow"></div>
 </div>

@@ -9,6 +9,6 @@ public interface MenuMapper extends BaseMapper<Menu> {
 
 	public Menu selectByCode(String code);
 
-	public List<Menu> selectAll(Integer adminId);
+	public List<Menu> selectAll(Boolean display);
 	
 }

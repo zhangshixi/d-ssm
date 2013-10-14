@@ -24,11 +24,11 @@ public class Admin extends PrimaryKey {
 	private String 	   mobile;
 
 	private Boolean    locked;
+	private String	   remark;
 	private Integer    createAid;
 	private Date   	   createTime;
 	private String 	   lastLoginIp;
 	private Date   	   lastLoginTime;
-	private String	   remark;
 	
 	private List<Role> roleList;
 	
@@ -91,6 +91,14 @@ public class Admin extends PrimaryKey {
         this.locked = locked;
     }
 	
+	public String getRemark() {
+		return remark;
+	}
+	
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	
     public Integer getCreateAid() {
 		return createAid;
 	}
@@ -121,14 +129,6 @@ public class Admin extends PrimaryKey {
 	
 	public void setLastLoginTime(Date lastLoginTime) {
 		this.lastLoginTime = lastLoginTime;
-	}
-	
-	public String getRemark() {
-		return remark;
-	}
-	
-	public void setRemark(String remark) {
-		this.remark = remark;
 	}
 	
 	public List<Role> getRoleList() {
