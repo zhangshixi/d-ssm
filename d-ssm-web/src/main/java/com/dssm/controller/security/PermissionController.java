@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -24,11 +25,13 @@ public class PermissionController extends BaseController {
 	@Autowired
     private PermissionService permissionService;
 	
+	@RequiresPermissions("permission:new")
 	@RequestMapping(value="/new", method=RequestMethod.GET)
 	public String toAdd() {
 		return "back/permission/add";
 	}
 	
+	@RequiresPermissions("permission:new")
 	@RequestMapping(method=RequestMethod.POST)
 	public String add(@Valid Permission permission) {
 	    permissionService.add(permission);
@@ -36,6 +39,7 @@ public class PermissionController extends BaseController {
 		return redirectTo("/permission");
 	}
 	
+	@RequiresPermissions("permission:show")
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public String show(@PathVariable Integer id, ModelMap modelMap) {
 		Permission targetPermission = permissionService.findById(id);
@@ -44,6 +48,7 @@ public class PermissionController extends BaseController {
 		return "back/permission/show";
 	}
 
+	@RequiresPermissions("permission:edit")
 	@RequestMapping(value="/{id}/edit", method=RequestMethod.GET)
 	public String toEdit(@PathVariable Integer id, ModelMap modelMap) {
 		Permission permission = permissionService.findById(id);
@@ -55,6 +60,7 @@ public class PermissionController extends BaseController {
 	    }
 	}
 	
+	@RequiresPermissions("permission:edit")
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
 	public String edit(@PathVariable Integer id, Permission permission) {
 	    permission.setId(id);
@@ -63,6 +69,7 @@ public class PermissionController extends BaseController {
 		return redirectTo("/permission/{0}", id);
 	}
 	
+	@RequiresPermissions("permission:remove")
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	public String remove(@PathVariable Integer id) {
 		permissionService.removeById(id);
@@ -70,11 +77,13 @@ public class PermissionController extends BaseController {
 	    return redirectTo("/permission");
 	}
 	
+	@RequiresPermissions("permission:show")
 	@RequestMapping(method=RequestMethod.GET)
 	public String index(ModelMap modelMap) {
 		return "back/permission/index";
 	}
 	
+	@RequiresPermissions("permission:show")
 	@RequestMapping(value="/list", method=RequestMethod.POST)
 	public String showList(Page<Permission> page, Permission permission, ModelMap modelMap) {
 		List<Permission> permissionList = permissionService.queryByPage(page, permission);

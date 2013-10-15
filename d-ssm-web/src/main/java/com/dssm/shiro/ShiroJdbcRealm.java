@@ -115,16 +115,14 @@ public class ShiroJdbcRealm extends AuthorizingRealm {
 	
 	private AuthenticationInfo buildAdminAuthenticationInfo(Admin loginAdmin) {
 		List<Role> roleList = roleService.queryAll(loginAdmin.getId());
-		AuthenticationInfo authInfo = null;
 		if (!roleList.isEmpty()) {
 			for (Role role : roleList) {
 				role.setPermissionList(permissionService.queryAll(role.getId()));
 			}
-			loginAdmin.setRoleList(roleList);
-			authInfo = new SimpleAuthenticationInfo(loginAdmin, loginAdmin.getPassword(), getName());
 		}
+		loginAdmin.setRoleList(roleList);
 		
-		return authInfo;
+		return new SimpleAuthenticationInfo(loginAdmin, loginAdmin.getPassword(), getName());
 	}
 	
 }
