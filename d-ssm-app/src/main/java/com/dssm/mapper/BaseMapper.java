@@ -1,6 +1,7 @@
 package com.dssm.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -22,7 +23,7 @@ public interface BaseMapper<TYPE> {
     public int batchUpdate(List<TYPE> instances);
     
     public TYPE selectById(Integer primaryId);
-    public List<TYPE> batchSelectByIds(List<Integer> primaryIds);
+    public Map<Integer, TYPE> batchSelectByIds(List<Integer> primaryIds);
     
     public List<TYPE> selectByPage(
     		@Param(MybatisPageInterceptor.PARAMETER_PAGE) Page<TYPE> page, 

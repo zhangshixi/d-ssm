@@ -2,6 +2,9 @@ package com.dssm.service;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 import com.mtoolkit.cache.callback.CallbackCache;
 import com.mtoolkit.cache.support.HashMapCache;
 import com.mtoolkit.page.Page;
@@ -9,14 +12,16 @@ import com.mtoolkit.page.Page;
 public abstract class AbstractService<TYPE> extends CallbackCache implements BaseService<TYPE> {
 
     public AbstractService() {
-        super(new HashMapCache());
+        super(new HashMapCache().startup());
     }
 
     @Override
+    @PostConstruct
 	public void init() {
 	}
 	
 	@Override
+	@PreDestroy
 	public void destroy() {
 	}
 

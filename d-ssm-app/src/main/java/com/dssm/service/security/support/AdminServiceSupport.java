@@ -7,32 +7,34 @@ import org.springframework.stereotype.Service;
 
 import com.dssm.domain.security.Admin;
 import com.dssm.exception.BusinessException;
+import com.dssm.exception.NotFoundException;
 import com.dssm.mapper.security.AdminMapper;
 import com.dssm.service.AbstractService;
 import com.dssm.service.security.AdminService;
+import com.mtoolkit.cache.callback.KeyGenerator;
+import com.mtoolkit.cache.callback.ValueLoader;
 import com.mtoolkit.page.Page;
-//import com.mcache.callback.ExpiredValueLoader;
-//import com.mcache.callback.KeyGenerator;
 
 @Service
 public class AdminServiceSupport extends AbstractService<Admin> implements AdminService {
     
 	@Autowired
     private AdminMapper adminMapper;
+	private static final Integer ADMINISTRATOR_ID = Integer.valueOf(1);
     
     @Override
     public void init() {
         super.init();
         
-//        List<Admin> allAdminList = adminMapper.selectAll();
-//        for (Admin admin : allAdminList) {
-//            asyncPut(new AdminIdCacheKeyGenerator(admin.getId()), admin, EXPIRED_TIME);
-//        }
+        List<Admin> allAdminList = adminMapper.selectAll();
+        for (Admin admin : allAdminList) {
+            asyncPut(new AdminIdCacheKeyGenerator(admin.getId()), admin, EXPIRED_TIME);
+        }
     }
 
     @Override
     public Integer add(Admin admin) {
-        if (adminMapper.selectByLoginName(admin.getLoginName()) != null) {
+        if (findByLoginName(admin.getLoginName()) != null) {
             throw new BusinessException("用户名[{0}]已存在！", admin.getLoginName());
         }
         
@@ -41,40 +43,46 @@ public class AdminServiceSupport extends AbstractService<Admin> implements Admin
 
     @Override
     public int removeById(Integer adminId) {
-        int row = adminMapper.deleteById(adminId);
-//        asyncRemove(new AdminIdCacheKeyGenerator(adminId));
-        return row;
+    	if (ADMINISTRATOR_ID.equals(adminId)) {
+    		throw new BusinessException("超级管理员不能被删除！");
+    	}
+    	
+    	Admin targetAdmin = findById(adminId);
+    	if (targetAdmin == null) {
+    		throw new NotFoundException("指定删除的管理员不存在！");
+    	}
+    	
+    	asyncRemove(new AdminIdCacheKeyGenerator(adminId));
+    	asyncRemove(new AdminNameCacheKeyGenerator(targetAdmin.getLoginName()));
+    	
+        return adminMapper.deleteById(adminId);
     }
 
     @Override
     public int editSelective(Admin admin) {
     	if (admin.getLoginName() != null) {
-    		doValidateAdmin(admin);
+    		Admin nameAdmin = findByLoginName(admin.getLoginName());
+            if (nameAdmin != null && nameAdmin.getId() != admin.getId()) {
+                throw new BusinessException("用户名[{0}]已存在！", admin.getLoginName());
+            } else if (nameAdmin == null) {
+            	asyncRemove(new AdminNameCacheKeyGenerator(admin.getLoginName()));
+            }
     	}
-         
-        int row = adminMapper.updateSelective(admin);
-//        asyncRemove(new AdminIdCacheKeyGenerator(admin.getId()));
-        return row;
+        
+    	asyncRemove(new AdminIdCacheKeyGenerator(admin.getId()));
+    	
+        return adminMapper.updateSelective(admin);
     }
 
 	@Override
     public Admin findById(Integer adminId) {
-//        return get(new AdminIdCacheKeyGenerator(adminId), new AdminValueLoader(adminId, EXPIRED_TIME, adminMapper));
-    	return adminMapper.selectById(adminId);
+        return get(new AdminIdCacheKeyGenerator(adminId), new AdminValueLoader(adminId, adminMapper), EXPIRED_TIME);
     }     
 
     @Override
     public Admin findByLoginName(String loginName) {
-//        Integer adminId = get(new AdminNameCacheKeyGenerator(adminName));
-//        if (adminId != null) {
-//            return findAdminById(adminId.intValue());
-//        } else {
-            Admin admin = adminMapper.selectByLoginName(loginName);
-//            if (admin != null) {
-//                asyncPut(new AdminNameCacheKeyGenerator(adminName), Integer.valueOf(admin.getId()), EXPIRED_TIME);
-//            }
-            return admin;
-//        }
+        Integer adminId = get(new AdminNameCacheKeyGenerator(loginName), new AdminIdValueLoader(loginName, adminMapper), EXPIRED_TIME);
+        return findById(adminId);
     }
     
     @Override
@@ -87,64 +95,66 @@ public class AdminServiceSupport extends AbstractService<Admin> implements Admin
     	return adminMapper.selectAll();
     }
     
-    
     /* ---- private methods ---- */
-    private void doValidateAdmin(Admin admin) {
-    	Admin nameAdmin = adminMapper.selectByLoginName(admin.getLoginName());
-        if (nameAdmin != null && nameAdmin.getId() != admin.getId()) {
-            throw new BusinessException("用户名[{0}]已存在！", admin.getLoginName());
-        }
-	}
     
     /* ---- inner classes ---- */
-//    private static final long EXPIRED_TIME = 7 * 24 * 60 * 60 * 1000;
-//    
-//    private static class AdminIdCacheKeyGenerator implements KeyGenerator {
-//        
-//        private int adminId;
-//        public AdminIdCacheKeyGenerator(int adminId) {
-//            this.adminId = adminId;
-//        }
-//        
-//        @Override
-//        public String generateKey() {
-//            return Admin.class.getName() + ".id." + adminId;
-//        }
-//    }
-//    
-//    private static class AdminNameCacheKeyGenerator implements KeyGenerator {
-//        
-//        private String adminName;
-//        public AdminNameCacheKeyGenerator(String adminName) {
-//            this.adminName = adminName;
-//        }
-//        
-//        @Override
-//        public String generateKey() {
-//            return Admin.class.getName() + ".name." + adminName;
-//        }
-//    }
-//    
-//    private static class AdminValueLoader implements ExpiredValueLoader<Admin> {
-//        private int adminId;
-//        private long expiredTime;
-//        private AdminMapper adminMapper;
-//        
-//        public AdminValueLoader(int adminId, long expiredTime, AdminMapper adminMapper) {
-//            this.adminId = adminId;
-//            this.expiredTime = expiredTime;
-//            this.adminMapper = adminMapper;
-//        }
-//        
-//        @Override
-//        public Admin loadValue() {
-//            return adminMapper.selectById(adminId);
-//        }
-//
-//        @Override
-//        public long getExpiredTime() {
-//            return expiredTime;
-//        }
-//    }
+    private static final long EXPIRED_TIME = 1 * 24 * 60 * 60 * 1000L;
+    
+    public static class AdminIdCacheKeyGenerator implements KeyGenerator {
+        
+        private Integer adminId;
+        public AdminIdCacheKeyGenerator(Integer adminId) {
+            this.adminId = adminId;
+        }
+        
+		@Override
+		public String generateKey() {
+			return Admin.class.getName() + ".id." + adminId;
+		}
+    }
+    
+    public static class AdminValueLoader implements ValueLoader<Admin> {
+    	
+        private Integer adminId;
+        private AdminMapper adminMapper;
+        public AdminValueLoader(Integer adminId, AdminMapper adminMapper) {
+            this.adminId = adminId;
+            this.adminMapper = adminMapper;
+        }
+        
+        @Override
+        public Admin loadValue() {
+            return adminMapper.selectById(adminId);
+        }
+    }
+    
+    public static class AdminNameCacheKeyGenerator implements KeyGenerator {
+    	
+    	private String loginName;
+    	public AdminNameCacheKeyGenerator(String loginName) {
+    		this.loginName = loginName;
+    	}
+    	
+    	@Override
+    	public String generateKey() {
+    		return Admin.class.getName() + ".name." + loginName;
+    	}
+    }
+    
+    public static class AdminIdValueLoader implements ValueLoader<Integer> {
+
+    	private String loginName;
+        private AdminMapper adminMapper;
+		public AdminIdValueLoader(String loginName, AdminMapper adminMapper) {
+			this.loginName = loginName;
+			this.adminMapper = adminMapper;
+		}
+
+		@Override
+		public Integer loadValue() {
+			Admin admin = adminMapper.selectByLoginName(loginName);
+			return admin == null ? null : admin.getId();
+		}
+    }
     
 }
