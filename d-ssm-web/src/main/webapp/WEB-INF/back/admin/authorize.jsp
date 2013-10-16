@@ -16,11 +16,11 @@
 		<div class="main">
 			<div class="main_title">
 				<span class="left bold main_title_top dark_blue">
-					<a href="${ctx}/role">角色管理</a> &gt;&gt; 分配权限
+					<a href="${ctx}/admin">管理员管理</a> &gt;&gt; 分配角色
 				</span>
 				<span class="right add_t">
-					<shiro:hasPermission name="role:show">
-						<a href="${ctx}/role" title="添加">返回列表</a>
+					<shiro:hasPermission name="role:new">
+						<a href="${ctx}/admin" title="添加">返回列表</a>
 					</shiro:hasPermission>
 				</span>
 			</div>
@@ -29,7 +29,7 @@
 			
 			<div id="searchPanel" class="search_row dark_blue">
 			
-				<form id="searchForm" name="searchForm" method="post" action="${ctx}/permission/list">
+				<form id="searchForm" name="searchForm" method="post" action="${ctx}/role/list">
 					<input type="hidden" name="pageIndex" value="1" />
 					<input type="hidden" name="pageSize" value="20" />
 					
@@ -51,28 +51,26 @@
 					<tbody>
 						<tr>
 							<th>ID</th>
-							<th>权限名称</th>
-							<th>权限编码</th>
-							<th>权限描述</th>
+							<th>角色名称</th>
+							<th>角色编码</th>
+							<th>角色描述</th>
 							<th>是否已分配</th>
 						</tr>
-						
-						<c:forEach items="${allPermissionList}" var="item">
+						<c:forEach items="${allRoleList}" var="item">
 							<tr>
 								<td>${item.id}</td>
 								<td>${item.name}</td>
 								<td>${item.code}</td>
 								<td>${item.description}</td>
 								<td>
-									<input type="checkbox" name="hasPermission" 
-										<c:forEach items="${ownPermissionList}" var="permission">
-											<c:if test="${item.code == permission.code}">checked="checked"</c:if> 
+									<input type="checkbox" name="hasRole" 
+										<c:forEach items="${ownRoleList}" var="role">
+											<c:if test="${item.code == role.code}">checked="checked"</c:if> 
 										</c:forEach>	
 									/>
 								</td>
 							</tr>
 						</c:forEach>
-						
 					</tbody>
 				</table>
 				

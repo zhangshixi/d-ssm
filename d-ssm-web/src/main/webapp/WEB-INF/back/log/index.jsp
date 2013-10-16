@@ -6,7 +6,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title>menu List</title>
+		<title>log List</title>
+		<script type="text/javascript" src="${ctx}/scripts/page.js"></script>
 	</head>
 	
 	<body>
@@ -18,40 +19,24 @@
 			
 			<div class="clear"></div>
 			
-			<div id="listDiv">
-				
-				<table id="dataTable" class="dataTable" style="width: 100%;">
-					<tbody>
-						<tr>
-							<th>编号</th>
-							<th>日志文件</th>
-							<th>文件大小</th>
-							<th>最后修改时间</th>
-							<th>操作</th>
-						</tr>
-						
-						<c:forEach items="${logFiles}" var="item" varStatus="count">
-							<tr>
-								<td>${count.count}</td>
-								<td>${item.absolutePath}</td>
-								<td>1.2M</td>
-								<td>2013-10-16 15:23:43</td>
-								<td>
-									<shiro:hasRole name="log">
-										<a href="${ctx}/log/${item.name}" title="监控">监控</a>
-										<a href="${ctx}/log/${item.name}" title="清空">清空</a>
-										<a href="${ctx}/log/${item.name}" title="下载">下载</a>
-										<a href="${ctx}/log/${item.name}" title="清空">删除</a>
-									</shiro:hasRole>
-								</td>
-							</tr>
-						</c:forEach>
-						
-					</tbody>
-				</table>
+			<div id="searchPanel" class="search_row dark_blue">
+			
+				<form id="searchForm" name="searchForm" method="post" action="${ctx}/log/list">
+					<input type="hidden" name="pageIndex" value="1" />
+					<input type="hidden" name="pageSize" value="20" />
+					
+					<div class="search_row_element">
+		    			文件名: <input type="text" class="enterQuery input black" name="fileName" />
+		            </div>
+
+					<input type="button" class="button" value="搜索" onclick="javascript:searchPage();" />
+				</form>
 			</div>
+			
+			<div class="clear"></div>
+			
+			<div id="contentPanel"></div>
 
 		</div>
-		
 	</body>
 </html>

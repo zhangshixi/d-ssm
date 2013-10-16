@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -14,7 +15,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dssm.controller.BaseController;
 import com.dssm.domain.security.Admin;
+import com.dssm.domain.security.Role;
 import com.dssm.service.security.AdminService;
+import com.dssm.service.security.RoleService;
 import com.mtoolkit.page.Page;
 
 @Controller
@@ -23,6 +26,8 @@ public class AdminController extends BaseController {
 
     @Autowired
     private AdminService adminService;
+    @Autowired
+    private RoleService  roleService;
 
     /**
      * 跳转到添加管理员页面。
@@ -48,11 +53,11 @@ public class AdminController extends BaseController {
 	 */
 	@RequestMapping(value="/{id}/edit", method=RequestMethod.GET)
 	public String toEdit(@PathVariable Integer id, ModelMap modelMap) {
-	    Admin admin = adminService.findById(id);
-	    if (admin == null) {
+	    Admin targetAdmin = adminService.findById(id);
+	    if (targetAdmin == null) {
 	        return redirectTo("/error/404");
 	    } else {
-	        modelMap.put("target", admin);
+	        modelMap.put("target", targetAdmin);
 	        return "back/admin/edit";
 	    }
 	}
@@ -109,8 +114,63 @@ public class AdminController extends BaseController {
 		return "back/admin/list";
 	}
 	
+	/**
+	 * 跳转到修改密码页面。
+	 */
+	@RequestMapping(value="{id}/password", method=RequestMethod.GET)
+	public String toEditPassword(@PathVariable Integer id, ModelMap modelMap) {
+		Admin targetAdmin = adminService.findById(id);
+		if (targetAdmin == null) {
+			return redirectTo("/error/404");
+		} else if (!SecurityUtils.getSubject().isAuthenticated()) {
+			return redirectTo("/logout");
+		}
+		
+		modelMap.put("target", targetAdmin);
+		return "back/admin/password";
+	}
 	
-	/* ~~~~ check methods ~~~~ */
+	/**
+	 * 修改密码。
+	 */
+	@RequestMapping(value="{id}/password", method=RequestMethod.PUT)
+	public String editPassword(@PathVariable Integer id, ModelMap modelMap) {
+		
+		return redirectTo("/admin/{0}", id);
+	}
+	
+	
+	/**
+	 * 跳转到分配角色页面。
+	 */
+	@RequestMapping(value="{id}/authorize", method=RequestMethod.GET)
+	public String toAuthorize(@PathVariable Integer id, ModelMap modelMap) {
+		Admin targetAdmin = adminService.findById(id);
+		if (targetAdmin == null) {
+	        return redirectTo("/error/404");
+	    }
+		
+    	List<Role> ownRoleList = roleService.queryAll(id);
+    	List<Role> allRoleList = roleService.queryAll();
+    	
+        modelMap.put("target", targetAdmin);
+        modelMap.put("ownRoleList", ownRoleList);
+        modelMap.put("allRoleList", allRoleList);
+        
+        return "back/admin/authorize";
+	}
+	
+	/**
+	 * 分配角色。
+	 */
+	@RequestMapping(value="{id}/authorize", method=RequestMethod.POST)
+	public String authorize(@PathVariable Integer id, ModelMap modelMap) {
+		
+		return redirectTo("/admin/{0}/authorize", id);
+	}
+	
+	
+	/* ---- check methods ---- */
 	@ResponseBody
 	@RequestMapping(value="/check/name", method=RequestMethod.GET)
 	public boolean checkName(String name) {

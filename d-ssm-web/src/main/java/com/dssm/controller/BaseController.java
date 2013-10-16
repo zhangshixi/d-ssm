@@ -19,17 +19,17 @@ public abstract class BaseController {
 	
 	/* Method examples:
 	 * 
-	 * showArticleList();      GET         /article
-	 * showArticle();          GET         /article/{id}
+	 * show()			GET			/resource/{id}
+	 * showList()		GET         /resource
 	 * 
-	 * toNewArticle();         GET         /article/new
-	 * createArticle();        POST        /article
+	 * toAdd()			GET         /resource/new
+	 * add()			POST        /resource
 	 * 
-	 * toEditArticle();        GET         /article/{id}/edit
-	 * editArticle();          PUT         /article/{id}
+	 * toEdit()			GET         /resource/{id}/edit
+	 * edit()			PUT         /resource/{id}
 	 * 
-	 * removeArticle();        DELETE      /article/{id}
-	 * batchRemoveArticles();  DELETE      /article
+	 * remove()			DELETE      /resource/{id}
+	 * batchRemove()	DELETE      /resource
 	 */
     
     /* ---- protected methods ---- */

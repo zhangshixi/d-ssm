@@ -6,17 +6,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-    	<title>Admin edit</title>
+    	<title>Admin edit Password</title>
     </head>
     
     <body>
     	
     	<div class="main">
 			<div class="main_title">
-				<span class="left bold main_title_top dark_blue">
-					<a href="${ctx}/admin">管理员管理</a> &gt;&gt; 编辑
-				</span>
-				<span class="right add_t"><a href="${ctx}/admin" title="返回列表">返回列表</a></span>
+				<span class="left bold main_title_top dark_blue">修改密码</span>
 			</div>
 			
 			<div class="clear"></div>
@@ -28,37 +25,17 @@
 					<table width="100%" cellspacing="1" cellpadding="3">
 						<tbody>
 							<tr>
-								<td width="40%" class="label dark_blue">Login name</td>
-								<td width="60%">
-									<input type="text" class="inputBorder" name="loginName" value="${target.loginName}" />
+								<td class="label dark_blue">Password</td>
+								<td>
+									<input type="text" class="inputBorder" id="password" name="password" />
 									<span class="red_dian">*</span>
 								</td>
 							</tr>
 							<tr>
-								<td class="label dark_blue">Real name</td>
+								<td class="label dark_blue">Password confirm</td>
 								<td>
-									<input type="text" class="inputBorder" name="realName" value="${target.realName}" />
+									<input class="inputBorder" type="text" name="passwordConfirm" />
 									<span class="red_dian">*</span>
-								</td>
-							</tr>
-							<tr>
-								<td class="label dark_blue">Email</td>
-								<td>
-									<input type="text" class="inputBorder" name="email" value="${target.email}" />
-									<span class="red_dian">*</span>
-								</td>
-							</tr>
-							<tr>
-								<td class="label dark_blue">Mobile</td>
-								<td>
-									<input type="text" class="inputBorder" name="mobile" value="${target.mobile}" />
-									<span class="red_dian">*</span>
-								</td>
-							</tr>
-							<tr>
-								<td class="label dark_blue">Remark</td>
-								<td>
-									<input type="text" class="inputBorder" name="remark" value="${target.remark}" />
 								</td>
 							</tr>
 							<tr>
@@ -71,9 +48,36 @@
 					</table>
 
 				</form>
-			
 			</div>
 		</div>
-    
+    	
+    	<script type="text/javascript">
+	        $().ready(function() {
+	            $("input[name=password]").focus();
+				
+	            $("#editForm").validate({
+	                rules: {
+	                    password: {
+	                        required: true,
+	                        minlength: 6
+	                    },
+						passwordConfirm: {
+	                        required: true,
+							equalTo: "#password"
+	                    }
+	                },
+	                messages: {
+	                    password: {
+	                        required: "Please provide a password",
+	                        minlength: "My password is more that 6 chars"
+	                    },
+						passwordConfirm: {
+	                        equalTo: "Input the same password as above"
+	                    }
+	                }   
+	            });
+	        });
+	    </script>
+    	
     </body>
 </html>

@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 
@@ -10,11 +11,11 @@
 				<th>ID</th>
 				<th>parent ID</th>
 				<th>名称</th>
-				<th>link</th>
-				<th>sequence</th>
-				<th>display</th>
-				<th>update admin</th>
-				<th>update time</th>
+				<th>链接</th>
+				<th>排序值</th>
+				<th>是否显示</th>
+				<th>最后更新人</th>
+				<th>最后更新时间</th>
 				<th>操作</th>
 			</tr>
 			<c:forEach items="${resultList}" var="item">
@@ -26,7 +27,7 @@
 					<td>${item.sequence}</td>
 					<td>${item.display}</td>
 					<td>${item.updateAid}</td>
-					<td>${item.updateTime}</td>
+					<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${item.updateTime}" /></td>
 					<td>
 						<shiro:hasPermission name="menu:show">
 							<a href="${ctx}/menu/${item.id}" id="editLink-${item.name}">查看</a>

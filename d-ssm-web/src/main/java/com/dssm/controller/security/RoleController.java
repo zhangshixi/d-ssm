@@ -90,11 +90,15 @@ public class RoleController extends BaseController {
 	
 	@RequestMapping(value="{id}/authorize", method=RequestMethod.GET)
 	public String toAuthorize(@PathVariable Integer id, ModelMap modelMap) {
-		Role role = roleService.findById(id);
+		Role targetRole = roleService.findById(id);
+		if (targetRole == null) {
+			return redirectTo("/error/404");
+		}
+		
 		List<Permission> allPermissionList = permissionService.queryAll();
 		List<Permission> ownPermissionList = permissionService.queryAll(id);
 
-		modelMap.put("role", role);
+		modelMap.put("target", targetRole);
 		modelMap.put("allPermissionList", allPermissionList);
 		modelMap.put("ownPermissionList", ownPermissionList);
 		

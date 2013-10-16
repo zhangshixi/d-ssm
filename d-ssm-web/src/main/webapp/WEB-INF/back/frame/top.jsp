@@ -25,22 +25,22 @@
 			<div class="top_right">
       			<dl class="nav">
         			<dd>
-          				<a class="icon_edit" href="javascript:toUpdatePassword();"><span></span>修改密码</a>
+          				<a class="icon_reload" href="javascript:pageReload();"><span></span>刷新页面</a>
         			</dd>
         			<dd>
-          				<a class="icon_reload" href="javascript:pageReload();"><span></span>刷新</a>
+          				<a class="icon_edit" href="${ctx}/admin/<shiro:principal property="id" />/password" onclick="return toEditPassword(this);"><span></span>修改密码</a>
         			</dd>
         			<dd>
           				<a class="icon_getout" href="${ctx}/logout" target="_parent"><span></span>退出</a>
         			</dd>
         			<dd>
-          				<a class="icon_hezuo" href="/cooperation.htm" target="mainFrame"><span></span>合作须知</a>
-        			</dd>
-        			<dd>
           				<a class="icon_help" href="${ctx}/help" target="mainFrame"><span></span>帮助手册</a>
         			</dd>
         			<dd>
-          				<a class="icon_home" href="http://www.fclub.cn" target="_blank"><span></span>网店</a>
+          				<a class="icon_hezuo" href="/cooperation.htm" target="mainFrame"><span></span>合作须知</a>
+        			</dd>
+        			<dd>
+          				<a class="icon_home" href="http://www.fclub.cn" target="_blank"><span></span>网站</a>
         			</dd>
       			</dl>
       			<div class="line"></div>
@@ -60,8 +60,9 @@
 			  window.top.frames['mainFrame'].document.location.reload();
 			}
 			
-			function toUpdatePassword() {
-				window.top.frames['mainFrame'].document.location.href = "/passwordTo.htm";
+			function toEditPassword(target) {
+                window.top.frames['mainFrame'].document.location.href = target.href;
+                return false;
 			}
 		</script>
     </body>

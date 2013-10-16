@@ -1,78 +1,51 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
+
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-	<title>menu show</title>
-</head>
+    <head>
+    	<title>log</title>
+    	
+		<style type="text/css">
+			.loading{width:16px; height:16px; display:block; overflow:hidden; background:url(http://img.tfclub.cn/images/index/preload.gif); position:relative; margin-left:0px; z-index: 99999;}
+		</style>
+		
+    	<script type="text/javascript" src="${ctx}/scripts/jquery/jquery.js"></script>
+    	<script type="text/javascript" src="${ctx}/scripts/util.js"></script>
+    	<script type="text/javascript">
+	        jQuery().ready(function() {
+	        	
+// 	        	var pos = "${pos}";
+        		var id = window.setInterval(function() {
+	        		jQuery.ajax({
+	        			type: "POST",
+	        			url: "${ctx}/log/${name}/0",
+	        			success: function(result) {
+// 	        				if (!isEmpty(result)) {
+// 		        				pos = parseInt(pos) + result.length;
+// 	        				}
+	            			jQuery("#log").append(result + "<br/>");
+	    					window.scrollTo(0, document.body.clientHeight);
+	        			}
+	        		});
+        		}, 2000);
+	        	
+	        	jQuery(document).keydown(function(event) {
+	        		if (event.ctrlKey && event.which === 67) {
+	        			window.clearInterval(id);
+	        			$(".loading").hide();
+	        		}
+	        	});
+	        });
+	    </script>
+    </head>
 
-<body>
-
-	<div class="main">
-			<div class="main_title">
-				<span class="left bold main_title_top dark_blue">
-					<a href="${ctx}/menu">角色管理</a> &gt;&gt; 查看
-				</span>
-				<span class="right add_t"><a href="${ctx}/menu" title="添加">返回列表</a></span>
-			</div>
-			
-			<div class="clear"></div>
-			
-			<div class=" title_row dark_blue">
-				<form id="editForm" name="editForm" method="post" action="${ctx}/menu/${target.id}">
-					<input type="hidden" name="_method" value="PUT" />
-					
-					<table width="100%" cellspacing="1" cellpadding="3">
-						<tbody>
-							<tr>
-								<td width="40%" class="label dark_blue">parent.id</td>
-								<td width="60%">
-									<input type="text" class="inputBorder" name="parent.id" value="${target.parent.id}" />
-									<span class="red_dian">*</span>
-								</td>
-							</tr>
-							<tr>
-								<td width="40%" class="label dark_blue">Name</td>
-								<td width="60%">
-									<input type="text" class="inputBorder" name="name" value="${target.name}" />
-									<span class="red_dian">*</span>
-								</td>
-							</tr>
-							<tr>
-								<td class="label dark_blue">Link</td>
-								<td>
-									<input type="text" class="inputBorder" name="link" value="${target.link}" />
-									<span class="red_dian">*</span>
-								</td>
-							</tr>
-							<tr>
-								<td class="label dark_blue">sequence</td>
-								<td>
-									<input type="text" class="inputBorder" name="sequence" value="${target.sequence}" />
-								</td>
-							</tr>
-							<tr>
-								<td class="label dark_blue">updateAid</td>
-								<td>
-									<input type="text" class="inputBorder" name="updateAid" value="${target.updateAid}" />
-								</td>
-							</tr>
-							<tr>
-								<td class="label dark_blue">updateTime</td>
-								<td>
-									<input type="text" class="inputBorder" name="updateTime" value="${target.updateTime}" />
-								</td>
-							</tr>
-						</tbody>
-					</table>
-
-				</form>
-			
-			</div>
-		</div>
-	
-	</body>
+    <body>
+    	
+        <div id="log"></div>
+        <div class="loading"></div>
+    
+    </body>
 </html>

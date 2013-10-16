@@ -16,7 +16,7 @@
 				<span class="left bold main_title_top dark_blue">
 					<a href="${ctx}/admin">管理员管理</a> &gt;&gt; 查看
 				</span>
-				<span class="right add_t"><a href="${ctx}/admin" title="添加">返回列表</a></span>
+				<span class="right add_t"><a href="${ctx}/admin" title="返回列表">返回列表</a></span>
 			</div>
 			
 			<div class="clear"></div>
