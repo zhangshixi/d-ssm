@@ -8,6 +8,7 @@ import java.io.InputStream;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,9 +23,19 @@ import com.mtoolkit.util.CopyUtil;
 import com.mtoolkit.util.EmptyUtil;
 
 @Controller
+@RequiresRoles("log")
 @RequestMapping("/log")
 public class LogController extends BaseController {
 
+    @RequestMapping(method=RequestMethod.GET)
+    public String index(ModelMap modelMap) {
+        File logDir = doGetLogDir();
+        File[] logFiles = logDir.listFiles();
+        
+        modelMap.put("logFiles", logFiles);
+        return "back/log/index";
+    }
+    
     @RequestMapping(value="/{name}", method=RequestMethod.GET)
     public String showLog(@PathVariable String name, long pos, ModelMap modelMap) {
         System.err.println(pos);
@@ -74,6 +85,7 @@ public class LogController extends BaseController {
 //        }
     }
     
+    @RequiresRoles("log")
     @RequestMapping(value="/{name}/download", method=RequestMethod.GET)
     public void downloadLog(@PathVariable String name, HttpServletResponse response) {
         File logFile = doGetLogFile(name);
@@ -104,7 +116,7 @@ public class LogController extends BaseController {
     /* ---- private methods ---- */
     private File doGetLogFile(String name) {
     	if (EmptyUtil.isNullEmpty(name)) {
-    		throw new NullPointerException("log name is null!");
+    		throw new NullPointerException("logname");
     	} else {
     		if (!name.startsWith("/")) {
     			name = "/" + name;
@@ -112,6 +124,10 @@ public class LogController extends BaseController {
     		String logFileName = getSystemPropertyLoader().getLogHome() + name;
     		return new File(logFileName);
     	}
+    }
+    
+    private File doGetLogDir() {
+        return new File(getSystemPropertyLoader().getLogHome());
     }
     
 }

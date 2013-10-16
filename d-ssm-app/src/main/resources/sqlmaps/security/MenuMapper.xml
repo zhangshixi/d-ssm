@@ -32,7 +32,7 @@
 		)
 	</insert>
 	
-	<delete id="delete" parameterType="Integer">
+	<delete id="deleteById" parameterType="Integer">
 		DELETE FROM ssm_menu WHERE id = #{id,jdbcType=SMALLINT}
 	</delete>
 	

@@ -1,9 +1,9 @@
 /* mysql-5.5 databse schema */
 
 -- database
-DROP DATABASE IF EXISTS	dssm;
-CREATE DATABASE dssm DEFAULT CHARACTER SET utf8;
-USE dssm;
+-- DROP DATABASE IF EXISTS	dssm;
+-- CREATE DATABASE dssm DEFAULT CHARACTER SET utf8;
+-- USE dssm;
 
 /* ------------------------------------------------------------------ */
 -- role

@@ -4,8 +4,8 @@
 	<excludes>
 		<pattern>/version</pattern>
 		<pattern>/error/*</pattern>
-<!-- 		<pattern>/frame/*</pattern> -->
 		<pattern>/index</pattern>
+		<pattern>/top</pattern>
 		<pattern>/left</pattern>
 		<pattern>/middle</pattern>
 		<pattern>/right</pattern>

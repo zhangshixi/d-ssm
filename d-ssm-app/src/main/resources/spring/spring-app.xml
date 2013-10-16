@@ -16,5 +16,28 @@
 		http://www.springframework.org/schema/webflow-config/spring-webflow-config-2.0.xsd
         http://cxf.apache.org/jaxws  http://cxf.apache.org/schemas/jaxws.xsd">
 	
-
+	<!-- cache configuration -->
+	<bean id="cache" class="com.mtoolkit.cache.callback.CallbackCache" init-method="startup" destroy-method="shutdown">
+		<constructor-arg name="version" value="${cache.version}" />
+		<constructor-arg name="cache">
+			<bean class="com.mtoolkit.cache.decorator.LoggedCache">
+				<constructor-arg>
+					<bean class="com.mtoolkit.cache.decorator.LruCache">
+						<constructor-arg>
+							<bean class="com.mtoolkit.cache.decorator.HashKeyCache">
+								<constructor-arg>
+									<bean class="com.mtoolkit.cache.decorator.GzipValueCache">
+										<constructor-arg name="cache">
+											<bean class="${cache.support}" />
+										</constructor-arg>
+									</bean>
+								</constructor-arg>
+							</bean>
+						</constructor-arg>
+					</bean>
+				</constructor-arg>
+			</bean>
+		</constructor-arg>
+	</bean>
+	
 </beans>

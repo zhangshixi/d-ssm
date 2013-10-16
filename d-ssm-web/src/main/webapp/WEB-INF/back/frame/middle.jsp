@@ -11,44 +11,45 @@
 <script type="text/javascript" src="${ctx}/scripts/jquery/jquery.js"></script>
 <script type="text/javascript">
 //点击展开关闭左侧菜单
-$(function(){
-	$('#mid').toggle(function close(){
-		if (!isIE6()&&!isIE7()) {
-			var cols = window.top.document.getElementById("myFrame").cols;
-			var width = cols.split(',')[0];
-			if (parseInt(width)<=0) {
-				$('#mid div').removeClass('nosel').addClass('sel');
-				jQuery(window.parent.parent.frames["leftFrame"].document).find("#left_list").removeClass('right');
-				window.top.document.getElementById('myFrame').cols='0,15,*';
-				return false;
-			};
-			window.top.document.getElementById('myFrame').cols=String(window.top.document.getElementById("myFrame").cols.split(',')[0]-30)+",15,*";
-			jQuery(window.parent.parent.frames["leftFrame"].document).find("#left_list").addClass('right');
-			setTimeout(close,16);
-		} else {
-			window.top.document.getElementById('myFrame').cols='0,15,*';
-			$('#mid div').removeClass('nosel').addClass('sel');
-		};
-	},
-	function open(){
-		if (!isIE6()&&!isIE7()) {
-			var cols = window.top.document.getElementById("myFrame").cols;
-			var width = cols.split(',')[0];
-			if (parseInt(width)>=210) {
-				$('#mid div').addClass("nosel").removeClass("sel");
-				jQuery(window.parent.parent.frames["leftFrame"].document).find("#left_list").removeClass('right');
-				window.top.document.getElementById('myFrame').cols='210,15,*';
-				return false;
-			}
-			window.top.document.getElementById('myFrame').cols=String(parseInt(window.top.document.getElementById("myFrame").cols.split(',')[0])+30)+",15,*";
-			jQuery(window.parent.parent.frames["leftFrame"].document).find("#left_list").addClass('right');
-			setTimeout(open,16);
-		} else {
-			window.top.document.getElementById('myFrame').cols='210,15,*';
-			$('#mid div').addClass("nosel").removeClass("sel");
-		}
-	});
-});
+// jQuery(function(){
+// 	jQuery('#mid').toggle(
+// 	function close(){
+// 		if (!isIE6()&&!isIE7()) {
+// 			var cols = window.top.document.getElementById("myFrame").cols;
+// 			var width = cols.split(',')[0];
+// 			if (parseInt(width)<=0) {
+// 				$('#mid div').removeClass('nosel').addClass('sel');
+// 				jQuery(window.parent.parent.frames["leftFrame"].document).find("#left_list").removeClass('right');
+// 				window.top.document.getElementById('myFrame').cols='0,15,*';
+// 				return false;
+// 			};
+// 			window.top.document.getElementById('myFrame').cols=String(window.top.document.getElementById("myFrame").cols.split(',')[0]-30)+",15,*";
+// 			jQuery(window.parent.parent.frames["leftFrame"].document).find("#left_list").addClass('right');
+// 			setTimeout(close,16);
+// 		} else {
+// 			window.top.document.getElementById('myFrame').cols='0,15,*';
+// 			$('#mid div').removeClass('nosel').addClass('sel');
+// 		};
+// 	},
+// 	function open(){
+// 		if (!isIE6()&&!isIE7()) {
+// 			var cols = window.top.document.getElementById("myFrame").cols;
+// 			var width = cols.split(',')[0];
+// 			if (parseInt(width)>=210) {
+// 				$('#mid div').addClass("nosel").removeClass("sel");
+// 				jQuery(window.parent.parent.frames["leftFrame"].document).find("#left_list").removeClass('right');
+// 				window.top.document.getElementById('myFrame').cols='210,15,*';
+// 				return false;
+// 			}
+// 			window.top.document.getElementById('myFrame').cols=String(parseInt(window.top.document.getElementById("myFrame").cols.split(',')[0])+30)+",15,*";
+// 			jQuery(window.parent.parent.frames["leftFrame"].document).find("#left_list").addClass('right');
+// 			setTimeout(open,16);
+// 		} else {
+// 			window.top.document.getElementById('myFrame').cols='210,15,*';
+// 			$('#mid div').addClass("nosel").removeClass("sel");
+// 		}
+// 	});
+// });
 //判断浏览器是非为IE7
 function isIE7() {
 	var version = navigator.userAgent.indexOf('MSIE 7.0')>-1;

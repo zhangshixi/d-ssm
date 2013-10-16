@@ -53,8 +53,8 @@ public class PermissionServiceSupport extends AbstractService<Permission> implem
 	}
 
 	@Override
-	public List<Permission> queryAll(Integer permissionId) {
-		return permissionMapper.selectAll(permissionId);
+	public List<Permission> queryAll(Integer roleId) {
+		return permissionMapper.selectAll(roleId);
 	}
 
 }

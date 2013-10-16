@@ -5,16 +5,20 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.mtoolkit.cache.callback.CallbackCache;
-import com.mtoolkit.cache.support.HashMapCache;
 import com.mtoolkit.page.Page;
 
-public abstract class AbstractService<TYPE> extends CallbackCache implements BaseService<TYPE> {
+public abstract class AbstractService<TYPE> implements BaseService<TYPE> {
+    
+    @Autowired
+    private CallbackCache cache;
 
-    public AbstractService() {
-        super(new HashMapCache().startup());
+    protected CallbackCache getCache() {
+        return this.cache;
     }
-
+    
     @Override
     @PostConstruct
 	public void init() {

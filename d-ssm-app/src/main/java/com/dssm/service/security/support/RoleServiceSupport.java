@@ -1,9 +1,7 @@
 package com.dssm.service.security.support;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,10 +30,9 @@ public class RoleServiceSupport extends AbstractService<Role> implements RoleSer
 		for (Role role : roleList) {
 			roleIdList.add(role.getId());
 			
-			asyncPut(CacheTactics.generateRoleCodeIdMappingCacheKey(role.getCode()), role.getId(), CacheTactics.EXPIRED_TIME);
-			asyncPut(CacheTactics.generateRoleCacheKey(role.getId()), role, CacheTactics.EXPIRED_TIME);
+			getCache().asyncPut(RoleCache.generateRoleCodeIdMappingCacheKey(role.getCode()), role.getId(), RoleCache.EXPIRED_TIME);
+			getCache().asyncPut(RoleCache.generateRoleCacheKey(role.getId()), role, RoleCache.EXPIRED_TIME);
 		}
-		asyncPut(CacheTactics.generateRoleIdListCacheKey(), roleIdList);
 	}
 	
 	@Override
@@ -54,7 +51,7 @@ public class RoleServiceSupport extends AbstractService<Role> implements RoleSer
     		throw new NotFoundException("指定删除的角色不存在！");
     	}
     	
-    	asyncRemove(CacheTactics.generateRoleCacheKey(roleId));
+    	getCache().asyncRemove(RoleCache.generateRoleCacheKey(roleId));
     	
         return roleMapper.deleteById(roleId);
     }
@@ -66,22 +63,22 @@ public class RoleServiceSupport extends AbstractService<Role> implements RoleSer
     		if (targetRole != null && !targetRole.getId().equals(role.getId())) {
     			throw new BusinessException("角色编码[{0}]已存在！", role.getCode());
     		} else if (targetRole == null) {
-    			asyncRemove(CacheTactics.generateRoleCodeIdMappingCacheKey(role.getCode()));
+    		    getCache().asyncRemove(RoleCache.generateRoleCodeIdMappingCacheKey(role.getCode()));
     		}
     	}
 
-    	asyncRemove(CacheTactics.generateRoleCacheKey(role.getId()));
+    	getCache().asyncRemove(RoleCache.generateRoleCacheKey(role.getId()));
     	
         return roleMapper.updateSelective(role);
     }
 
     @Override
     public Role findById(Integer roleId) {
-    	Role targetRole = get(CacheTactics.generateRoleCacheKey(roleId));
+    	Role targetRole = getCache().get(RoleCache.generateRoleCacheKey(roleId));
     	
     	if (targetRole == null) {
     		targetRole = roleMapper.selectById(roleId);
-    		asyncPut(CacheTactics.generateRoleCacheKey(roleId), targetRole, CacheTactics.EXPIRED_TIME);
+    		getCache().asyncPut(RoleCache.generateRoleCacheKey(roleId), targetRole, RoleCache.EXPIRED_TIME);
     	}
     	
         return targetRole;
@@ -89,14 +86,14 @@ public class RoleServiceSupport extends AbstractService<Role> implements RoleSer
 
     @Override
     public Role findByCode(String code) {
-    	Integer roleId = get(CacheTactics.generateRoleCodeIdMappingCacheKey(code));
+    	Integer roleId = getCache().get(RoleCache.generateRoleCodeIdMappingCacheKey(code));
     	
     	Role targetRole = null;
     	if (roleId == null) {
     		targetRole = roleMapper.selectByCode(code);
     		if (targetRole != null) {
-    			asyncPut(CacheTactics.generateRoleCodeIdMappingCacheKey(code), targetRole.getId(), CacheTactics.EXPIRED_TIME);
-    			asyncPut(CacheTactics.generateRoleCacheKey(targetRole.getId()), targetRole, CacheTactics.EXPIRED_TIME);
+    		    getCache().asyncPut(RoleCache.generateRoleCodeIdMappingCacheKey(code), targetRole.getId(), RoleCache.EXPIRED_TIME);
+    			getCache().asyncPut(RoleCache.generateRoleCacheKey(targetRole.getId()), targetRole, RoleCache.EXPIRED_TIME);
     		}
     	}
     	
@@ -105,36 +102,6 @@ public class RoleServiceSupport extends AbstractService<Role> implements RoleSer
     
     @Override
     public List<Role> queryByPage(Page<Role> page, Role search) {
-    	List<Integer> roleIdList = get(CacheTactics.generateRoleIdListCacheKey());
-    	
-    	if (roleIdList == null) {
-    		// TODO:
-    	}
-    	
-    	page.setTotalData(roleIdList.size());
-    	List<Integer> pageIdList = roleIdList.subList(page.getFromIndex(), page.getToIndex());
-    	
-    	Map<String, Integer> queryKeyMap = new HashMap<String, Integer>(pageIdList.size(), 1F);
-    	for (Integer roleId : pageIdList) {
-    		queryKeyMap.put(CacheTactics.generateRoleCacheKey(roleId), roleId);
-    	}
-    	
-    	// query from cache
-    	Map<Integer, String> unCachedKeys = new HashMap<Integer, String>();
-    	String[] queryKeys = queryKeyMap.keySet().toArray(new String[0]);
-	    Map<String, Role> cachedResultMap = get(queryKeys);
-	    for (String key : queryKeys) {
-	        if (!cachedResultMap.containsKey(key)) {
-	            unCachedKeys.put(queryKeyMap.get(key), key);
-	        }
-	    }
-    	
-    	if (!unCachedKeys.isEmpty()) {
-    		Map<Integer, Role> dbRoleMap = roleMapper.batchSelectByIds(new ArrayList<Integer>(unCachedKeys.keySet()));
-    		
-    	}
-    	
-    	
     	return roleMapper.selectByPage(page, search);
     }
     
@@ -148,7 +115,7 @@ public class RoleServiceSupport extends AbstractService<Role> implements RoleSer
 		return roleMapper.selectAll(adminId);
 	}
 	
-	public static class CacheTactics {
+	public static class RoleCache {
 		
 		public static final long EXPIRED_TIME = 1 * 24 * 60 * 60 * 1000L;
 		
@@ -158,10 +125,6 @@ public class RoleServiceSupport extends AbstractService<Role> implements RoleSer
 		
 		public static String generateRoleCodeIdMappingCacheKey(String roleCode) {
 			return Role.class.getName() + ".name." + roleCode;
-		}
-		
-		public static String generateRoleIdListCacheKey() {
-			return Role.class.getName() + ".id.list";
 		}
 		
 	}

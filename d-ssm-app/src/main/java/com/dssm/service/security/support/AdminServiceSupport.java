@@ -28,7 +28,7 @@ public class AdminServiceSupport extends AbstractService<Admin> implements Admin
         
         List<Admin> allAdminList = adminMapper.selectAll();
         for (Admin admin : allAdminList) {
-            asyncPut(new AdminIdCacheKeyGenerator(admin.getId()), admin, EXPIRED_TIME);
+            getCache().asyncPut(new AdminIdCacheKeyGenerator(admin.getId()), admin, EXPIRED_TIME);
         }
     }
 
@@ -52,8 +52,8 @@ public class AdminServiceSupport extends AbstractService<Admin> implements Admin
     		throw new NotFoundException("指定删除的管理员不存在！");
     	}
     	
-    	asyncRemove(new AdminIdCacheKeyGenerator(adminId));
-    	asyncRemove(new AdminNameCacheKeyGenerator(targetAdmin.getLoginName()));
+    	getCache().asyncRemove(new AdminIdCacheKeyGenerator(adminId));
+    	getCache().asyncRemove(new AdminNameCacheKeyGenerator(targetAdmin.getLoginName()));
     	
         return adminMapper.deleteById(adminId);
     }
@@ -65,23 +65,23 @@ public class AdminServiceSupport extends AbstractService<Admin> implements Admin
             if (nameAdmin != null && nameAdmin.getId() != admin.getId()) {
                 throw new BusinessException("用户名[{0}]已存在！", admin.getLoginName());
             } else if (nameAdmin == null) {
-            	asyncRemove(new AdminNameCacheKeyGenerator(admin.getLoginName()));
+                getCache().asyncRemove(new AdminNameCacheKeyGenerator(admin.getLoginName()));
             }
     	}
         
-    	asyncRemove(new AdminIdCacheKeyGenerator(admin.getId()));
+    	getCache().asyncRemove(new AdminIdCacheKeyGenerator(admin.getId()));
     	
         return adminMapper.updateSelective(admin);
     }
 
 	@Override
     public Admin findById(Integer adminId) {
-        return get(new AdminIdCacheKeyGenerator(adminId), new AdminValueLoader(adminId, adminMapper), EXPIRED_TIME);
+        return getCache().get(new AdminIdCacheKeyGenerator(adminId), new AdminValueLoader(adminId, adminMapper), EXPIRED_TIME);
     }     
 
     @Override
     public Admin findByLoginName(String loginName) {
-        Integer adminId = get(new AdminNameCacheKeyGenerator(loginName), new AdminIdValueLoader(loginName, adminMapper), EXPIRED_TIME);
+        Integer adminId = getCache().get(new AdminNameCacheKeyGenerator(loginName), new AdminIdValueLoader(loginName, adminMapper), EXPIRED_TIME);
         return findById(adminId);
     }
     

@@ -25,7 +25,7 @@
 		)
 	</insert>
 	
-	<delete id="delete" parameterType="java.lang.Integer">
+	<delete id="deleteById" parameterType="java.lang.Integer">
 		DELETE FROM ssm_role WHERE id = #{id,jdbcType=SMALLINT}
 	</delete>
 	

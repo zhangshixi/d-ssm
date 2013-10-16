@@ -1,11 +1,11 @@
-*{font-family:Tahoma, SimSun, Arial,'ËÎÌå';font-size:12px;}
+*{font-family:Tahoma, SimSun, Arial,'ï¿½ï¿½ï¿½ï¿½';font-size:12px;}
 a{color:#000}
 :focus {outline:0} 
 table th,table td{line-height:28px;padding:0}
 #listDiv{overflow:hidden}
 .marginL40{margin-left:40%}
 
-/*Í¼±êÇÐ¸îÍ¼*/
+/*Í¼ï¿½ï¿½ï¿½Ð¸ï¿½Í¼*/
 .add,.list_open,.list_close,.icon_Return,.icon_View,.icon_Model,.icon_Brand,.color_add .del,.icon_del,.icon_MoneyAdd,.icon_UserAdd,.icon_UserLV,.icon_Play,.icon_Mark,.active,.lock,.question,.icon_article,.icon_jurisdic{cursor:pointer;}
 .icon_tool,.icon_success,.icon_fail,.icon_half,.arrowR,.arrowRgray,.arrowD,.arrowDgray,.done_color,.undone_color,.error_color,.icon_console,.icon_viewReport,.shootOn,.shootOff{background:url(../images/import_icon.png) no-repeat;cursor:pointer}
 .color_add .del{background:url(../images/ico_common.png) no-repeat;}
@@ -59,17 +59,17 @@ a.add:hover{text-decoration:underline;}
 .shootOn{background-position:-20px -180px;*background-position:-20px -189px;_background-position:-20px -180px}
 .shootOff{background-position:0 -180px;*background-position:0 -189px;_background-position:0 -180px}
 
-/*ErrorÒ³Ãæ*/
+/*ErrorÒ³ï¿½ï¿½*/
 .accountDiv{padding:4px 8px;border:1px solid #FFB5B5;background-color:#FFFAF7;color:black;margin-top:10px;line-height:18px}
 .errorTitle{font-size:14px;font-weight:bold;margin-left:20px;vertical-align:middle;color:red}
 
-/*ÐÅÏ¢ÌáÊ¾*/
+/*ï¿½ï¿½Ï¢ï¿½ï¿½Ê¾*/
 .infoCue{width:99%;text-align:center;}
 .infoCueSub{width:280px;height:30px;line-height:30px;margin:0 5px 5px;display:inline-block;background-color:#fff;vertical-align:top;border:1px solid #e00;border-top:0;}
 .icon_wait{padding-left:20px;background:url(../images/loading.gif) left center no-repeat;}
 .icon_ok{padding-left:20px;background:url(../images/yes.gif) left center no-repeat;}
 
-/*ÁÐ±íÒ³Ãæ-Í·²¿±êÇ©*/
+/*ï¿½Ð±ï¿½Ò³ï¿½ï¿½-Í·ï¿½ï¿½ï¿½ï¿½Ç©*/
 .main{width:99%;height:100%}
 .main_title{
 	font-size:14px;height:30px;line-height:30px;margin-top:4px;padding-bottom:7px;
@@ -77,19 +77,19 @@ a.add:hover{text-decoration:underline;}
 }
 .main_title_top{margin-left:10px;color:#404040}
 
-/*É¸Ñ¡¿ò*/
+/*É¸Ñ¡ï¿½ï¿½*/
 .search_row{padding:5px 10px 5px;background-color:#f0f0f0;overflow:hidden;}
 .search_row_element{height:24px;_height:25px;margin:4px;line-height:26px;_line-height:normal;display:inline-block;*display:block;*float:left;_display:block;_float:left;_overflow:hidden;*white-space:nowrap}
 .search_row select{padding:3px 2px;border:1px solid #aaaaaa;margin:0}
 .search_row .input,.search_row .input2,.search_row .inputBorder{width:100px}
 .searchOpen,.searchClose{cursor:pointer;float:right;line-height:30px;}
 
-/*ÊäÈë¿òÑùÊ½*/
+/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½*/
 .input{border:1px solid #aaaaaa;background-color:#fff;height:22px;line-height:22px;}
 .inputTextarea{border:1px solid #aaaaaa;background-color:#fff;overflow:hidden;margin:3px 0}
 .inputTextarea_readOnly{background-color:#DDDBDC;border:1px solid #aaa;resize:none;margin:3px 0}
 
-/*ÁÐ±íÑùÊ½*/
+/*ï¿½Ð±ï¿½ï¿½ï¿½Ê½*/
 #dataTable th{
 	height:29px;background:#fff;font-weight:normal;color:#fff;
 	background:-webkit-linear-gradient(top,#666,#333);
@@ -109,7 +109,7 @@ a.add:hover{text-decoration:underline;}
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f5f5f5',endColorstr='#e6e6e6',GradientType=0);
 }
 .dataTable{border-bottom:1px solid #999;border-right:1px solid #999;table-layout:auto;border-collapse:collapse}
-.dataTable th,.dataTable td{border-top:1px solid #999;border-left:1px solid #999;padding:0 2px}/*word-break:break-all;word-wrap:break-word;*/
+.dataTable th,.dataTable td{border-top:1px solid #999;border-left:1px solid #999;padding:0 2px; text-align: center;}/*word-break:break-all;word-wrap:break-word;*/
 .dataTable th{
 	background:#fff;
 	background:-webkit-linear-gradient(top,#666,#333);
@@ -136,7 +136,7 @@ form{margin:0}
 .state_row2{background:none #C7F6FF no-repeat;padding:5px;text-align:center;font-weight:bold;margin:5px 0;color:#FF7F00}
 .state_row3{background:none #F5F5F5;padding:5px;margin:10px 0;text-align:center;border: 1px solid #CCC}
 
-/*ÉÌÆ·ÏêÇéÒ³¡ª¡ªÕâ¿é²»Òª¶¯*/
+/*ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é²»Òªï¿½ï¿½*/
 .list_bg_color_blue{background-color:#e5fff7}
 .colorTable span font{cursor:pointer}
 .colorTable span font:hover{text-decoration:underline}
@@ -206,7 +206,7 @@ form{margin:0}
 .classifiedCrowd th{padding-left:10px;font-weight:normal;background:none #EBF0F5}
 .classifiedCrowdOpenClose{line-height:32px;cursor:pointer;margin-left:5px;color:#F50}
 
-/*ÉÌÆ·ÅúÁ¿µ¼Èë*/
+/*ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 .importTable,.tips_row{border:1px solid #999;position:relative;}
 .importTable th,.tips_row th{
 	color:#fff;
@@ -225,7 +225,7 @@ form{margin:0}
 	position:absolute;top:1px;right:10px;
 }
 .importTable input{
-	border:none;font-size:14px;font-weight:bold;color:#fff;font-family:"Î¢ÈíÑÅºÚ";
+	border:none;font-size:14px;font-weight:bold;color:#fff;font-family:"Î¢ï¿½ï¿½ï¿½Åºï¿½";
 	height:50px;width:130px;cursor:pointer;margin:0 5px;
 	border-radius:10px;
 	background:-webkit-linear-gradient(top,#f55,#f21818);
@@ -282,7 +282,7 @@ form{margin:0}
 .inputList input{width:90%}
 .inputList .hidden{display:none}
 
-/*ÉÌÆ·¹ÜÀíÑùÊ½*/
+/*ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½*/
 .goods_color_size{color:black;border-left:1px solid #EB0;margin:5px;overflow:hidden;white-space:nowrap}
 #dataTable .goods_color_size_top th{border-right:1px solid #EB0;*border-bottom:1px solid #EB0;font-weight:bold;background:none;background-color:#FFF1B8;}
 #dataTable .goods_color_size_bottom td{}
@@ -303,7 +303,7 @@ form{margin:0}
 .SRSubInfo a{width:80px;display:inline-block;float:left;text-align:center;border:1px solid #fff;color:#666;line-height:20px;margin:2px;overflow:hidden}
 .SRSubInfo .hover{color:#fff;background-color:#5EADFF}
 
-/*È¨ÏÞ¹ÜÀíÑùÊ½*/
+/*È¨ï¿½Þ¹ï¿½ï¿½ï¿½ï¿½ï¿½Ê½*/
 .form{}
 #jurisdiction{border-top:1px solid #ccc;border-left:1px solid #ccc}
 #jurisdiction td,#jurisdiction th{border-bottom:1px solid #ccc;border-right:1px solid #ccc;padding:5px}
@@ -313,7 +313,7 @@ form{margin:0}
 .perm_group span {height:22px;display:block;padding:0 5px;white-space:nowrap;float:left;cursor:pointer}
 .status_on{color:red;cursor:pointer}
 
-/*Í¨Öªµ¥ÁÐ±íÑùÊ½*/
+/*Í¨Öªï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½Ê½*/
 .sampleEditColor{border-bottom:1px solid #EB8}
 .sampleEditColor table{float:left;border-right:1px solid #EB8;white-space:nowrap}
 .sampleEditColor input{text-align:center}
@@ -321,13 +321,13 @@ form{margin:0}
 .sampleEditColor table td div{white-space:nowrap;text-align:center}
 #dataTable .sampleEditColor th{border-right:1px solid #EB0;font-weight:bold;background:none;background-color:#FFE}
 
-/*ÁÐ±íµ×²¿*/
+/*ï¿½Ð±ï¿½×²ï¿½*/
 .list_b{height:24px;padding:5px 0}
 .list_b a{padding:0 5px;line-height:24px;}
 .list_bottom{}
 .list_bottom div{margin-top:3px}
 
-/*Ìí¼ÓÒ³Ãæ-Íê³ÉÒ³Ãæ---±È½ÏÄÑ¿´µÄÒ³Ãæ--*/
+/*ï¿½ï¿½ï¿½Ò³ï¿½ï¿½-ï¿½ï¿½ï¿½Ò³ï¿½ï¿½---ï¿½È½ï¿½ï¿½Ñ¿ï¿½ï¿½ï¿½Ò³ï¿½ï¿½--*/
 .title_row{background:none #fff no-repeat;padding:10px;border:1px solid #999;}
 .title_row select,.title_row .input,.title_row .input2,.title_row .inputBorder,.title_row .inputBorder_readOnly{width:200px;}
 .title_row .button{margin-right:10px}
@@ -341,15 +341,15 @@ form{margin:0}
 .top_row_search{border:1px solid #ccc;overflow:hidden;padding:5px 10px}
 .top_row td.label{font-weight:bold;padding:5px 1em;text-align:right;vertical-align:top}
 
-/*ÉÌÆ·×ªÒÆÒ³Ãæ*/
+/*ï¿½ï¿½Æ·×ªï¿½ï¿½Ò³ï¿½ï¿½*/
 .question{background-position:0 -420px;height:24px;line-height:20px;display:block;padding-left:30px;cursor:default}
 
-/*Ç°Ì¨·ÖÀà¹ÜÀí*/
+/*Ç°Ì¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 #typelinkDiv .classified_title{display:table-cell}
 #typelinkDiv .classified{table-layout:fixed}
 #typelinkDiv .classified th,#typelinkDiv .classified td{height:auto}
 
-/*±à¼­¸öÈË×ÊÁÏ*/
+/*ï¿½à¼­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 .navGroup{}
 .navGroupLeft,.navGroupCenter,.navGroupRight{display:inline-block;vertical-align:middle;}
 .navGroupLeft,.navGroupRight{border:1px solid #5EADFF;height:180px;width:180px;overflow-x:hidden;overflow-y:auto}
@@ -365,7 +365,7 @@ form{margin:0}
 .listLevel2{border:0;}
 .listLevel2 td{border-top:0;padding:0}
 
-/*±íµ¥ÑéÖ¤  ÒÔÏÂ¶¼ÊÇ²å¼þ×Ô´øÑùÊ½£¬²»ºÃ¶¯*/
+/*ï¿½?ï¿½ï¿½Ö¤  ï¿½ï¿½ï¿½Â¶ï¿½ï¿½Ç²ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¶ï¿½*/
 .required{
 	border-left:2px solid red;
 }
@@ -388,7 +388,7 @@ form{margin:0}
     padding:3px 0;
 }
 
-/* ×Ô¶¯Íê³É */
+/* ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ */
 .autocomplete-w1 {position:absolute;top:0px;left:0px;margin:8px 0 0 6px;_background:none;_margin:0}
 .autocomplete {border:1px solid #999;background:#FFF;cursor:default;text-align:left;max-height:350px;overflow:auto;margin:-6px 6px 6px -6px;/* IE6 specific:*/ _height:350px; _margin:0;_overflow-x:hidden}
 .autocomplete .selected {background:#EDFDFF}
@@ -396,7 +396,7 @@ form{margin:0}
 .autocomplete > div + div {border-top:1px solid #EEEEEE}
 .autocomplete strong {font-weight:normal;color:#3399FF}
 
-/* ÑÕÉ«Ñ¡ÔñÆ÷  */ 
+/* ï¿½ï¿½É«Ñ¡ï¿½ï¿½ï¿½ï¿½  */ 
 .input_color{width:18px;height:18px;padding:0;border:none;background:#000 url(../images/color_picker.png) no-repeat;font-size:0;line-height:0;vertical-align:middle;cursor:pointer} 
 .html_colorpane{display:none;position:absolute;z-index:1001} 
 .html_colorpane h5{width:220px;padding:0 5px;border:1px solid #000;border-bottom:none;background:#fff;color:#999;font:normal 12px/20px "\5B8B\4F53";cursor:pointer;margin:0} 
@@ -404,7 +404,7 @@ form{margin:0}
 .html_colorpane table{border-collapse:collapse;table-layout:fixed;empty-cells:show} 
 .html_colorpane td{position:static;width:10px;height:10px;padding:0;border:1px solid #000;font-size:0;line-height:0;cursor:pointer}
 
-/* ¶©µ¥ */
+/* ï¿½ï¿½ï¿½ï¿½ */
 table.mainTable {
 	width:100%;
 	border:1px solid #ccc;
@@ -572,7 +572,7 @@ div.title {
     color:#40A3DE;
 }
 
-/*3gp×¨ÓÃ*/
+/*3gp×¨ï¿½ï¿½*/
 #dataTableA th{
 	height:26px;color:#fff;
 	background:-webkit-linear-gradient(top,#666 0,#333 100%);

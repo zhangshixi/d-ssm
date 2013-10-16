@@ -25,13 +25,16 @@
 					<td>${item.lastLoginTime}</td>
 					<td>
 						<shiro:hasPermission name="admin:show">
-							<a href="${ctx}/admin/${item.id}" id="editLink-${item.loginName}">查看</a>
+							<a href="${ctx}/admin/${item.id}" title="查看">查看</a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="admin:edit">
-							<a href="${ctx}/admin/${item.id}/edit" id="editLink-${item.loginName}">编辑</a>
+							<a href="${ctx}/admin/${item.id}/edit" title="编辑">编辑</a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="admin:remove">
 							<a href="${ctx}/admin/${item.id}" title="删除" onclick="return doDelete(this);">删除</a>
+						</shiro:hasPermission>
+						<shiro:hasPermission name="admin:authorize">
+							<a href="${ctx}/admin/${item.id}/authorize" title="分配角色">分配角色</a>
 						</shiro:hasPermission>
 					</td>
 				</tr>
