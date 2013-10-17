@@ -17,6 +17,7 @@ public class Menu extends PrimaryKey {
     private static final long serialVersionUID = 7833650858725900162L;
 
     private String     name;
+    private String	   code;
     private String	   link;
     private Integer	   sequence;
     private Boolean	   display;
@@ -39,6 +40,14 @@ public class Menu extends PrimaryKey {
     public void setName(String name) {
         this.name = name;
     }
+    
+    public String getCode() {
+		return code;
+	}
+    
+    public void setCode(String code) {
+		this.code = code;
+	}
     
     public String getLink() {
 		return link;

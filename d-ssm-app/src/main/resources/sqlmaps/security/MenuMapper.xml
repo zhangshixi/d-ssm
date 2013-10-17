@@ -8,6 +8,7 @@
 		<id column="id" property="id" jdbcType="SMALLINT" />
 		<result column="parent_id" property="parent.id" jdbcType="SMALLINT" />
 		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="code" property="code" jdbcType="VARCHAR" />
 		<result column="link" property="link" jdbcType="VARCHAR" />
 		<result column="sequence" property="sequence" jdbcType="SMALLINT" />
 		<result column="display" property="display" jdbcType="BOOLEAN" />
@@ -16,15 +17,16 @@
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id, parent_id, name, link, sequence, display, update_aid, update_time
+		id, parent_id, name, code, link, sequence, display, update_aid, update_time
 	</sql>
 	
 	<insert id="insert" parameterType="Menu">
 		INSERT INTO ssm_menu (
-			parent_id, name, link, sequence, update_aid, update_time
+			parent_id, name, code, link, sequence, update_aid, update_time
 		) VALUES (
 			#{parent.id,jdbcType=SMALLINT},
 			#{name,jdbcType=VARCHAR},
+			#{code,jdbcType=VARCHAR},
 			#{link,jdbcType=VARCHAR},
 			#{sequence,jdbcType=SMALLINT},
 			#{updateAid,jdbcType=SMALLINT},

@@ -31,8 +31,8 @@ import com.mtoolkit.util.CopyUtil;
 import com.mtoolkit.util.EmptyUtil;
 
 @Controller
-@RequiresRoles("log")
 @RequestMapping("/log")
+@RequiresRoles("log:manager")
 public class LogController extends BaseController {
 
     @RequestMapping(method=RequestMethod.GET)

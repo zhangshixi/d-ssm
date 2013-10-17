@@ -34,7 +34,7 @@ public class AdminController extends BaseController {
      */
     @RequestMapping(value="/new", method=RequestMethod.GET)
     public String toAdd() {
-        return "back/admin/add";
+        return view("add");
     }
     
     /**
@@ -58,7 +58,7 @@ public class AdminController extends BaseController {
 	        return redirectTo("/error/404");
 	    } else {
 	        modelMap.put("target", targetAdmin);
-	        return "back/admin/edit";
+	        return view("edit");
 	    }
 	}
 	
@@ -91,7 +91,7 @@ public class AdminController extends BaseController {
 	    Admin targetAdmin = adminService.findById(id);
 	    modelMap.put("target", targetAdmin);
 	    
-		return "back/admin/show";
+		return view("show");
 	}
 	
 	/**
@@ -99,7 +99,7 @@ public class AdminController extends BaseController {
 	 */
 	@RequestMapping(method=RequestMethod.GET)
 	public String index(ModelMap modelMap) {
-		return "back/admin/index";
+		return view("index");
 	}
 	
 	/**
@@ -111,7 +111,7 @@ public class AdminController extends BaseController {
 		modelMap.put("page", page);
 		modelMap.put("resultList", adminList);
 		
-		return "back/admin/list";
+		return view("list");
 	}
 	
 	/**
@@ -127,7 +127,7 @@ public class AdminController extends BaseController {
 		}
 		
 		modelMap.put("target", targetAdmin);
-		return "back/admin/password";
+		return view("password");
 	}
 	
 	/**
@@ -157,7 +157,7 @@ public class AdminController extends BaseController {
         modelMap.put("ownRoleList", ownRoleList);
         modelMap.put("allRoleList", allRoleList);
         
-        return "back/admin/authorize";
+        return view("authorize");
 	}
 	
 	/**
@@ -175,6 +175,11 @@ public class AdminController extends BaseController {
 	@RequestMapping(value="/check/name", method=RequestMethod.GET)
 	public boolean checkName(String name) {
 		return adminService.findByLoginName(name) == null;
+	}
+	
+	/* ---- private methods ---- */
+	private String view(String viewName) {
+		return "back/admin/" + viewName;
 	}
 	
 }

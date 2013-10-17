@@ -166,7 +166,7 @@ a.icon_home:hover span{background:url(../images/top/icon_home_hover.png) no-repe
 	background:        linear-gradient(right,rgba(0,0,0,.3) 0,rgba(0,0,0,0) 100%);
 }
 /* icon */
-.icon_gysxx{background:url(../images/left/icon_gysxx.png) no-repeat;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/left/icon_gysxx.png");}
-.icon_yygl{background:url(../images/left/icon_yygl.png) no-repeat;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/left/icon_yygl.png");}
+.icon_authorize{background:url(../images/left/icon_gysxx.png) no-repeat;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/left/icon_gysxx.png");}
+.icon_system{background:url(../images/left/icon_yygl.png) no-repeat;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/left/icon_yygl.png");}
 .icon_spgl{background:url(../images/left/icon_spgl.png) no-repeat;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/left/icon_spgl.png");}
 .icon_fhgl{background:url(../images/left/icon_fhgl.png) no-repeat;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/left/icon_fhgl.png");}

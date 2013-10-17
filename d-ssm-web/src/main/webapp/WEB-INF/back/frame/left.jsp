@@ -23,7 +23,7 @@
 		<c:forEach items="${menuList}" var="item">
 			<dl>
 				<dt class="bold">
-					<s class="icon_gysxx"></s>${item.name}
+					<s class="icon_${item.code}"></s>${item.name}
 				</dt>
 				<c:forEach items="${item.childList}" var="childItem">	
 					<dd style="display:none;">

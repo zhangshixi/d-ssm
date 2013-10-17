@@ -42,6 +42,13 @@
 								</td>
 							</tr>
 							<tr>
+								<td width="40%" class="label dark_blue">Code</td>
+								<td width="60%">
+									<input type="text" class="inputBorder" name="code" value="${target.code}" />
+									<span class="red_dian">*</span>
+								</td>
+							</tr>
+							<tr>
 								<td class="label dark_blue">Link</td>
 								<td>
 									<input type="text" class="inputBorder" name="link" value="${target.link}" />

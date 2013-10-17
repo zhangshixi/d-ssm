@@ -34,6 +34,9 @@
 					<div class="search_row_element">
 		    			名称: <input type="text" class="enterQuery input black" name="name" />
 		            </div>
+					<div class="search_row_element">
+		    			编码: <input type="text" class="enterQuery input black" name="code" />
+		            </div>
 
 					<input type="button" class="button" value="搜索" onclick="javascript:searchPage();" />
 				</form>
