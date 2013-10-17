@@ -1,8 +1,8 @@
 package com.dssm.service.security.support;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -68,19 +68,34 @@ public class MenuServiceSupport extends AbstractService<Menu> implements MenuSer
 			return Collections.emptyList();
 		}
 		
-		// TODO:
-		Menu item = null;
-		Iterator<Menu> iterator = menuList.iterator();
-		Map<Integer, Menu> menuMap = new HashMap<Integer, Menu>();
-		while (iterator.hasNext()) {
-			item = iterator.next();			
-			if (item.isTopLevel()) {
-				menuMap.put(item.getId(), item);
-			} else {
-				item.getParent().getId();
-			}
-		}
-		return menuMapper.selectAll(display);
+		return buildTree(menuList);
+	}
+	
+	private List<Menu> buildTree(List<Menu> menuList) {
+	    Map<Integer, Menu> topMap = new HashMap<Integer, Menu>();
+	    
+	    for (Menu menu : menuList) {
+	        if (menu.isTopLevel()) {
+	            topMap.put(menu.getId(), menu);
+	        } else if (menu.getParent().isTopLevel()) {
+	            Menu parentMenu = topMap.get(menu.getParent().getId());
+	            List<Menu> childMenuList = parentMenu.getChildList();
+	            if (childMenuList == null) {
+	                childMenuList = new ArrayList<Menu>();
+	            }
+	            childMenuList.add(menu);
+	            parentMenu.setChildList(childMenuList);
+	        }
+	    }
+	    
+	    List<Menu> resultList = new ArrayList<Menu>(topMap.size());
+	    for (Menu menu : menuList) {
+	        if (topMap.get(menu.getId()) != null) {
+	            resultList.add(topMap.get(menu.getId()));
+	        }
+	    }
+	    
+	    return resultList;
 	}
 	
 }

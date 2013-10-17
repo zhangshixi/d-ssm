@@ -30,7 +30,8 @@ public class IndexController extends BaseController {
 
     @RequestMapping(value="/left", method=RequestMethod.GET)
     public String left(ModelMap modelMap) {
-    	List<Menu> menuList = menuService.queryAll(Boolean.TRUE);
+    	List<Menu> menuList = menuService.queryAllTree(Boolean.TRUE);
+    	System.err.println("menuList:  " + menuList);
     	modelMap.put("menuList", menuList);
     	return "back/frame/left";
     }

@@ -28,7 +28,7 @@ public class Menu extends PrimaryKey {
 
     /* ---- extend methods ---- */
     public boolean isTopLevel() {
-        return this.parent != null && Integer.valueOf(0).equals(this.parent.getId());
+        return this.parent == null || Integer.valueOf(0).equals(this.parent.getId());
     }
     
     /* ---- getter/setter methods ---- */

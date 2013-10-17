@@ -20,45 +20,17 @@
       	<div class="left_button1" id="left_list_button"></div>
     </div>
     <div class="left_list_Center">
-		<dl>
-			<dt class="bold">
-				<s class="icon_gysxx"></s>权限管理
-			</dt>
-			<dd style="display:none;">
-				<a href="${ctx}/admin" target="mainFrame">管理员管理</a>
-			</dd>
-			<dd style="display:none;">
-				<a href="${ctx}/role" target="mainFrame">角色管理</a>
-			</dd>
-			<dd style="display:none;">
-				<a href="${ctx}/permission" target="mainFrame">权限管理</a>
-			</dd>
-			<dd style="display:none;">
-				<a href="${ctx}/menu" target="mainFrame">菜单设置</a>
-			</dd>
-		</dl>
-		
-		<dl>
-			<dt class="bold">
-				<s class="icon_yygl"></s>系统管理
-			</dt>
-			<dd style="display:none;">
-				<a href="${ctx}/log" target="mainFrame">系统日志</a>
-			</dd>
-		</dl>
-		
-		
-		<c:forEach items="${enumList}" var="item">
+		<c:forEach items="${menuList}" var="item">
 			<dl>
-			<dt class="bold">
-				<s class="icon_yygl"></s>${item.name}
-			</dt>
-			<c:forEach items="${enum.childList}" var="childItem">	
-				<dd style="display:none;">
-					<a href="${ctx}${childItem.link}" target="mainFrame">${childItem.name}</a>
-				</dd>
-			</c:forEach>
-		</dl>
+				<dt class="bold">
+					<s class="icon_gysxx"></s>${item.name}
+				</dt>
+				<c:forEach items="${item.childList}" var="childItem">	
+					<dd style="display:none;">
+						<a href="${childItem.link}" target="mainFrame">${childItem.name}</a>
+					</dd>
+				</c:forEach>
+			</dl>
 		</c:forEach>
     </div>
     <div class="shadow"></div>
