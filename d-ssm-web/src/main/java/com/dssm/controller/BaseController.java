@@ -103,4 +103,48 @@ public abstract class BaseController {
 		return redirectTo("/error?message=" + message);
 	}
 	
+	
+	protected String view(String viewName) {
+	    String invokeClassName = doGetInvokeClass();
+	    String viewPath = doGetViewPath(invokeClassName);
+        return viewPath + viewName;
+    }
+	
+    private String doGetInvokeClass() {
+	    String basePackageName = BaseController.class.getPackage().getName();
+	    StackTraceElement[] stackTraces = new Throwable().getStackTrace();
+	    
+	    String invokeClassName = null;
+	    for (StackTraceElement element : stackTraces) {
+	        String className = element.getClassName();
+	        if (className.startsWith(basePackageName)) {
+	            invokeClassName = className;
+	        } else {
+	            break;
+	        }
+	    }
+	    
+	    return invokeClassName;
+	}
+	
+    private String doGetViewPath(String invokeClassName) {
+        String basePackageName = BaseController.class.getPackage().getName();
+        int beginIndex = basePackageName.length() + 1;
+        int endIndex = invokeClassName.length() - "Controller".length();
+        
+        String viewPath = invokeClassName.substring(beginIndex, endIndex).toLowerCase();
+        StringBuilder buff = new StringBuilder();
+        for (int i = 0; i < viewPath.length(); i++) {
+            char point = viewPath.charAt(i);
+            if (point == '.') {
+                buff.append('/');
+            } else {
+                buff.append(point);
+            }
+        }
+        buff.append('/');
+        
+        return buff.toString();
+    }
+    
 }
