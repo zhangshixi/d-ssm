@@ -11,6 +11,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dssm.controller.BaseController;
@@ -29,6 +30,26 @@ public class AdminController extends BaseController {
     @Autowired
     private RoleService  roleService;
 
+    /**
+	 * 查询管理员信息列表。
+	 */
+	@RequestMapping(method=RequestMethod.GET)
+	public String index(ModelMap modelMap) {
+		return view("index");
+	}
+	
+	/**
+	 * 分页查询管理员信息列表。
+	 */
+	@RequestMapping(value="/list", method=RequestMethod.POST)
+	public String showList(Page<Admin> page, Admin admin, ModelMap modelMap) {
+		List<Admin> adminList = adminService.queryByPage(page, admin);
+		modelMap.put("page", page);
+		modelMap.put("resultList", adminList);
+		
+		return view("list");
+	}
+    
     /**
      * 跳转到添加管理员页面。
      */
@@ -95,26 +116,6 @@ public class AdminController extends BaseController {
 	}
 	
 	/**
-	 * 查询管理员信息列表。
-	 */
-	@RequestMapping(method=RequestMethod.GET)
-	public String index(ModelMap modelMap) {
-		return view("index");
-	}
-	
-	/**
-	 * 分页查询管理员信息列表。
-	 */
-	@RequestMapping(value="/list", method=RequestMethod.POST)
-	public String showList(Page<Admin> page, Admin admin, ModelMap modelMap) {
-		List<Admin> adminList = adminService.queryByPage(page, admin);
-		modelMap.put("page", page);
-		modelMap.put("resultList", adminList);
-		
-		return view("list");
-	}
-	
-	/**
 	 * 跳转到修改密码页面。
 	 */
 	@RequestMapping(value="{id}/password", method=RequestMethod.GET)
@@ -163,8 +164,9 @@ public class AdminController extends BaseController {
 	/**
 	 * 分配角色。
 	 */
-	@RequestMapping(value="{id}/authorize", method=RequestMethod.POST)
-	public String authorize(@PathVariable Integer id, ModelMap modelMap) {
+	@RequestMapping(value="{id}/authorize", method=RequestMethod.PUT)
+	public String authorize(@PathVariable Integer id, @RequestParam(value="roleId[]", required=false) Integer[] roleIds, ModelMap modelMap) {
+		adminService.authorize(id, roleIds);
 		
 		return redirectTo("/admin/{0}/authorize", id);
 	}
@@ -175,11 +177,6 @@ public class AdminController extends BaseController {
 	@RequestMapping(value="/check/name", method=RequestMethod.GET)
 	public boolean checkName(String name) {
 		return adminService.findByLoginName(name) == null;
-	}
-	
-	/* ---- private methods ---- */
-	private String view(String viewName) {
-		return "back/admin/" + viewName;
 	}
 	
 }

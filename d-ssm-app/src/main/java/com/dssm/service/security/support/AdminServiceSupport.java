@@ -14,6 +14,7 @@ import com.dssm.service.security.AdminService;
 import com.mtoolkit.cache.callback.KeyGenerator;
 import com.mtoolkit.cache.callback.ValueLoader;
 import com.mtoolkit.page.Page;
+import com.mtoolkit.util.EmptyUtil;
 
 @Service
 public class AdminServiceSupport extends AbstractService<Admin> implements AdminService {
@@ -94,6 +95,14 @@ public class AdminServiceSupport extends AbstractService<Admin> implements Admin
     public List<Admin> queryAll() {
     	return adminMapper.selectAll();
     }
+
+	@Override
+	public void authorize(Integer adminId, Integer[] roleIds) {
+		adminMapper.deleteRelateRoles(adminId);
+		if (EmptyUtil.isNotNullEmpty(roleIds)) {
+			adminMapper.insertRelateRoles(adminId, roleIds);
+		}
+	}
     
     /* ---- private methods ---- */
     
@@ -156,5 +165,5 @@ public class AdminServiceSupport extends AbstractService<Admin> implements Admin
 			return admin == null ? null : admin.getId();
 		}
     }
-    
+
 }

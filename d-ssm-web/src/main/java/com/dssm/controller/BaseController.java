@@ -110,6 +110,7 @@ public abstract class BaseController {
         return viewPath + viewName;
     }
 	
+	/* ---- private methods ---- */
     private String doGetInvokeClass() {
 	    String basePackageName = BaseController.class.getPackage().getName();
 	    StackTraceElement[] stackTraces = new Throwable().getStackTrace();
@@ -130,7 +131,7 @@ public abstract class BaseController {
     private String doGetViewPath(String invokeClassName) {
         String basePackageName = BaseController.class.getPackage().getName();
         int beginIndex = basePackageName.length() + 1;
-        int endIndex = invokeClassName.length() - "Controller".length();
+        int endIndex = invokeClassName.lastIndexOf("Controller");
         
         String viewPath = invokeClassName.substring(beginIndex, endIndex).toLowerCase();
         StringBuilder buff = new StringBuilder();

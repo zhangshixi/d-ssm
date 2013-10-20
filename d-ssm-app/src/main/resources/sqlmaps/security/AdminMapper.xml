@@ -130,4 +130,17 @@
 		ORDER BY id DESC
 	</select>
 	
+	
+	<delete id="deleteRelateRoles" parameterType="Integer">
+		DELETE FROM ssm_relate_admin_role WHERE admin_id = #{adminId,jdbcType=SMALLINT}
+	</delete>
+	
+	<insert id="insertRelateRoles" parameterType="Map">
+		INSERT INTO ssm_relate_admin_role(admin_id, role_id) VALUES
+		<foreach collection="roleIds" item="roleId" index="index">
+			<if test="index > 0">,</if>
+			(#{adminId,jdbcType=SMALLINT}, #{roleId,jdbcType=SMALLINT})
+		</foreach>
+	</insert>
+	
 </mapper>

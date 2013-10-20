@@ -27,7 +27,7 @@
 					<td>${item.code}</td>
 					<td>${item.link}</td>
 					<td>${item.sequence}</td>
-					<td>${item.display}</td>
+					<td>${item.display ? "是" : "否"}</td>
 					<td>${item.updateAid}</td>
 					<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${item.updateTime}" /></td>
 					<td>

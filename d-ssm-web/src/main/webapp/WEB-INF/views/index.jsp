@@ -17,10 +17,10 @@
     
 <!-- <body> -->
    	<frameset rows="60,*" cols="*" frameborder="no" border="0" framespacing="0">
-		<frame src="${ctx}/top" id="topFrame" name="topFrame" scrolling="no" noresize="noresize" />
+		<frame src="${ctx}/frame/top" id="topFrame" name="topFrame" scrolling="no" noresize="noresize" />
 		<frameset cols="210,15,*" frameborder="no" border="0" framespacing="0" id="myFrame" name="myFrame">
-			<frame src="${ctx}/left" id="leftFrame" name="leftFrame" scrolling="auto" noresize="noresize" />
-			<frame src="${ctx}/middle" id="midFrame" name="midFrame" scrolling="no" noresize="noresize" />
+			<frame src="${ctx}/frame/left" id="leftFrame" name="leftFrame" scrolling="auto" noresize="noresize" />
+			<frame src="${ctx}/frame/middle" id="midFrame" name="midFrame" scrolling="no" noresize="noresize" />
 			<frame src="${ctx}/admin" id="mainFrame" name="mainFrame" scrolling="auto" noresize="noresize" />
 		</frameset>
 	</frameset>

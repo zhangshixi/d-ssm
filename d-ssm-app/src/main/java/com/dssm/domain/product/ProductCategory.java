@@ -1,10 +1,7 @@
-package com.dssm.domain.website;
+package com.dssm.domain.product;
 
 import com.dssm.domain.PrimaryKey;
 
-/**
- * 产品类别。
- */
 public class ProductCategory extends PrimaryKey {
     
     private static final long serialVersionUID = 8634952745872353614L;

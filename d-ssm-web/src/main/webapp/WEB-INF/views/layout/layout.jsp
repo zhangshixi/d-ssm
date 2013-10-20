@@ -31,11 +31,11 @@
 	
     <body class="">
     
-		<jsp:include page="/WEB-INF/back/layout/header.jsp" />
+		<jsp:include page="header.jsp" />
 
 		<sitemesh:body />
 		
-		<jsp:include page="/WEB-INF/back/layout/footer.jsp" />
+		<jsp:include page="footer.jsp" />
 		
     </body>
 	

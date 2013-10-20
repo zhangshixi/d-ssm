@@ -47,33 +47,42 @@
 			<div class="clear"></div>
 			
 			<div id="listDiv">
-				<table id="dataTable" class="dataTable" style="width: 100%;">
-					<tbody>
-						<tr>
-							<th>ID</th>
-							<th>角色名称</th>
-							<th>角色编码</th>
-							<th>角色描述</th>
-							<th>是否已分配</th>
-						</tr>
-						<c:forEach items="${allRoleList}" var="item">
+				<form method="post" action="${ctx}/admin/${target.id}/authorize">
+					<input type="hidden" name="_method" value="PUT" />
+					
+					<table id="dataTable" class="dataTable" style="width: 100%;">
+						<tbody>
 							<tr>
-								<td>${item.id}</td>
-								<td>${item.name}</td>
-								<td>${item.code}</td>
-								<td>${item.description}</td>
-								<td>
-									<input type="checkbox" name="hasRole" 
-										<c:forEach items="${ownRoleList}" var="role">
-											<c:if test="${item.code == role.code}">checked="checked"</c:if> 
-										</c:forEach>	
-									/>
-								</td>
+								<th>ID</th>
+								<th>角色名称</th>
+								<th>角色编码</th>
+								<th>角色描述</th>
+								<th>是否已分配</th>
 							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-				
+							<c:forEach items="${allRoleList}" var="item">
+								<tr>
+									<td>${item.id}</td>
+									<td>${item.name}</td>
+									<td>${item.code}</td>
+									<td>${item.description}</td>
+									<td>
+										<input type="checkbox" name="roleId[]" value="${item.id}"
+											<c:forEach items="${ownRoleList}" var="role">
+												<c:if test="${item.code == role.code}">checked="checked"</c:if> 
+											</c:forEach>	
+										/>
+									</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+					
+					<div id="pageDiv" class="list_b">
+						<div class="right list_bottom list_b">
+							<input type="submit" class="button" value="提交" />
+						</div>
+					</div>
+				</form>
 			</div>
 		</div>
 	</body>

@@ -19,7 +19,7 @@ public class CacheController extends BaseController {
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public String index(ModelMap modelMap) {
-	    return "back/cache/index";
+	    return view("index");
 	}
 	
 	@RequestMapping(method=RequestMethod.DELETE)

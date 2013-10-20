@@ -1,4 +1,4 @@
-package com.dssm.controller.security;
+package com.dssm.controller;
 
 import java.util.List;
 
@@ -8,43 +8,36 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.dssm.controller.BaseController;
 import com.dssm.domain.security.Menu;
 import com.dssm.service.security.MenuService;
 
 @Controller
-public class IndexController extends BaseController {
+public class FrameController extends BaseController {
     
 	@Autowired
     private MenuService menuService;
 	
-    @RequestMapping(value="/index", method=RequestMethod.GET)
-    public String index() {
-        return "back/index";
-    }
-    
-    @RequestMapping(value="/top", method=RequestMethod.GET)
+    @RequestMapping(value="/frame/top", method=RequestMethod.GET)
     public String top() {
-        return "back/frame/top";
+        return view("top");
     }
 
-    @RequestMapping(value="/left", method=RequestMethod.GET)
+    @RequestMapping(value="/frame/left", method=RequestMethod.GET)
     public String left(ModelMap modelMap) {
     	List<Menu> menuList = menuService.queryAllTree(Boolean.TRUE);
-    	System.err.println("menuList:  " + menuList);
     	modelMap.put("menuList", menuList);
-    	return "back/frame/left";
+    	return view("left");
     }
     
-    @RequestMapping(value="/middle", method=RequestMethod.GET)
+    @RequestMapping(value="/frame/middle", method=RequestMethod.GET)
     
     public String middle() {
-        return "back/frame/middle";
+        return view("middle");
     }
     
-    @RequestMapping(value="/right", method=RequestMethod.GET)
+    @RequestMapping(value="/frame/right", method=RequestMethod.GET)
     public String right() {
-        return "back/frame/right";
+        return view("right");
     }
 
 }

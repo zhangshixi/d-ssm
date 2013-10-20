@@ -37,7 +37,7 @@ public class LogController extends BaseController {
 
     @RequestMapping(method=RequestMethod.GET)
     public String index(ModelMap modelMap) {
-        return "back/log/index";
+        return view("index");
     }
     
     @RequestMapping(value="/list", method=RequestMethod.POST)
@@ -55,7 +55,7 @@ public class LogController extends BaseController {
         modelMap.put("page", page);
         modelMap.put("resultList", resultList);
 		
-		return "back/log/list";
+		return view("list");
 	}
 
     @RequestMapping(value="/{name}/remove", method=RequestMethod.GET)
@@ -121,7 +121,7 @@ public class LogController extends BaseController {
     public String showLog(@PathVariable String name, long pos, ModelMap modelMap) {
         modelMap.put("name", name);
         modelMap.put("pos", pos);
-        return "back/log/monitor";
+        return view("monitor");
     }
     
     @ResponseBody
@@ -200,13 +200,15 @@ public class LogController extends BaseController {
     
     public static class LogFile {
     	
-    	private String name;
-    	private String size;
-    	private String absolutePath;
-    	private Date   lastModifiedTime;
+    	private String 	name;
+    	private String 	size;
+    	private boolean directory;
+    	private String 	absolutePath;
+    	private Date   	lastModifiedTime;
     	
     	public LogFile(File logFile) {
     		this.name = logFile.getName();
+    		this.directory = logFile.isDirectory();
     		this.size = (logFile.length() % 1024L == 0 
     				? logFile.length() / 1024L 
     				: logFile.length() / 1024L + 1) + "KB";
@@ -220,6 +222,9 @@ public class LogController extends BaseController {
     	public String getSize() {
     		return this.size;
     	}
+    	public boolean isDirectory() {
+			return directory;
+		}
     	public String getAbsolutePath() {
 			return this.absolutePath;
 		}

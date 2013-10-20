@@ -6,5 +6,7 @@ import com.dssm.service.BaseService;
 public interface AdminService extends BaseService<Admin> {
 
     public Admin findByLoginName(String loginName);
+
+	public void authorize(Integer id, Integer[] roleIds);
     
 }

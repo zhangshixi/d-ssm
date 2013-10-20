@@ -34,9 +34,9 @@ INSERT INTO ssm_permission(name, code, description) VALUES
 INSERT INTO ssm_menu(id, parent_id, name, code, link, sequence, update_aid, update_time) VALUES
 (1, 0, '权限管理', 'authorize', null, 99, 1, NOW()),
 (2, 0, '系统管理', 'system', null, 99, 1, NOW()),
-(3, 1, '管理员管理', 'admin', 'admin', 9, 1, NOW()),
-(4, 1, '角色管理', 'role', 'role', 8, 1, NOW()),
-(5, 1, '权限管理', 'permission', 'permission', 7, 1, NOW()),
-(6, 1, '菜单管理', 'menu', 'menu', 6, 1, NOW()),
-(7, 2, '日志管理', 'log', 'log', 9, 1, NOW()),
-(8, 2, '缓存管理', 'cache', 'cache', 8, 1, NOW());
+(3, 1, '管理员管理', 'admin', '/admin', 9, 1, NOW()),
+(4, 1, '角色管理', 'role', '/role', 8, 1, NOW()),
+(5, 1, '权限管理', 'permission', '/permission', 7, 1, NOW()),
+(6, 1, '菜单管理', 'menu', '/menu', 6, 1, NOW()),
+(7, 2, '日志管理', 'log', '/log', 9, 1, NOW()),
+(8, 2, '缓存管理', 'cache', '/cache', 8, 1, NOW());

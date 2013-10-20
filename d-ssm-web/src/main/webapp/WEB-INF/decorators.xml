@@ -5,14 +5,11 @@
 		<pattern>/version</pattern>
 		<pattern>/error/*</pattern>
 		<pattern>/index</pattern>
-		<pattern>/top</pattern>
-		<pattern>/left</pattern>
-		<pattern>/middle</pattern>
-		<pattern>/right</pattern>
+		<pattern>/frame/*</pattern>
 		<pattern>/*/list</pattern>
     </excludes>
 
-	<decorator name="back" page="back/layout/layout.jsp">
+	<decorator name="back" page="views/layout/layout.jsp">
 		<pattern>/*</pattern>
 	</decorator>
 	

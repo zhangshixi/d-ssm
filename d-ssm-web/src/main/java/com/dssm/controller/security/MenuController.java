@@ -25,7 +25,7 @@ public class MenuController extends BaseController {
 	
 	@RequestMapping(value="/new", method=RequestMethod.GET)
 	public String toAdd() {
-		return "back/menu/add";
+		return view("add");
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
@@ -41,7 +41,7 @@ public class MenuController extends BaseController {
 		Menu targetMenu = menuService.findById(id);
 	    modelMap.put("target", targetMenu);
 	    
-		return "back/menu/show";
+		return view("show");
 	}
 
 	@RequestMapping(value="/{id}/edit", method=RequestMethod.GET)
@@ -51,7 +51,7 @@ public class MenuController extends BaseController {
 	        return redirectTo("/error/404");
 	    } else {
 	        modelMap.put("target", menu);
-	        return "back/menu/edit";
+	        return view("edit");
 	    }
 	}
 	
@@ -73,7 +73,7 @@ public class MenuController extends BaseController {
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public String index(ModelMap modelMap) {
-		return "back/menu/index";
+		return view("index");
 	}
 	
 	@RequestMapping(value="/list", method=RequestMethod.POST)
@@ -84,7 +84,7 @@ public class MenuController extends BaseController {
 		List<Menu> menuList = menuService.queryAll(null);
 		modelMap.put("resultList", menuList);
 		
-		return "back/menu/list";
+		return view("list");
 	}
 	
 }

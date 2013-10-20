@@ -28,7 +28,7 @@ public class PermissionController extends BaseController {
 	@RequiresPermissions("permission:new")
 	@RequestMapping(value="/new", method=RequestMethod.GET)
 	public String toAdd() {
-		return "back/permission/add";
+		return view("add");
 	}
 	
 	@RequiresPermissions("permission:new")
@@ -45,7 +45,7 @@ public class PermissionController extends BaseController {
 		Permission targetPermission = permissionService.findById(id);
 	    modelMap.put("target", targetPermission);
 	    
-		return "back/permission/show";
+		return view("show");
 	}
 
 	@RequiresPermissions("permission:edit")
@@ -56,7 +56,7 @@ public class PermissionController extends BaseController {
 	        return redirectTo("/error/404");
 	    } else {
 	        modelMap.put("target", permission);
-	        return "back/permission/edit";
+	        return view("edit");
 	    }
 	}
 	
@@ -80,7 +80,7 @@ public class PermissionController extends BaseController {
 	@RequiresPermissions("permission:show")
 	@RequestMapping(method=RequestMethod.GET)
 	public String index(ModelMap modelMap) {
-		return "back/permission/index";
+		return view("index");
 	}
 	
 	@RequiresPermissions("permission:show")
@@ -90,7 +90,7 @@ public class PermissionController extends BaseController {
 		modelMap.put("page", page);
 		modelMap.put("resultList", permissionList);
 		
-		return "back/permission/list";
+		return view("list");
 	}
 	
 	

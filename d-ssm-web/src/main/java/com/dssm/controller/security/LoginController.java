@@ -32,7 +32,7 @@ public class LoginController extends BaseController {
     	if (isRemembered || isAuthenticated) {
     		return redirectTo("/index");
     	}
-        return "back/login";
+        return "login";
     }
     
     /**
@@ -57,7 +57,7 @@ public class LoginController extends BaseController {
     	
     	modelMap.put("errorMsg", errorMsg);
     	
-    	return "back/login";
+    	return "login";
     }
 	
 }

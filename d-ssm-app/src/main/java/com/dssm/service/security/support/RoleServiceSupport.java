@@ -115,6 +115,14 @@ public class RoleServiceSupport extends AbstractService<Role> implements RoleSer
 		return roleMapper.selectAll(adminId);
 	}
 	
+	@Override
+	public void authorize(Integer roleId, Integer[] permissionIds) {
+		roleMapper.deleteRelatePermissions(roleId);
+		if (EmptyUtil.isNotNullEmpty(permissionIds)) {
+			roleMapper.insertRelatePermissions(roleId, permissionIds);
+		}
+	}
+	
 	public static class RoleCache {
 		
 		public static final long EXPIRED_TIME = 1 * 24 * 60 * 60 * 1000L;

@@ -10,6 +10,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dssm.controller.BaseController;
@@ -27,10 +28,24 @@ public class RoleController extends BaseController {
     private RoleService roleService;
 	@Autowired
     private PermissionService permissionService;
+
+	@RequestMapping(method=RequestMethod.GET)
+	public String index(ModelMap modelMap) {
+		return view("index");
+	}
+	
+	@RequestMapping(value="/list", method=RequestMethod.POST)
+	public String showList(Page<Role> page, Role role, ModelMap modelMap) {
+		List<Role> roleList = roleService.queryByPage(page, role);
+		modelMap.put("page", page);
+		modelMap.put("resultList", roleList);
+		
+		return view("list");
+	}
 	
 	@RequestMapping(value="/new", method=RequestMethod.GET)
 	public String toAdd() {
-		return "back/role/add";
+		return view("add");
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
@@ -45,7 +60,7 @@ public class RoleController extends BaseController {
 		Role targetRole = roleService.findById(id);
 	    modelMap.put("target", targetRole);
 	    
-		return "back/role/show";
+		return view("show");
 	}
 
 	@RequestMapping(value="/{id}/edit", method=RequestMethod.GET)
@@ -55,7 +70,7 @@ public class RoleController extends BaseController {
 	        return redirectTo("/error/404");
 	    } else {
 	        modelMap.put("target", role);
-	        return "back/role/edit";
+	        return view("edit");
 	    }
 	}
 	
@@ -74,20 +89,6 @@ public class RoleController extends BaseController {
 	    return redirectTo("/role");
 	}
 	
-	@RequestMapping(method=RequestMethod.GET)
-	public String index(ModelMap modelMap) {
-		return "back/role/index";
-	}
-	
-	@RequestMapping(value="/list", method=RequestMethod.POST)
-	public String showList(Page<Role> page, Role role, ModelMap modelMap) {
-		List<Role> roleList = roleService.queryByPage(page, role);
-		modelMap.put("page", page);
-		modelMap.put("resultList", roleList);
-		
-		return "back/role/list";
-	}
-	
 	@RequestMapping(value="{id}/authorize", method=RequestMethod.GET)
 	public String toAuthorize(@PathVariable Integer id, ModelMap modelMap) {
 		Role targetRole = roleService.findById(id);
@@ -102,14 +103,14 @@ public class RoleController extends BaseController {
 		modelMap.put("allPermissionList", allPermissionList);
 		modelMap.put("ownPermissionList", ownPermissionList);
 		
-		return "back/role/authorize";
+		return view("authorize");
 	}
 
 	@RequestMapping(value="{id}/authorize", method=RequestMethod.PUT)
-	public String authorize(@PathVariable Integer id, Role role) {
+	public String authorize(@PathVariable Integer id, @RequestParam(value="permissionId[]", required=false) Integer[] permissionIds) {
+		roleService.authorize(id, permissionIds);
 		
-		
-		return "back/role/authorize";
+		return redirectTo("/role/{id}/authorize", id);
 	}
 	
 	

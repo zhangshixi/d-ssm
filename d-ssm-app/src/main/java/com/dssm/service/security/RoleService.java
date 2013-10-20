@@ -10,5 +10,7 @@ public interface RoleService extends BaseService<Role> {
 	public Role findByCode(String code);
 
 	public List<Role> queryAll(Integer adminId);
+
+	public void authorize(Integer roleId, Integer[] permissionIds);
 	
 }

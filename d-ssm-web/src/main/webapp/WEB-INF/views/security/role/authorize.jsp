@@ -47,35 +47,44 @@
 			<div class="clear"></div>
 			
 			<div id="listDiv">
-				<table id="dataTable" class="dataTable" style="width: 100%;">
-					<tbody>
-						<tr>
-							<th>ID</th>
-							<th>权限名称</th>
-							<th>权限编码</th>
-							<th>权限描述</th>
-							<th>是否已分配</th>
-						</tr>
-						
-						<c:forEach items="${allPermissionList}" var="item">
+				<form method="post" action="${ctx}/role/${target.id}/authorize">
+					<input type="hidden" name="_method" value="PUT" />
+			
+					<table id="dataTable" class="dataTable" style="width: 100%;">
+						<tbody>
 							<tr>
-								<td>${item.id}</td>
-								<td>${item.name}</td>
-								<td>${item.code}</td>
-								<td>${item.description}</td>
-								<td>
-									<input type="checkbox" name="hasPermission" 
-										<c:forEach items="${ownPermissionList}" var="permission">
-											<c:if test="${item.code == permission.code}">checked="checked"</c:if> 
-										</c:forEach>	
-									/>
-								</td>
+								<th>ID</th>
+								<th>权限名称</th>
+								<th>权限编码</th>
+								<th>权限描述</th>
+								<th>是否已分配</th>
 							</tr>
-						</c:forEach>
-						
-					</tbody>
-				</table>
-				
+							
+							<c:forEach items="${allPermissionList}" var="item">
+								<tr>
+									<td>${item.id}</td>
+									<td>${item.name}</td>
+									<td>${item.code}</td>
+									<td>${item.description}</td>
+									<td>
+										<input type="checkbox" name="permissionId[]" value="${item.id}" 
+											<c:forEach items="${ownPermissionList}" var="permission">
+												<c:if test="${item.code == permission.code}">checked="checked"</c:if> 
+											</c:forEach>	
+										/>
+									</td>
+								</tr>
+							</c:forEach>
+							
+						</tbody>
+					</table>
+					
+					<div id="pageDiv" class="list_b">
+						<div class="right list_bottom list_b">
+							<input type="submit" class="button" value="提交" />
+						</div>
+					</div>
+				</form>
 			</div>
 		</div>
 	</body>

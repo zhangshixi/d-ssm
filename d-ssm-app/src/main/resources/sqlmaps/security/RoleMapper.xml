@@ -88,4 +88,17 @@
 		ORDER BY r.id DESC
 	</select>
 	
+	
+	<delete id="deleteRelatePermissions" parameterType="Integer">
+		DELETE FROM ssm_relate_role_permission WHERE role_id = #{roleId,jdbcType=SMALLINT}
+	</delete>
+	
+	<insert id="insertRelatePermissions" parameterType="Map">
+		INSERT INTO ssm_relate_role_permission(role_id, permission_id) VALUES
+		<foreach collection="permissionIds" item="permissionId" index="index">
+			<if test="index > 0">,</if>
+			(#{roleId,jdbcType=SMALLINT}, #{permissionId,jdbcType=SMALLINT})
+		</foreach>
+	</insert>
+	
 </mapper>

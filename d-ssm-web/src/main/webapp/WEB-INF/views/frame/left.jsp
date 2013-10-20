@@ -27,7 +27,7 @@
 				</dt>
 				<c:forEach items="${item.childList}" var="childItem">	
 					<dd style="display:none;">
-						<a href="${childItem.link}" target="mainFrame">${childItem.name}</a>
+						<a href="${ctx}${childItem.link}" target="mainFrame">${childItem.name}</a>
 					</dd>
 				</c:forEach>
 			</dl>

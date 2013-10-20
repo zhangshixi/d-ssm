@@ -38,4 +38,4 @@
 	</table>
 </div>
 
-<jsp:include page="../layout/page.jsp" />
+<jsp:include page="/WEB-INF/views/layout/page.jsp" />
