@@ -19,4 +19,20 @@ public class IndexController extends BaseController {
         return "version";
     }
     
+    @RequestMapping(value="/kind", method=RequestMethod.GET)
+    public String editor() {
+        return "editor/demo";
+    }
+    
+
+    @RequestMapping(value="/editor/file_manager_json", method=RequestMethod.GET)
+    public String file_manager_json() {
+        return "editor/file_manager_json";
+    }
+    
+//    @RequestMapping(value="/editor/upload_json", method=RequestMethod.POST)
+//    public String upload_json() {
+//        return "editor/upload_json";
+//    }
+    
 }
