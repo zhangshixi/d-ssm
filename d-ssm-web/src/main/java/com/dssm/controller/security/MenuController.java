@@ -30,7 +30,7 @@ public class MenuController extends BaseController {
 	
 	@RequestMapping(method=RequestMethod.POST)
 	public String add(@Valid Menu menu) {
-		menu.setUpdateAid(getLoginAdminId());
+		menu.setUpdateAdmin(getLoginAdmin());
 	    menuService.add(menu);
 	    
 		return redirectTo("/menu");
@@ -58,7 +58,7 @@ public class MenuController extends BaseController {
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
 	public String edit(@PathVariable Integer id, Menu menu) {
 	    menu.setId(id);
-	    menu.setUpdateAid(getLoginAdminId());
+	    menu.setUpdateAdmin(getLoginAdmin());
 	    menuService.editSelective(menu);
 	    
 		return redirectTo("/menu/{0}", id);
@@ -81,7 +81,7 @@ public class MenuController extends BaseController {
 //		List<Menu> menuList = menuService.queryByPage(page, menu);
 //		modelMap.put("page", page);
 		
-		List<Menu> menuList = menuService.queryAll(null);
+		List<Menu> menuList = menuService.queryAllTree(null);
 		modelMap.put("resultList", menuList);
 		
 		return view("list");

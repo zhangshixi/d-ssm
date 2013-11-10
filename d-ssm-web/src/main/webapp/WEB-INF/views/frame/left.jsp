@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -25,10 +26,12 @@
 				<dt class="bold">
 					<s class="icon_${item.code}"></s>${item.name}
 				</dt>
-				<c:forEach items="${item.childList}" var="childItem">	
-					<dd style="display:none;">
-						<a href="${ctx}${childItem.link}" target="mainFrame">${childItem.name}</a>
-					</dd>
+				<c:forEach items="${item.childList}" var="childItem">
+<%-- 					<shiro:hasPermission name="${childItem.code}:show"> --%>
+						<dd style="display:none;">
+							<a href="${ctx}${childItem.link}" target="mainFrame">${childItem.name}</a>
+						</dd>
+<%-- 					</shiro:hasPermission> --%>
 				</c:forEach>
 			</dl>
 		</c:forEach>

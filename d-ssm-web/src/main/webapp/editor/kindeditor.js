@@ -1,3 +1,14 @@
+createEditor = function(name) {
+	KindEditor.ready(function(K) {
+		K.create('textarea[name="'+name+'"]', {
+			cssPath : '${ctx}/editor/plugins/code/prettify.css',
+			uploadJson : '${ctx}/editor/upload',
+			fileManagerJson : '${ctx}/editor/show',
+			allowFileManager : true,
+		});
+	});
+};
+
 /*******************************************************************************
 * KindEditor - WYSIWYG HTML Editor for Internet
 * Copyright (C) 2006-2013 kindsoft.net

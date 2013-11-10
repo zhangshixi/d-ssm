@@ -12,12 +12,12 @@
 		<result column="link" property="link" jdbcType="VARCHAR" />
 		<result column="sequence" property="sequence" jdbcType="SMALLINT" />
 		<result column="display" property="display" jdbcType="BOOLEAN" />
-		<result column="update_aid" property="updateAid" jdbcType="SMALLINT" />
 		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<association property="updateAdmin" resultMap="com.dssm.mapper.security.AdminMapper.BaseResultMap" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id, parent_id, name, code, link, sequence, display, update_aid, update_time
+		t.id, t.parent_id, t.name, t.code, t.link, t.sequence, t.display, t.update_aid, t.update_time
 	</sql>
 	
 	<insert id="insert" parameterType="Menu">
@@ -29,7 +29,7 @@
 			#{code,jdbcType=VARCHAR},
 			#{link,jdbcType=VARCHAR},
 			#{sequence,jdbcType=SMALLINT},
-			#{updateAid,jdbcType=SMALLINT},
+			#{updateAdmin.id,jdbcType=SMALLINT},
 			NOW()
 		)
 	</insert>
@@ -52,9 +52,7 @@
 			<if test="sequence != null">
 				sequence = #{sequence,jdbcType=SMALLINT},
 			</if>
-			<if test="updateAid != null">
-				update_aid = #{updateAid,jdbcType=SMALLINT},
-			</if>
+			update_aid = #{updateAdmin.id,jdbcType=SMALLINT},
 			update_time = NOW()
 		WHERE id = #{id,jdbcType=SMALLINT}
 	</update>
@@ -62,18 +60,19 @@
 	<select id="selectById" parameterType="Integer" resultMap="BaseResultMap">
 		SELECT
 			<include refid="Base_Column_List" />
-		FROM ssm_menu
-		WHERE id = #{id,jdbcType=SMALLINT}
+		FROM ssm_menu t 
+		WHERE t.id = #{id,jdbcType=SMALLINT}
 	</select>
 	
 	<select id="selectAll" parameterType="Boolean" resultMap="BaseResultMap">
 		SELECT 
-			<include refid="Base_Column_List" />
-		FROM ssm_menu 
+			<include refid="Base_Column_List" />, a.login_name
+		FROM ssm_menu t 
+		LEFT JOIN ssm_admin a ON a.id = t.update_aid 
 		<if test="_parameter != null">
-		WHERE display = #{_parameter,jdbcType=BOOLEAN}
+		WHERE t.display = #{_parameter,jdbcType=BOOLEAN}
 		</if>
-		ORDER BY sequence DESC
+		ORDER BY t.sequence DESC
 	</select>
 	
 </mapper>

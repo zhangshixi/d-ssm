@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dssm.mapper.setting.PlatformMapper">
+	
+	<resultMap id="BaseResultMap" type="Platform">
+		<id column="id" property="id" jdbcType="SMALLINT" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="code" property="code" jdbcType="VARCHAR" />
+		<result column="enable" property="enable" jdbcType="BOOLEAN" />
+		<result column="description" property="description" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		t.id, t.name, t.code, t.enable, t.description 
+	</sql>
+	
+	<insert id="insert" parameterType="Platform">
+		INSERT INTO ssm_platform (
+			name, code, enable, description 
+		) VALUES (
+			#{name,jdbcType=VARCHAR},
+			#{code,jdbcType=VARCHAR},
+			#{enable,jdbcType=BOOLEAN},
+			#{description,jdbcType=VARCHAR}
+		)
+	</insert>
+	
+	<delete id="deleteById" parameterType="java.lang.Integer">
+		DELETE FROM ssm_platform WHERE id = #{id,jdbcType=SMALLINT}
+	</delete>
+	
+	<update id="updateSelective" parameterType="Platform">
+		UPDATE ssm_platform 
+		<set>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				description = #{description,jdbcType=VARCHAR},
+			</if>
+		</set>
+		WHERE id = #{id,jdbcType=SMALLINT}
+	</update>
+	
+	<select id="selectById" resultMap="BaseResultMap" parameterType="Integer">
+		SELECT
+			<include refid="Base_Column_List" />
+		FROM ssm_platform t 
+		WHERE t.id = #{id,jdbcType=SMALLINT}
+	</select>
+	
+	<select id="selectByCode" resultMap="BaseResultMap" parameterType="String">
+		SELECT 
+			<include refid="Base_Column_List" />
+		FROM ssm_platform t
+		WHERE t.code = #{code,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="selectByPage" parameterType="Platform" resultMap="BaseResultMap">
+		SELECT 
+			<include refid="Base_Column_List" />
+		FROM ssm_platform t 
+		<where>
+			<if test="search.code != null and search.code != ''">
+				t.code LIKE '%${search.code}%'
+			</if>
+			<if test="search.name != null and search.name != ''">
+				AND t.name = #{search.name,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectAll" parameterType="Boolean" resultMap="BaseResultMap">
+		SELECT 
+			<include refid="Base_Column_List" />
+		FROM ssm_platform t 
+		<if test="_parameter != null">
+		WHERE t.enable = #{_parameter,jdbcType=BOOLEAN}
+		</if>
+		ORDER BY t.id DESC
+	</select>
+	
+</mapper>

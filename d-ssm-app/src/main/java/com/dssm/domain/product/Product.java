@@ -6,8 +6,16 @@ public class Product extends PrimaryKey {
 
     private static final long serialVersionUID = 1265441437107287621L;
 
+    private String sn;
     private String name;
-    private String description;
+    
+    private Integer sex;
+    private String  description;
+    
+    private Brand	 brand;
+    private Category category;
+    private Provider provider;
+    
     
     /* ---- getter/setter methods ---- */
     public String getName() {

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dssm.mapper.depot.DepotMapper">
+	
+	<resultMap id="BaseResultMap" type="Depot">
+		<id column="id" property="id" jdbcType="SMALLINT" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="code" property="code" jdbcType="VARCHAR" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<association property="updateAdmin" resultMap="com.dssm.mapper.security.AdminMapper.BaseResultMap" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		t.id, t.name, t.code, t.update_aid, t.update_time
+	</sql>
+	
+	<insert id="insert" parameterType="Depot">
+		INSERT INTO ssm_depot (
+			name, code, update_aid, update_time
+		) VALUES (
+			#{name,jdbcType=VARCHAR},
+			#{code,jdbcType=VARCHAR},
+			#{updateAdmin.id,jdbcType=SMALLINT},
+			NOW()
+		)
+	</insert>
+	
+	<delete id="deleteById" parameterType="java.lang.Integer">
+		DELETE FROM ssm_depot WHERE id = #{id,jdbcType=SMALLINT}
+	</delete>
+	
+	<update id="updateSelective" parameterType="Depot">
+		UPDATE ssm_depot 
+		<set>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			update_time = NOW() 
+		</set>
+		WHERE id = #{id,jdbcType=SMALLINT}
+	</update>
+	
+	<select id="selectById" resultMap="BaseResultMap" parameterType="Integer">
+		SELECT
+			<include refid="Base_Column_List" />
+		FROM ssm_depot t 
+		WHERE t.id = #{id,jdbcType=SMALLINT}
+	</select>
+	
+	<select id="selectByCode" resultMap="BaseResultMap" parameterType="String">
+		SELECT 
+			<include refid="Base_Column_List" />
+		FROM ssm_depot t
+		WHERE t.code = #{code,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="selectByPage" parameterType="Depot" resultMap="BaseResultMap">
+		SELECT 
+			<include refid="Base_Column_List" />, a.login_name 
+		FROM ssm_depot t 
+		LEFT JOIN ssm_admin a ON a.id = t.update_aid 
+		<where>
+			<if test="search.code != null and search.code != ''">
+				t.code LIKE '%${search.code}%'
+			</if>
+			<if test="search.name != null and search.name != ''">
+				AND t.name = #{search.name,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT 
+			<include refid="Base_Column_List" />
+		FROM ssm_depot t 
+		ORDER BY t.id DESC
+	</select>
+	
+</mapper>

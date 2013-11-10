@@ -23,13 +23,15 @@
 						<shiro:hasPermission name="role:show">
 							<a href="${ctx}/role/${item.id}" id="editLink-${item.name}">查看</a>
 						</shiro:hasPermission>
-						<shiro:hasPermission name="role:edit">
-							<a href="${ctx}/role/${item.id}/edit" id="editLink-${item.name}">编辑</a>
-						</shiro:hasPermission>
-						<shiro:hasPermission name="role:remove">
-							<a href="${ctx}/role/${item.id}" title="删除" onclick="return doDelete(this);">删除</a>
-						</shiro:hasPermission>
-						<a href="${ctx}/role/${item.id}/authorize" title="分配权限">分配权限</a>
+						<c:if test="${!item.administrator}">
+							<shiro:hasPermission name="role:edit">
+								<a href="${ctx}/role/${item.id}/edit" id="editLink-${item.name}">编辑</a>
+							</shiro:hasPermission>
+							<shiro:hasPermission name="role:remove">
+								<a href="${ctx}/role/${item.id}" title="删除" onclick="return doDelete(this);">删除</a>
+							</shiro:hasPermission>
+							<a href="${ctx}/role/${item.id}/authorize" title="分配权限">分配权限</a>
+						</c:if>
 					</td>
 				</tr>
 			</c:forEach>

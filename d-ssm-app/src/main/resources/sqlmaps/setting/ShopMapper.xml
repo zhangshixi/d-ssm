@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dssm.mapper.setting.ShopMapper">
+	
+	<resultMap id="BaseResultMap" type="Shop">
+		<id column="id" property="id" jdbcType="SMALLINT" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="code" property="code" jdbcType="VARCHAR" />
+		<result column="type" property="type" jdbcType="VARCHAR" />
+		<result column="website" property="website" jdbcType="VARCHAR" />
+		<result column="account" property="account" jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+		<result column="description" property="description" jdbcType="VARCHAR" />
+		<association property="platform" resultMap="com.dssm.mapper.setting.PlatformMapper.BaseResultMap" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		t.id, t.platform_id, t.name, t.code, t.type, t.website, t.account, t.password, t.description 
+	</sql>
+	
+	<insert id="insert" parameterType="Shop">
+		INSERT INTO ssm_shop (
+			platform_id, name, code, type, website, account, password, description 
+		) VALUES (
+			#{platform.id,jdbcType=SMALLINT},
+			#{name,jdbcType=VARCHAR},
+			#{code,jdbcType=VARCHAR},
+			#{type,jdbcType=VARCHAR},
+			#{website,jdbcType=VARCHAR},
+			#{account,jdbcType=VARCHAR},
+			#{password,jdbcType=VARCHAR},
+			#{description,jdbcType=VARCHAR}
+		)
+	</insert>
+	
+	<delete id="deleteById" parameterType="java.lang.Integer">
+		DELETE FROM ssm_shop WHERE id = #{id,jdbcType=SMALLINT}
+	</delete>
+	
+	<update id="updateSelective" parameterType="Shop">
+		UPDATE ssm_shop 
+		<set>
+			<if test="platform != null and platform.id != null">
+				platform_id = #{platform.id,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				website = #{website,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				account = #{account,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				password = #{password,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				description = #{description,jdbcType=VARCHAR},
+			</if>
+		</set>
+		WHERE id = #{id,jdbcType=SMALLINT}
+	</update>
+	
+	<select id="selectById" resultMap="BaseResultMap" parameterType="Integer">
+		SELECT
+			<include refid="Base_Column_List" />
+		FROM ssm_shop t 
+		WHERE t.id = #{id,jdbcType=SMALLINT}
+	</select>
+	
+	<select id="selectByCode" resultMap="BaseResultMap" parameterType="String">
+		SELECT 
+			<include refid="Base_Column_List" />
+		FROM ssm_shop t
+		WHERE t.code = #{code,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="selectByPage" parameterType="Shop" resultMap="BaseResultMap">
+		SELECT 
+			<include refid="Base_Column_List" />, p.id, p.name
+		FROM ssm_shop t 
+		LEFT JOIN ssm_platform p ON p.id = t.platform_id 
+		<where>
+			<if test="search.code != null and search.code != ''">
+				t.code LIKE '%${search.code}%'
+			</if>
+			<if test="search.name != null and search.name != ''">
+				AND t.name = #{search.name,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT 
+			<include refid="Base_Column_List" />
+		FROM ssm_shop t 
+		ORDER BY t.id DESC
+	</select>
+	
+</mapper>

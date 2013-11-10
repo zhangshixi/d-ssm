@@ -62,9 +62,9 @@
 								</td>
 							</tr>
 							<tr>
-								<td class="label dark_blue">updateAid</td>
+								<td class="label dark_blue">updateAdmin</td>
 								<td>
-									<input type="text" class="inputBorder" name="updateAid" value="${target.updateAid}" />
+									<input type="text" class="inputBorder" name="updateAid" value="${target.updateAdmin.id}" />
 								</td>
 							</tr>
 							<tr>

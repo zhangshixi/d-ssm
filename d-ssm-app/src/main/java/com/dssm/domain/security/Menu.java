@@ -21,8 +21,8 @@ public class Menu extends PrimaryKey {
     private String	   link;
     private Integer	   sequence;
     private Boolean	   display;
-    private Integer	   updateAid;
     private Date	   updateTime;
+    private Admin	   updateAdmin;
     
     private Menu       parent;
     private List<Menu> childList;
@@ -73,12 +73,12 @@ public class Menu extends PrimaryKey {
     	this.display = display;
     }
 
-    public Integer getUpdateAid() {
-		return updateAid;
+    public Admin getUpdateAdmin() {
+		return updateAdmin;
 	}
     
-    public void setUpdateAid(Integer updateAid) {
-		this.updateAid = updateAid;
+    public void setUpdateAdmin(Admin updateAdmin) {
+		this.updateAdmin = updateAdmin;
 	}
     
     public Date getUpdateTime() {

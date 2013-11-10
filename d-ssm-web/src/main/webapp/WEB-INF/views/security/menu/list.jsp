@@ -8,8 +8,8 @@
 	<table id="dataTable" class="dataTable" style="width: 100%;">
 		<tbody>
 			<tr>
+				<th>+/-</th>
 				<th>ID</th>
-				<th>parent ID</th>
 				<th>名称</th>
 				<th>编码</th>
 				<th>链接</th>
@@ -21,14 +21,14 @@
 			</tr>
 			<c:forEach items="${resultList}" var="item">
 				<tr>
+					<td>+</td>
 					<td>${item.id}</td>
-					<td>${item.parent.id}</td>
 					<td>${item.name}</td>
 					<td>${item.code}</td>
 					<td>${item.link}</td>
 					<td>${item.sequence}</td>
 					<td>${item.display ? "是" : "否"}</td>
-					<td>${item.updateAid}</td>
+					<td>${item.updateAdmin.loginName}</td>
 					<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${item.updateTime}" /></td>
 					<td>
 						<shiro:hasPermission name="menu:show">
@@ -42,6 +42,32 @@
 						</shiro:hasPermission>
 					</td>
 				</tr>
+				
+				<c:forEach items="${item.childList}" var="childItem">
+					<tr>
+						<td></td>
+						<td>${childItem.id}</td>
+						<td>${childItem.name}</td>
+						<td>${childItem.code}</td>
+						<td>${childItem.link}</td>
+						<td>${childItem.sequence}</td>
+						<td>${childItem.display ? "是" : "否"}</td>
+						<td>${childItem.updateAdmin.loginName}</td>
+						<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${childItem.updateTime}" /></td>
+						<td>
+							<shiro:hasPermission name="menu:show">
+								<a href="${ctx}/menu/${childItem.id}" id="editLink-${childItem.name}">查看</a>
+							</shiro:hasPermission>
+							<shiro:hasPermission name="menu:edit">
+								<a href="${ctx}/menu/${childItem.id}/edit" id="editLink-${childItem.name}">编辑</a>
+							</shiro:hasPermission>
+							<shiro:hasPermission name="menu:remove">
+								<a href="${ctx}/menu/${childItem.id}" title="删除" onclick="return doDelete(this);">删除</a>
+							</shiro:hasPermission>
+						</td>
+					</tr>
+				</c:forEach>
+				
 			</c:forEach>
 		</tbody>
 	</table>

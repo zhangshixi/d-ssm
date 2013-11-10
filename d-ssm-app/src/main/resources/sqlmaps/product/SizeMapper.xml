@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dssm.mapper.product.SizeMapper">
+	
+	<resultMap id="BaseResultMap" type="Size">
+		<id column="id" property="id" jdbcType="SMALLINT" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="code" property="code" jdbcType="VARCHAR" />
+		<result column="description" property="description" jdbcType="VARCHAR" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<association property="updateAdmin" resultMap="com.dssm.mapper.security.AdminMapper.BaseResultMap" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		t.id, t.name, t.code, t.description, t.update_aid, t.update_time
+	</sql>
+	
+	<insert id="insert" parameterType="Size">
+		INSERT INTO ssm_product_Size (
+			name, code, description, update_aid, update_time
+		) VALUES (
+			#{name,jdbcType=VARCHAR},
+			#{code,jdbcType=VARCHAR},
+			#{description,jdbcType=VARCHAR},
+			#{updateAdmin.id,jdbcType=SMALLINT},
+			NOW()
+		)
+	</insert>
+	
+	<delete id="deleteById" parameterType="java.lang.Integer">
+		DELETE FROM ssm_product_Size WHERE id = #{id,jdbcType=SMALLINT}
+	</delete>
+	
+	<update id="updateSelective" parameterType="Size">
+		UPDATE ssm_product_Size 
+		<set>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				description = #{description,jdbcType=VARCHAR},
+			</if>
+			update_time = NOW() 
+		</set>
+		WHERE id = #{id,jdbcType=SMALLINT}
+	</update>
+	
+	<select id="selectById" resultMap="BaseResultMap" parameterType="Integer">
+		SELECT
+			<include refid="Base_Column_List" />
+		FROM ssm_product_Size t 
+		WHERE t.id = #{id,jdbcType=SMALLINT}
+	</select>
+	
+	<select id="selectByCode" resultMap="BaseResultMap" parameterType="String">
+		SELECT 
+			<include refid="Base_Column_List" />
+		FROM ssm_product_Size t
+		WHERE t.code = #{code,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="selectByPage" parameterType="Size" resultMap="BaseResultMap">
+		SELECT 
+			<include refid="Base_Column_List" />, a.login_name 
+		FROM ssm_product_Size t 
+		LEFT JOIN ssm_admin a ON a.id = t.update_aid 
+		<where>
+			<if test="search.code != null and search.code != ''">
+				t.code LIKE '%${search.code}%'
+			</if>
+			<if test="search.name != null and search.name != ''">
+				AND t.name = #{search.name,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT 
+			<include refid="Base_Column_List" />
+		FROM ssm_product_Size t 
+		ORDER BY t.id DESC
+	</select>
+	
+</mapper>

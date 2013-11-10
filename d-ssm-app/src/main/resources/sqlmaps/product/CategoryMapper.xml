@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dssm.mapper.product.CategoryMapper">
+
+	<resultMap id="BaseResultMap" type="Category">
+		<id column="id" property="id" jdbcType="SMALLINT" />
+		<result column="parent_id" property="parent.id" jdbcType="SMALLINT" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="code" property="code" jdbcType="VARCHAR" />
+		<result column="description" property="description" jdbcType="VARCHAR" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<association property="updateAdmin" resultMap="com.dssm.mapper.security.AdminMapper.BaseResultMap" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		t.id, t.parent_id, t.name, t.code, t.description, t.update_aid, t.update_time
+	</sql>
+	
+	<insert id="insert" parameterType="Category">
+		INSERT INTO ssm_product_category (
+			parent_id, name, code, description, update_aid, update_time
+		) VALUES (
+			#{parent.id,jdbcType=SMALLINT},
+			#{name,jdbcType=VARCHAR},
+			#{code,jdbcType=VARCHAR},
+			#{description,jdbcType=SMALLINT},
+			#{updateAdmin.id,jdbcType=SMALLINT},
+			NOW()
+		)
+	</insert>
+	
+	<delete id="deleteById" parameterType="Integer">
+		DELETE FROM ssm_product_category WHERE id = #{id,jdbcType=SMALLINT}
+	</delete>
+	
+	<update id="updateSelective" parameterType="Category">
+		UPDATE ssm_product_category SET 
+			<if test="parent != null and parent.id != null">
+				parent_id = #{parent.id,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				description = #{description,jdbcType=VARCHAR},
+			</if>
+			update_aid = #{updateAdmin.id,jdbcType=SMALLINT},
+			update_time = NOW()
+		WHERE id = #{id,jdbcType=SMALLINT}
+	</update>
+	
+	<select id="selectById" parameterType="Integer" resultMap="BaseResultMap">
+		SELECT
+			<include refid="Base_Column_List" />
+		FROM ssm_product_category t 
+		WHERE t.id = #{id,jdbcType=SMALLINT}
+	</select>
+	
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT 
+			<include refid="Base_Column_List" />, a.login_name
+		FROM ssm_product_category t 
+		LEFT JOIN ssm_admin a ON a.id = t.update_aid 
+		ORDER BY t.id ASC
+	</select>
+	
+</mapper>
